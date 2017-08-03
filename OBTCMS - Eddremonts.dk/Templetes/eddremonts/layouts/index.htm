@@ -1,0 +1,20 @@
+description = "Index"
+==
+<html lang="en">
+{% partial "tpl_system/head" %}
+    <body id="page-top" class="body">
+        <div class="body_index container-fluid">
+            {% page %}
+            {% partial "tpl_system/scrit" %}
+            {% framework extras %}
+            {% scripts %}
+        </div>
+    </body>
+<script>
+    $(document).ready(function () {
+        window.setTimeout(function () {
+            location.href = "http://eddremonts.dk/index";
+        }, 25000);
+    });
+</script>
+</html>
