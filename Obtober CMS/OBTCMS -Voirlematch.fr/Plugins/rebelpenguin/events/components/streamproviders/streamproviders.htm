@@ -1,0 +1,442 @@
+<style>
+    .shadow{
+        -webkit-box-shadow: 9px 7px 13px -1px rgba(0,0,0,0.08);
+        -moz-box-shadow: 9px 7px 13px -1px rgba(0,0,0,0.08);
+        box-shadow: 9px 7px 13px -1px rgba(0,0,0,0.08);
+    }
+    .cont_pros ul li span {color:#212121;}
+    .fa{color:#1B5E20;}
+    span strong{color:#212121;}
+    span b{color:#212121;}
+    .nonhand{
+        cursor: default;
+    }
+    
+</style>
+
+     {% for conf in conf %}
+     <section class="container" style="background:white;padding-top:50px;margin-bottom:0;padding-left: 0px">
+         <div class="row">
+             <div class="col-md-offset-1 col-md-10">
+                 <div class="heading-border special">
+                     <h2>{{ conf.head }}<span> {{conf.SubHead }}</span></h2>
+                     <p>{{ conf.SubHead1}}</p>
+                 </div>
+             </div>
+         </div>
+        
+        {% if conf.type == 'Live' %}
+           {% for STP in STP %}
+             {% if STP.gnr_active == '1' %}
+                <div class="container" style="margin-bottom: 15px">
+                    <div class="row text-justify str_gnr shadow">
+                        <div class="tv200px">
+                            <img src="/storage/app/media/Stream%20Provider/live-stream-reviews/{{STP.gnr_label}}.png" alt="{{STP.gnr_label}}">
+                        </div>
+                        <div class="providertext100">
+                            <span class="" style="color:black;font-size: 30px"><strong>{{STP.gnr_label}}</strong>
+                            {% for i in 1.. STP.gnr_rating %}
+                               <i class="fa fa-star start_color_succes"></i>
+                               {% endfor %}{% if STP.gnr_rating_half %}
+                               <i class="fa fa-star-half-full start_color_succes"></i>
+                               {% endif %}
+                          </span>
+                            {{STP.gnr_coment |md}}
+                            <p class="pull-right">
+                            <a href="{{ conf.Link}}/:{{STP.gnr_label}}" target="" class="btn btn-default btn-lg"><span class="fa fa-chevron-circle-right"></span> {{STP.gnr_review_butt }} </a>
+                            <a href="{{STP.gnr_affi}}"   target="_blank" class="btn btn-success_ btn-lg">
+                               <span style="color:#fff" class="fa fa-chevron-circle-right"></span> {{STP.gnr_live_butt }}</a>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+             {% endif %}
+           {% endfor %}
+        {% endif %}
+        
+
+        {% if conf.type == 'Reviews' %}
+             <div class="container" style="margin-top: 15px">
+
+                        <!-- Nav tabs -->
+                       <ul class="nav nav-tabs">
+                            {% for STP in STP %}
+                                {% if STP.cont_active == '1' %}
+                                    {% if conf.idstream == STP.id %}
+                                        <li role="presentation1" class="active" style="width:auto !important; border-bottom:5px solid #212121; margin:2px">
+                                            <a href="#{{STP.id}}" aria-controls="profile" role="tab"data-toggle="tab">{{STP.gnr_label}}</a>
+                                        </li>
+                                    {% else %}
+                                        <li role="presentation1" style="width:auto !important; border-bottom:5px solid #212121;margin:2px">
+                        <a href="#{{STP.id}}" aria-controls="profile" role="tab" data-toggle="tab">{{STP.gnr_label}}</a>
+                    </li>
+                                    {% endif %}
+                                {% endif %}
+                            {% endfor %}
+                        </ul>
+
+                        <!-- Tab panes -->
+                        <div class="tab-content" style="background:  #fff;padding: 20px;margin-bottom: 20px;margin-left:1px; border-radius: 0 4px 4px 4px">
+                            {% for STP in STP %}
+                             {% if STP.cont_active == '1' %}
+                              {% if conf.idstream == STP.id %}
+                                    <div style="font-size: 16px" role="tabpanel" class="tab-pane active nonhand" id={{STP.id}}>
+                                                        <div class="row col-sm-12" style="border-bottom: 1px solid #DDDDDD;margin-bottom: 20px ">
+                                                            <div class="col-sm-5 text-center"
+                                                                 style="border-right:1px solid #DDDDDD; margin-top: 15px; margin-bottom: 15px ">
+                                                                <img class="float_img" src="/storage/app/media/Stream%20Provider/stream/{{STP.gnr_label}}.png" alt="{{STP.gnr_label}}">
+                                                                <div class="text-center"><strong>{{STP.cont_bonus | md }}</strong></div>
+                                                            </div>
+                                                            <div class="col-sm-7" style="margin-top: 15px;margin-bottom: 15px ">
+                                                                <div class="text-left">
+                                                                 <p style="font-size: 30px">{{STP.gnr_label}}</p>
+                                                                 <div class="cont_pros">{{STP.cont_pros |md}}</div>
+                                                                </div>
+                                                                <a href="{{STP.cont_affiliate}}" target="_blank" class="btn btn-danger_ btn-lg"
+                                                                   style="float: left">
+                                                                    <span style="color:#fff" class="fa fa-chevron-circle-right"></span> {{STP.cont_topbutton }}
+                                                                </a>
+                                                            </div>
+                                                        </div>
+                                                        <div class="row col-sm-12 text-left" style="margin-bottom: 20px ">
+                                                            {{STP.cont_introduction |md}}
+                                                        </div>
+
+                                                        {% if STP.udv_content %}
+                                                        <div class="row col-sm-12 text-left" style="margin-bottom: 20px ">
+
+                                                            <div><span class=""><strong>{{STP.udv_heading }}</strong></span>
+                                                                {% for i in 1.. STP.udv_ratin %}<span class="fa fa-star"></span>{% endfor %}
+                                                                {% if STP.udv_ratin_half %}<span class="fa fa-star-half-full"></span>{% endif %}
+                                                            </div>
+
+                                                            <br>
+                                                            {{STP.udv_content | md }}
+                                                        </div>
+                                                        {% endif %}
+
+                                                        {% if STP.prod_content %}
+                                                        <div class="row col-sm-12 text-left" style="margin-bottom: 20px ">
+                                                            <span class=""><strong>{{STP.prod_heading}}</strong></span>
+                                                            {% for i in 1.. STP.prod_ratin %}<span class="fa fa-star"></span>{% endfor %}
+                                                            {% if STP.prod_ratin_half %}<span class="fa fa-star-half-full"></span>{% endif %}
+                                                            <br>
+                                                            {{STP.prod_content | md }}
+                                                        </div>
+                                                        {% endif %}
+
+                                                        {% if STP.lives_content %}
+                                                        <div class="row col-sm-12 text-left" style="margin-bottom: 20px ">
+                                                            <span class=""><strong>{{STP.lives_heading }}</strong></span>
+                                                            {% for i in 1.. STP.lives_ratin %}
+                                                            <span class="fa fa-star"></span>
+                                                            {% endfor %}
+                                                            {% if STP.lives_ratin_half %}<span class="fa fa-star-half-full"></span>{% endif %}
+                                                            <br>
+                                                            {{STP.lives_content | md }}
+                                                        </div>
+                                                        {% endif %}
+
+
+                                                        {% if STP.odds_content %}
+                                                        <div class="row col-sm-12 text-left" style="margin-bottom: 20px ">
+                                                            <span class=""><strong>{{STP.odds_heading}}</strong></span>
+                                                            {% for i in 1.. STP.odds_ratin %}
+                                                            <span class="fa fa-star"></span>
+                                                            {% endfor %}
+                                                            {% if STP.odds_ratin_half %}<span class="fa fa-star-half-full"></span>{% endif %}
+                                                            <br>
+                                                            {{STP.odds_content | md }}
+                                                        </div>
+                                                        {% endif %}
+
+
+                                                        {% if STP.supp_content %}
+                                                        <div class="row col-sm-12 text-left" style="margin-bottom: 20px ">
+                                                            <span class=""><strong>{{STP.supp_heading}}</strong></span>
+                                                            {% for i in 1.. STP.supp_ratin %}
+                                                            <span class="fa fa-star"></span>
+                                                            {% endfor %}
+                                                            {% if STP.supp_ratin_half %}<span class="fa fa-star-half-full"></span>{% endif %}
+                                                            <br>
+                                                            {{STP.supp_content | md }}
+                                                        </div>
+                                                        {% endif %}
+
+
+                                                        {% if STP.bonusser_content %}
+                                                        <div class="row col-sm-12 text-left" style="margin-bottom: 20px ">
+                                                            <span class=""><strong>{{STP.bonusser_heading }}</strong></span>
+                                                            {% for i in 1.. STP.bonusser_ratin %}
+                                                            <span class="fa fa-star"></span>
+                                                            {% endfor %}
+                                                            {% if STP.bonusser_ratin_half %}<span class="fa fa-star-half-full"></span>{% endif %}
+                                                            <br>
+                                                            {{STP.bonusser_content | md }}
+                                                        </div>
+                                                        {% endif %}
+
+
+                                                        {% if STP.bruger_content %}
+                                                        <div class="row col-sm-12 text-left" style="margin-bottom: 20px ">
+                                                            <span class=""><strong>{{STP.bruger_heading }}</strong></span>
+                                                            {% for i in 1.. STP.bruger_ratin %}
+                                                            <span class="fa fa-star"></span>
+                                                            {% endfor %}
+                                                            {% if STP.bruger_ratin_half %}<span class="fa fa-star-half-full"></span>{% endif %}
+                                                            <br>
+                                                            {{STP.bruger_content | md }}
+                                                        </div>
+                                                        {% endif %}
+
+
+                                                        {% if STP.ind_og_content %}
+                                                        <div class="row col-sm-12 text-left" style="margin-bottom: 20px ">
+                                                            <span class=""><strong>{{STP.ind_og_heading }}</strong></span>
+                                                            {% for i in 1.. STP.ind_og_ratin %}
+                                                            <span class="fa fa-star"></span>
+                                                            {% endfor %}
+                                                            {% if STP.ind_og_ratin_half %}<span class="fa fa-star-half-full"></span>{% endif %}
+                                                            <br>
+                                                            {{STP.ind_og_content | md }}
+                                                        </div>
+                                                        {% endif %}
+
+
+                                                        {% if STP.vores_content %}
+                                                        <div class="row col-sm-12 text-left" style="margin-bottom: 20px ">
+                                                            <span class=""><strong>{{STP.vores_heading }}</strong></span>
+                                                            {% for i in 1.. STP.vores_ratin %}
+                                                            <span class="fa fa-star"></span>
+                                                            {% endfor %}
+                                                            {% if STP.vores_ratin_half %}<span class="fa fa-star-half-full"></span>{% endif %}
+                                                            <br>
+                                                            {{STP.vores_content | md }}
+                                                        </div>
+                                                        {% endif %}
+
+                                                        {% if STP.liveb_content %}
+                                                        <div class="row col-sm-12 text-left" style="margin-bottom: 20px ">
+                                                            <span class=""><strong>{{STP.liveb_heading }}</strong></span>
+                                                            {% for i in 1.. STP.liveb_ratin %}
+                                                            <span class="fa fa-star"></span>
+                                                            {% endfor %}
+                                                            {% if STP.liveb_ratin_half %}<span class="fa fa-star-half-full"></span>{% endif %}
+                                                            <br>
+                                                            {{STP.liveb_content | md }}
+                                                        </div>
+                                                        {% endif %}
+
+
+                                                        {% if STP.indsat_content %}
+                                                        <div class="row col-sm-12 text-left" style="margin-bottom: 20px ">
+                                                            <span class=""><strong>{{STP.indsat_heading | md }}</strong></span>
+                                                            {% for i in 1.. STP.indsat_ratin %}
+                                                            <span class="fa fa-star"></span>
+                                                            {% endfor %}
+                                                            <br>
+                                                            {{STP.indsat_content | md }}
+                                                        </div>
+                                                        {% endif %}
+
+                                                        {% if STP.konk_content %}
+                                                        <div class="row col-sm-12 text-left" style="margin-bottom: 20px ">
+                                                            <span class=""><strong>{{STP.konk_heading }}</strong></span>
+                                                            {% for i in 1.. STP.konk_ratin %}
+                                                            <span class="fa fa-star"></span>
+                                                            {% endfor %}
+                                                            {% if STP.konk_ratin_half %}<span class="fa fa-star-half-full"></span>{% endif %}
+                                                            <br>
+                                                            {{STP.konk_content | md }}
+                                                        </div>
+                                                        {% endif %}
+
+                                                        <a href="{{STP.cont_affiliate}}" target="_blank" class="btn btn-danger_ btn-lg" style="width: 90%;margin-bottom: 15px">
+                                                            <span style="color:#fff" class="fa fa-chevron-circle-right"></span>
+                                                            {{STP.cont_botbutton }}
+                                                        </a>
+                                                    </div>
+                                    {% else %}
+                                    <div style="font-size: 16px" role="tabpanel" class="tab-pane nonhand" id={{STP.id}}>
+                                <div class="row col-sm-12" style="border-bottom: 1px solid #DDDDDD;margin-bottom: 20px ">
+                                    <div class="col-sm-5 text-center"
+                                         style="border-right:1px solid #DDDDDD; margin-top: 15px; margin-bottom: 15px ">
+                                        <img class="float_img" src="/storage/app/media/Stream%20Provider/stream/{{STP.gnr_label}}.png" alt="{{STP.gnr_label}}">
+                                        <div class="text-center"><strong>{{STP.cont_bonus | md }}</strong></div>
+                                    </div>
+                                    <div class="col-sm-7" style="margin-top: 15px;margin-bottom: 15px ">
+                                        <div class="text-left">
+                                            <p style="font-size: 30px">{{STP.gnr_label}}</p>
+                                            <div class="cont_pros">{{STP.cont_pros |md}}</div>
+                                        </div>
+                                        <a href="{{STP.cont_affiliate}}" target="_blank" class="btn btn-danger_ btn-lg"
+                                           style="float: left">
+                                            <span style="color:#fff" class="fa fa-chevron-circle-right"></span> {{STP.cont_topbutton}}
+                                        </a>
+                                    </div>
+                                </div>
+                                <div class="row col-sm-12 text-left" style="margin-bottom: 20px ">{{STP.cont_introduction | md }}</div>
+
+                                {% if STP.udv_content %}
+                                <div class="row col-sm-12 text-left" style="margin-bottom: 20px ">
+                                    <span class=""><strong>{{STP.udv_heading }}</strong></span>
+                                    {% for i in 1.. STP.udv_ratin %}
+                                    <span class="fa fa-star"></span>
+                                    {% endfor %}
+                                    {% if STP.udv_ratin_half %}<span class="fa fa-star-half-full"></span>{% endif %}
+                                    <br>
+                                    {{STP.udv_content | md }}
+                                </div>
+                                {% endif %}
+
+                                {% if STP.prod_content %}
+                                <div class="row col-sm-12 text-left" style="margin-bottom: 20px ">
+                                    <span class=""><strong>{{STP.prod_heading }}</strong></span>
+                                    {% for i in 1.. STP.prod_ratin %}
+                                    <span class="fa fa-star"></span>
+                                    {% endfor %}
+                                    {% if STP.prod_ratin_half %}<span class="fa fa-star-half-full"></span>{% endif %}
+                                    <br>
+                                    {{STP.prod_content | md }}
+                                </div>
+                                {% endif %}
+
+                                {% if STP.lives_content %}
+                                <div class="row col-sm-12 text-left" style="margin-bottom: 20px ">
+                                    <span class=""><strong>{{STP.lives_heading }}</strong></span>
+                                    {% for i in 1.. STP.lives_ratin %}
+                                    <span class="fa fa-star"></span>
+                                    {% endfor %}
+                                    {% if STP.lives_ratin_half %}<span class="fa fa-star-half-full"></span>{% endif %}
+                                    <br>
+                                    {{STP.lives_content |md }}
+                                </div>
+                                {% endif %}
+
+
+                                {% if STP.odds_content %}
+                                <div class="row col-sm-12 text-left" style="margin-bottom: 20px ">
+                                    <span class=""><strong>{{STP.odds_heading}}</strong></span>
+                                    {% for i in 1.. STP.odds_ratin %}
+                                    <span class="fa fa-star"></span>
+                                    {% endfor %}
+                                    {% if STP.odds_ratin_half %}<span class="fa fa-star-half-full"></span>{% endif %}
+                                    <br>
+                                    {{STP.odds_content |md}}
+                                </div>
+                                {% endif %}
+
+
+                                {% if STP.supp_content %}
+                                <div class="row col-sm-12 text-left" style="margin-bottom: 20px ">
+                                    <span class=""><strong>{{STP.supp_heading}}</strong></span>
+                                    {% for i in 1.. STP.supp_ratin %}
+                                    <span class="fa fa-star"></span>
+                                    {% endfor %}
+                                    {% if STP.supp_ratin_half %}<span class="fa fa-star-half-full"></span>{% endif %}
+                                    <br>
+                                    {{STP.supp_content |md}}
+                                </div>
+                                {% endif %}
+
+
+                                {% if STP.bonusser_content %}
+                                <div class="row col-sm-12 text-left" style="margin-bottom: 20px ">
+                                    <span class=""><strong>{{STP.bonusser_heading}}</strong></span>
+                                    {% for i in 1.. STP.bonusser_ratin %}
+                                    <span class="fa fa-star"></span>
+                                    {% endfor %}
+                                    {% if STP.bonusser_ratin_half %}<span class="fa fa-star-half-full"></span>{% endif %}
+                                    <br>
+                                    {{STP.bonusser_content |md}}
+                                </div>
+                                {% endif %}
+
+
+                                {% if STP.bruger_content %}
+                                <div class="row col-sm-12 text-left" style="margin-bottom: 20px ">
+                                    <span class=""><strong>{{STP.bruger_heading}}</strong></span>
+                                    {% for i in 1.. STP.bruger_ratin %}
+                                    <span class="fa fa-star"></span>
+                                    {% endfor %}
+                                    {% if STP.bruger_ratin_half %}<span class="fa fa-star-half-full"></span>{% endif %}
+                                    <br>
+                                    {{STP.bruger_content|md}}
+                                </div>
+                                {% endif %}
+
+
+                                {% if STP.ind_og_content %}
+                                <div class="row col-sm-12 text-left" style="margin-bottom: 20px ">
+                                    <span class=""><strong>{{STP.ind_og_heading}}</strong></span>
+                                    {% for i in 1.. STP.ind_og_ratin %}
+                                    <span class="fa fa-star"></span>
+                                    {% endfor %}
+                                    {% if STP.ind_og_ratin_half %}<span class="fa fa-star-half-full"></span>{% endif %}
+                                    <br>
+                                    {{STP.ind_og_content | md}}
+                                </div>
+                                {% endif %}
+
+
+                                {% if STP.vores_content %}
+                                <div class="row col-sm-12 text-left" style="margin-bottom: 20px ">
+                                    <span class=""><strong>{{STP.vores_heading }}</strong></span>
+                                    {% for i in 1.. STP.vores_ratin %}
+                                    <span class="fa fa-star"></span>
+                                    {% endfor %}
+                                    {% if STP.vores_ratin_half %}<span class="fa fa-star-half-full"></span>{% endif %}
+                                    <br>
+                                    {{STP.vores_content | md}}
+                                </div>
+                                {% endif %}
+
+                                {% if STP.liveb_content %}
+                                <div class="row col-sm-12 text-left" style="margin-bottom: 20px ">
+                                    <span class=""><strong>{{STP.liveb_heading }}</strong></span>
+                                    {% for i in 1.. STP.liveb_ratin %}
+                                    <span class="fa fa-star"></span>
+                                    {% endfor %}
+                                    {% if STP.liveb_ratin_half %}<span class="fa fa-star-half-full"></span>{% endif %}
+                                    <br>
+                                    {{STP.liveb_content | md}}
+                                </div>
+                                {% endif %}
+
+
+                                {% if STP.indsat_content %}
+                                <div class="row col-sm-12 text-left" style="margin-bottom: 20px ">
+                                    <span class=""><strong>{{STP.indsat_heading }}</strong></span>
+                                    {% for i in 1.. STP.indsat_ratin %}
+                                    <span class="fa fa-star"></span>
+                                    {% endfor %}
+                                    <br>
+                                    {{STP.indsat_content | md}}
+                                </div>
+                                {% endif %}
+
+                                {% if STP.konk_content %}
+                                <div class="row col-sm-12 text-left" style="margin-bottom: 20px ">
+                                    <span class=""><strong>{{STP.konk_heading }}</strong></span>
+                                    {% for i in 1.. STP.konk_ratin %}
+                                    <span class="fa fa-star"></span>
+                                    {% endfor %}
+                                    {% if STP.konk_ratin_half %}<span class="fa fa-star-half-full"></span>{% endif %}
+                                    <br>
+                                    {{STP.konk_content | md}}
+                                </div>
+                                {% endif %}
+                                <a href="{{STP.cont_affiliate}}" target="_blank" class="btn btn-danger_ btn-lg" style="width: 90%;margin-bottom: 15px">
+                                <span style="color:#fff" class="fa fa-chevron-circle-right"> </span>{{STP.cont_botbutton }}</a>
+								</div>
+                               {% endif %}
+                             {% endif %}
+                            {% endfor %}
+                        </div>
+
+                </div>
+         {% endif %}
+     </section>
+    {% endfor %}
+
+

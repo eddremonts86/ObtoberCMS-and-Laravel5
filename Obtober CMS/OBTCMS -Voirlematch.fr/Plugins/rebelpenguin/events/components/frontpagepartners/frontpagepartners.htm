@@ -1,0 +1,12 @@
+{% for Name in conf %}
+    <div class="col-xs-12 text-center"><h3>{{Name.stream}}</h3></div>
+    <div class="col-xs-12 text-center">
+        {% for stream in streams %}
+        {% if loop.index < 4 %}
+        <a href="{{Name.Link}}/:{{stream.name}}" ><img class="img_none" src="storage/app/media/Stream%20Provider/Index/{{stream.name}}.png" alt="{{stream.name}}"></a>
+        {%else%}
+        <a class="hidden-xs hidden-sm"  href="{{Name.Link}}/:{{stream.name}}" ><img class="img_none" src="storage/app/media/Stream%20Provider/Index/{{stream.name}}.png" alt="{{stream.name}}"></a>
+        {%endif%}
+        {% endfor %}
+    </div>
+{% endfor %}

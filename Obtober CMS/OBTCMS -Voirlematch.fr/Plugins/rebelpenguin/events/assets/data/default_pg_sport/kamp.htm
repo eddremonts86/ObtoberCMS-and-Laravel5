@@ -1,0 +1,342 @@
+title = "Landing Page"
+url = "/Fodbold/kamp/:id_name/:id_fb"
+is_hidden = 0
+==
+<?php
+use Rebelpenguin\Events\Classes\template;
+    function onStart()
+    {
+        $id_fb = $this->param('id_fb');
+        $Sport = "Fodbold";
+        $id_fb = explode(':',$id_fb );
+        
+        $article= template::landinPagesGobal($id_fb[1]);
+        $this['articles'] = $article;
+        
+        $streams= template::landinPagesstream($id_fb[1],$Sport);
+        $this['stream'] = $streams;
+}
+?>
+==
+{% partial "tpl_system/head" %}
+{% for article in articles %}
+<style>
+        .color{
+            color:#838383;
+            font-size:25px
+        }
+        .imgnone {
+            float: none;
+        }
+        .colorh_left{
+            color:#{{article.color}};
+        font-size:15px
+        }
+        .colorShadow{
+            text-shadow: 7px 2px 3px rgba(00, 00, 00, 0.7);
+        }
+        .bgcolor{
+            background: #{{article.color}};
+        border-bottom-color: #{{article.color}};
+        }
+        .btn-success_{
+        background: #7DA410;
+        border: 1px solid #7DA410;
+        box-shadow: 0 0 0.001px 1px rgba(122, 170, 17, 0.4);
+        }
+        .plgpanel_head {
+            margin: 0;
+            padding-bottom: 0px;
+            padding-top: 0px;
+            padding-left: 30px;
+            padding-right: 30px;
+            background: #fff;
+            text-align: left;
+            font-size: 14px;
+            color: #212;
+            min-height: 60px;
+            height: auto;
+            border-bottom: 1px solid #ddd;
+        }
+        .btn {
+            display: inline-block;
+            padding: 6px 12px;
+            margin-bottom: 0;
+            font-size: 14px;
+            font-weight: 400;
+            line-height: 1.42857143;
+            text-align: center;
+            white-space: nowrap;
+            vertical-align: middle;
+            -ms-touch-action: manipulation;
+            touch-action: manipulation;
+            cursor: pointer;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+            background-image: none;
+            border: 1px solid transparent;
+            border-radius: 4px;
+        }
+        .btn-danger_ {
+            background: #7DA410;
+            border: 1px solid #7DA410;
+            font-size:20px;
+            padding:15px;
+            color:#ffffff;
+            border-radius: 4px;
+        }
+        header .fb_head_selive {
+            background: url(/storage/app/media/Sports/Fodbold/landing-banner.jpg);
+            background-image: url(/storage/app/media/Sports/Fodbold/landing-banner.jpg);
+            background-repeat: no-repeat;
+        }
+        .landingbanner {
+            background: url(/storage/app/media/Sports/Fodbold/landingbanner-strip.png);
+            background-image: url(/storage/app/media/Sports/Fodbold/landingbanner-strip.png);
+            background-repeat: no-repeat;
+        }
+        .laptop {
+            background: url(/storage/app/media/Sports/Fodbold/laptop.png);
+            background-image: url(/storage/app/media/Sports/Fodbold/laptop.png);
+            background-repeat: no-repeat;
+            height:110px;
+            width: 166px;
+            padding-top: 20px;
+            text-align: center;
+            position:relative; 
+            float:left;
+        }
+        .article{
+            background: #fff;
+            padding-top: 30px;
+            padding-bottom: 25px; 
+            padding-left: 5px;
+            padding-right: 5px;
+            margin-top: 30px;
+            margin-bottom: 30px;
+        }
+        .img_regular_fb {
+    width: 90px;
+    height: 85px;
+    border-radius: 50%;
+    vertical-align: middle;
+    margin: 5px;
+    padding: 4px;
+    background-color: rgba(255, 255, 255, 0.42);
+    border: 4px solid rgba(16, 35, 41, 0.69);
+}
+        .number {
+          color: #e19a23;
+          font-size: 90px;
+          letter-spacing: -5px;
+          line-height: 93px;
+          float:left;
+        }
+        .v-middle{
+        	display:inline-block;
+        	vertical-align:middle;
+        	margin-right:-4px;
+        }
+        .margin-left{
+            margin-left:10px;
+        }
+        section {
+            z-index: 1;
+            background: rgba(11, 10, 10, 0.94);
+            position: relative;
+            padding: 10px;
+        }
+        .top{
+            background: rgba(0,0,0,0.75);
+        }
+        .container{
+            margin: 0 0; 
+        }
+        .first:before {
+            background: url("http://images.sesport.dk/sesport.dk-ver5/v5-images/landing/banner-strip.png");
+            content: "";
+            height: 131px;
+            left: -9px;
+            position: absolute;
+            top: 3px;
+            width: 133px;
+        }
+        
+        .SetSre:before {
+            background: url("http://images.sesport.dk/sesport.dk-ver5/v5-images/landing/banner-strip.png");
+            content: "";
+            height: 131px;
+            left: -3px;
+            position: absolute;
+            top: -11px;
+            width: 133px;
+        }
+    </style>
+<section class="top">
+        <div class="col-sm-offset-2 col-sm-10 col-xs-12">
+          <div class="logo">
+              <a href="/"><img src="/themes/sesportV1/assets/images/home/logo-light.png" alt="Sesport logo" /></a>
+          </div>
+       </div>
+</section>
+
+ {% for stream in stream %}
+    {% if loop.index == 1 %}
+        {% if stream.promobox_link == 1%}
+            <header onclick="document.location = '{{stream.prombox_affil}}';">
+        {%else%}
+            <header>
+        {%endif%}
+    {%endif%}
+ {%endfor%}   
+    <div class=" slider fb_head_selive">
+        <div class="container_fluid" style="margin-top:100px">
+            <div class="row">
+                <div class="col-md-offset-7 col-md-3 hidden-xs">
+                  <div>
+                        <div class="col-md-4 text-center ">
+                                    <img class="img_regular_fb imgnone" src="{{article.home_team_logo }}">
+                                    <div style="height: 35px"><h5>{{article.home_team }}</h5></div>
+                                </div>
+                        <div class="col-md-4 text-center colorh_left" style="margin-top: 10px; color:#fff">
+                                    <b style="font-size:30px">VS</b><br>
+                                     {{article.date}}<br>
+                                     Kl.{{article.date_h}}
+                                    </div>
+                        <div class="col-md-4 text-center">
+                                    <img class="img_regular_fb imgnone" src="{{article.away_team_logo }}">
+                                    <div style="height: 35px"><h5>{{article.away_team }}</h5></div>
+                                </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="container_fluid">
+            <div class="row landingbanner">
+                <div class="col-xs-4 text-center first" style=" font-size:35px;height:125px; margin-right:0px; padding:15px">
+                    {% for stream in stream %}
+                            {% if loop.index == 1 %}
+                             {{stream.prombox_banner_head}}<br>           
+                             {{stream.prombox_aff_tv}}<br>
+                             {%endif%}
+                          {%endfor%}
+                </div>
+                    {% for stream in stream %}
+                            {% if loop.index == 1 %}
+                            <div class="col-xs-3 text-right" onclick="document.location = '{{stream.prombox_affil}}';"  style=" font-size:35px; height:125px; padding-top:40px ">
+                             {{stream.prombox_head}}&nbsp;&nbsp;<i class="fa fa-play-circle"></i><br>
+                             {%endif%}
+                          {%endfor%}
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+{% for stream in stream %}
+    {% if loop.index == 1  and stream.usedarticle == 1%}
+        <div class="container-fluid" style="background: #262b2d; margin-bottom: 20px; ">
+            <div class="row" >
+                <div class="col-md-offset-2 col-md-8 article ">
+                    <div class="col-md-2 text-left">
+                        <img class="img-thumbnail img-rounded"
+                             src="http://images.sesport.dk/sesport.dk-ver5/authors/mathilde-miller.jpg">
+    
+                    </div>
+                    <div class="col-md-8 text-justify">
+                        <h4>Se {{ article.home_team }} vs {{ article.away_team }}</h4>
+                        <p>{{article.date }}</p>
+                        {{article.article_body}}
+                        <p>Læs mere her</p>
+                    </div>
+                    <div class="col-md-2" style="top:50%">
+                        <a href="{{stream.prombox_affil}}" target="_blank"  class="btn btn-success_ btn_close">Se Kampen live <i class="fa fa-angle-right"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    {%endif%}
+{%endfor%}
+
+
+<div class="container-fluid" >
+    {% for stream in stream %}
+        {%if stream.stream_sort != "0" %}
+        <div class="row" >
+                {%if stream.sponsored == "1" %}
+                      <div class="panel SetSre panel-default col-md-offset-2 col-md-8 " style="margin-top: 7px; margin-bottom: 7px; padding-top: 15px" >
+                {%else%}    
+                      <div class="panel  panel-default col-md-offset-2 col-md-8 " style="margin-top: 7px; margin-bottom: 7px; padding-top: 15px" >
+                {%endif%}
+                        <div class="plgpanel_head" style="height: auto; min-height:45px;">
+                        <div class="col-xs-12 col-md-offset-1 col-sm-5 text-left">
+                            <b style="font-size: 30px">{{stream.stream_name}}  
+                            {% for i in 1..stream.Rating %}<i class="fa fa-star"></i>{% endfor %}
+                            </b>
+                        </div>
+                        <div class="col-xs-12 col-sm-5" style="font-size: 25px">
+                            <div class="col-xs-6 text-right">
+                                <i class="fa fa-check">  </i>  Kvalitet : <b>{{stream.Quality}}</b>
+                            </div>
+                            <div class="col-xs-6 text-right">
+                                <i class="fa fa-money">  </i>  Pris :<b> {{stream.Price}}</b>
+                            </div>
+                        </div>
+                    </div>
+                        <div class="plgpanel_body" style="min-height:200px; height: auto; margin-bottom: 15px; margin-bottom: 15px">
+                        <div class="text-center col-xs-12 color" style="margin-bottom: 15px; margin-bottom: 15px">
+                        Se {{article.home_team }} vs {{article.away_team }} live med  {{stream.stream_name}}
+                        </div>
+                        <div class="text-center col-xs-12 col-md-3" style="margin-bottom: 15px; margin-bottom: 15px" >
+                            <spam class="number">1</spam>
+                            <div class="laptop ">
+                                 <p style="margin-top:-15px">{{stream.stream_icon_one |md}}</p>
+                                 <img class="imgnone"  style="margin-top:-15px" src="/storage/app/media/Sports/Fodbold/www.png" alt="{{stream.stream_name}}"><br>
+                            </div>
+                             <img class="hidden-xs hidden-sm imgnone marg_top margin-left"  src="/storage/app/media/Sports/Fodbold/green-arrow.png" alt="{{stream.stream_name}}"><br>
+                        </div>
+                        <div class="text-center col-xs-12 col-md-3" style="margin-bottom: 15px; margin-bottom: 15px">
+                            <spam class="number">2</spam>
+                            <div class="laptop">
+                                 <p style="margin-top:-15px">{{stream.stream_icon_two |md}}</p>
+                                 <img class="imgnone"  style="margin-top:-15px" src="/storage/app/media/Sports/Fodbold/pencil.png" alt="{{stream.stream_name}}"><br>
+                            </div>
+                             <img class="hidden-xs hidden-sm  imgnone marg_top margin-left"  src="/storage/app/media/Sports/Fodbold/green-arrow.png" alt="{{stream.stream_name}}"><br>
+                        </div>
+                        <div class="text-center col-xs-12 col-md-3" style="margin-bottom: 15px; margin-bottom: 15px">
+                            <spam class="number">3</spam>
+                            <div class="laptop">
+                                 <p style="margin-top:-15px">{{stream.stream_icon_tree |md}}</p>
+                                 <img class="imgnone"  style="margin-top:-15px" src="/storage/app/media/Sports/Fodbold/play.png" alt="{{stream.stream_name}}"><br>
+                            </div>
+                            </div>
+                        <div class="text-center col-xs-12 col-md-3">
+                            <a class="btn btn-danger_ btn-lg" style="width: 80%; margin-left:10%" href="{{stream.stream_aff}}" target="_blank" >
+                               {{stream.stream_buttons_butt}}  <i class="fa fa-play-circle"></i> <br> <small class="sm_subtex">{{stream.stream_buttons_phrase}}</small>
+                            </a>
+                        </div>
+                    </div>
+                    </div>
+        </div>
+         {%endif%}
+    {% endfor %}
+</div>
+
+
+
+<script type="text/javascript" language="JavaScript">
+    document.title = 'Se {{ article.home_team }} VS {{ article.away_team }} {{article.date_D}} ';
+    meta = document.createElement("meta");
+    meta.setAttribute("name", "description");
+    meta.setAttribute("content", "Følg med og se {{ article.home_team }} vs {{ article.away_team }} live stream Fodbold | Se Fodbold live når de to fodboldhold møder hinanden.");
+    var head = document.getElementsByTagName("head")[0];
+    head.appendChild(meta);
+</script>
+{% endfor %}
+{% partial "tpl_system/footer" %}
+{% partial "tpl_system/scrit" %}
+{% framework extras %}
+{% scripts %}

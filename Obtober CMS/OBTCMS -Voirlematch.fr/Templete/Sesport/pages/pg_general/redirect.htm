@@ -1,0 +1,16 @@
+title = "Redirect"
+url = "/redirect/:sport/:stream/:area"
+is_hidden = 0
+==
+<?php
+use Rebelpenguin\Events\Classes\template;
+function onStart()
+    {
+        $sport = $this->param('sport');
+        $stream = $this->param('stream');
+        $area = $this->param('area');
+        $result= template::fakeurl($sport,$stream,$area);
+        return Redirect::to($result);
+    }
+?>
+==

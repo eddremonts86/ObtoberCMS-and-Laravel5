@@ -1,0 +1,37 @@
+title = "FodboldLiveStreamDinamic"
+url = "/Football/Football_liveevents/:id_event"
+layout = "ly_fodbold/selive"
+is_hidden = 0
+meta_title = "Sites de Streaming Fooball disponibles | Voirlematch.fr"
+meta_description = "Consultez la liste des sites de streaming afin de découvrir leurs séléction et voir vos matchs de football disponibles en streaming live."
+
+[StreamUdbyder StreamUdbyderlive]
+max = 0
+Layout = "LIVEEVENTS"
+Sport = "a0c77e28-69fb-11e4-85c8-5254005a5aa0"
+Head = "Choisissez votre site de streaming"
+SubHead = "Ci-dessous vous pouvez choissir entre les différents sites de streaming et d'içi quelques minutes vous aurez accés à une multitude de matchs en direct."
+
+[Events Eventslives]
+max = 0
+Layout = "TableProgram"
+Sport = "a0c77e28-69fb-11e4-85c8-5254005a5aa0"
+Head = "Calendrier"
+SubHead = "- Matchs disponibles"
+
+[StreamPageDinamic]
+Sport = "a0c77e28-69fb-11e4-85c8-5254005a5aa0"
+Head0 = "Voir du foot"
+Head1 = "en streaming"
+Head2 = "Içi vous trouverez les instructions de comment voir un match en streaming chez les différents sites listés ci-dessous - suivez les instructions pour continuer ou choissisez diréctement un match à partir du calendrier en bas de la page."
+Head3 = "Prochains matchs"
+==
+{% component 'StreamPageDinamic' %}
+
+ <div class="container" style="background: #fff">
+   {% component 'StreamUdbyderlive' %}
+</div>
+
+<div class="container_fluid" style="background:#252627">
+    {% component 'Eventslives' %}
+</div>

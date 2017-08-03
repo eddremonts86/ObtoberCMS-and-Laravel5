@@ -1,0 +1,41 @@
+title = "Sport"
+url = "/Fodbold"
+layout = "ly_fodbold/home"
+description = "sport"
+is_hidden = 0
+
+[SportEvents]
+max = 3
+VIM = 0
+Frompage = 0
+Prioritize = 0
+Active = 1
+Layout = "New"
+Sport = "a0c77e28-69fb-11e4-85c8-5254005a5aa0"
+
+[Rebelpenguin\Events\Components\Events Events]
+max = 0
+Layout = "TableNew"
+Locale = "en"
+Sport = "a0c77e28-69fb-11e4-85c8-5254005a5aa0"
+Country = "None"
+Tournaments = "None"
+Stream_providers = "None"
+
+[Rebelpenguin\Events\Components\GeneralStream GeneralStream]
+max = 10
+Layout = "TABLE"
+Sport = "a0c77e28-69fb-11e4-85c8-5254005a5aa0"
+==
+<section class="container padding-top">
+    {% component 'SportEvents' %}
+</section>
+
+<section class="container">
+	{% component 'Events' %}
+</section>
+
+
+<section class="container">
+	{% component 'GeneralStream' %}
+</section>

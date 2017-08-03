@@ -1,0 +1,435 @@
+.one{
+    background-image: url(../images/fodbold/teams/1.png);
+    background-repeat: no-repeat;
+    height: 70px;
+    width: 70px;
+    margin-top: 5px;
+}
+.two{
+    background-image: url(../images/fodbold/teams/2.png);
+    background-repeat: no-repeat;
+    height: 70px;
+    width: 70px;
+    margin-top: 5px;
+}
+.tre{
+    background-image: url(../images/fodbold/teams/3.png);
+    background-repeat: no-repeat;
+    height: 70px;
+    width: 70px;
+    margin-top: 5px;
+}
+.cuatro{
+    background-image: url(../images/fodbold/teams/4.png);
+    background-repeat: no-repeat;
+    height: 70px;
+    width: 70px;
+    margin-top: 5px;
+}
+.cinco{
+    background-image: url(../images/fodbold/teams/5.png);
+    background-repeat: no-repeat;
+    height: 70px;
+    width: 70px;
+    margin-top: 5px;
+}
+.six{
+    background-image: url(../images/fodbold/teams/6.png);
+    background-repeat: no-repeat;
+    height: 70px;
+    width: 70px;
+    margin-top: 5px;
+}
+
+.cEmail {
+    background: url(http://images.sesport.dk/sesport.dk-ver2/baloon.png) center center no-repeat;
+    background-size: 350px;
+    min-height: 250px;
+    line-height: 205px;
+    width: 100%;
+    float: left;
+    margin-top: 40px;
+    margin-bottom: 40px;
+}
+.ground-small {
+    background-image: url(../images/fodbold/ground-small.png);
+    background-repeat: no-repeat;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    background-size: cover;
+    -o-background-size: cover;
+    height: 76px;
+    width: 100%;
+    margin-top: -50px;
+    margin-bottom: 8px;
+
+}
+.ground-small_general {
+    background: url(../images/fodbold/ground-small.png) center bottom;
+    background-repeat: no-repeat;
+    height: 90px;
+    width: 100%;
+    margin-left: 0px;
+    margin-bottom: -60px;
+    margin-top: 50px;
+}
+.ground-small_general_fodbold {
+    background: url(../images/fodbold/ground-small.png) center bottom;
+    background-repeat: no-repeat;
+    height: 90px;
+    width: 100%;
+    margin-left: 0px;
+    margin-bottom: -60px;
+    margin-top: 50px;
+    
+}
+.ground-small_general_Tennis {
+    background: url(../images/tennis/tennis.png) center bottom;
+    background-repeat: no-repeat;
+    height: 90px;
+    width: 100%;
+    margin-left: 0px;
+    margin-bottom: -60px;
+    margin-top: 50px;
+}
+
+.carousel-inner.minus-top { top: -100px;}
+
+.fod-three-box {
+    background-image: url(../images/fodbold/ground-image-football.jpg);
+    background-repeat: no-repeat;
+    background-size: 100%;
+    float: left;
+    width: 100%;
+    height: auto;
+    z-index: 147;
+    position: absolute;
+}
+.fod-three-box_live {
+    background-color: #223A00;
+    background-image: url(../images/fodbold/ground-image-football.jpg);
+    background-repeat: no-repeat;
+    background-size: 100%;
+    float: left;
+    width: 100%;
+    height: auto;
+    position: relative;
+    padding: 10px;
+}
+.bet365_2 {
+    background-image: url(../images/fodbold/bet365_2.png);
+    background-repeat: no-repeat;
+    height: 213px;
+    width: 161px;
+}
+.bet365_3 {
+    background-image: url(../images/stream/OddsProvider%20.png);
+    background-repeat: no-repeat;
+    height: 213px;
+    width: 100%;
+}
+.unibet_3 {
+    background-image: url(../images/stream/OddsProviderLogo%20.png);
+    background-repeat: no-repeat;
+    height: 213px;
+    width: 100%;
+}
+.unibet {
+    background-image: url(../images/fodbold/unibet.png);
+    background-repeat: no-repeat;
+    height: 213px;
+    width: 161px;
+}
+.viaplay {
+    background-image: url(../images/fodbold/viaplay.png);
+    background-repeat: no-repeat;
+    height: 213px;
+    width: 161px;
+}
+.play {
+    background-image: url(../images/fodbold/play.png);
+    background-repeat: no-repeat;
+    height: 213px;
+    width: 161px;
+}
+.danske_spil {
+    background-image: url(../images/fodbold/danske_spil.png);
+    background-repeat: no-repeat;
+    height: 213px;
+    width: 161px;
+}
+.dr_nu {
+    background-image: url(../images/fodbold/dr_nu.png);
+    background-repeat: no-repeat;
+    height: 213px;
+    width: 161px;
+}
+.fox {
+    background-image: url(../images/fodbold/fox.png);
+    background-repeat: no-repeat;
+    height: 213px;
+    width: 161px;
+}
+.bet365 {
+    background-image: url(../images/fodbold/bet365.png);
+    background-repeat: no-repeat;
+    height: 70px;
+    width: 90px;
+    float: left;
+    margin-top: 15px;
+}
+.line-arw {
+    background-image: url(../images/fodbold/line-arw.png);
+    background-repeat: no-repeat;
+    height: 30px;
+    width: 56px;
+    float: right;
+    margin-top: 25px;
+    margin-right: 30px;
+}
+.sep-arw {
+    background-image: url(../images/fodbold/sep-arw.png);
+    background-repeat: no-repeat;
+    height: 200px;
+    width: 56px;
+    float: none;
+    margin-top: 0px;
+}
+.ico-green-2 {
+    background-image: url(../images/fodbold/ico-green-2.png);
+    background-repeat: no-repeat;
+    height: 70px;
+    width: 90px;
+    float: left;
+    margin-top: 15px;
+}
+.ico-green-3 {
+    background-image: url(../images/fodbold/ico-green-3.png);
+    background-repeat: no-repeat;
+    height: 70px;
+    width: 90px;
+    float: left;
+    margin-top: 15px;
+}
+.bet365_home {
+    background-image: url(../images/home/bet365.png);
+    background-repeat: no-repeat;
+    height: 51px;
+    width: 150px;
+    margin-top: 15px;
+}
+.unibet_home {
+    background-image: url(../images/home/unibet.png);
+    background-repeat: no-repeat;
+    height: 51px;
+    width: 150px;
+    margin-top: 15px;
+}
+.viaplay_home {
+    background-image: url(../images/home/viaplay.png);
+    background-repeat: no-repeat;
+    height: 51px;
+    width: 150px;
+    margin-top: 15px;
+}
+.v2play_home {
+    background-image: url(../images/home/v2play.png);
+    background-repeat: no-repeat;
+    height: 51px;
+    width: 150px;
+    margin-top: 15px;
+}
+
+.uk_k {
+    background: url(http://images.sesport.dk/country-flags/uk-2.png) no-repeat;
+    height: 20px;
+    width: 30px;
+    display: block;
+    text-indent: -9999px;
+    overflow: hidden;
+    float: left;
+    margin-top: 3px;
+    cursor: pointer;
+}
+
+.bet365bet {
+    background-image: url(../images/fodbold/chanels/bet365bet.png);
+    background-repeat: no-repeat;
+    height: 34px;
+    width: 44px;
+    float: left;
+}
+.StreamProvid {
+    background-image: url(../images/fodbold/chanels/StreamProvid.png);
+    background-repeat: no-repeat;
+    height: 34px;
+    width: 44px;
+    float: left;
+}
+.StreamProviderLogo {
+    background-image: url(../images/fodbold/chanels/StreamProviderLogo%20.png);
+    background-repeat: no-repeat;
+    height: 34px;
+    width: 44px;
+    float: left;
+}
+.StreamProviderstr_viaplay {
+    background-image: url(../images/fodbold/chanels/str_viaplay.png);
+    background-repeat: no-repeat;
+    height: 34px;
+    width: 44px;
+    float: left;
+}
+.StreamProviderDR {
+    background-image: url(../images/fodbold/chanels/dr.jpg);
+    background-repeat: no-repeat;
+    height: 45px;
+    width: 80px;
+    float: left;
+    margin-left: 3px;
+    margin-right: 3px;
+    margin-top: -5px;
+}
+.StreamProviderstr_univet{
+    background-image: url(../images/fodbold/chanels/str_univet.jpg);
+    background-repeat: no-repeat;
+    height: 34px;
+    width: 44px;
+    float: left;
+}
+.eren_logo_new {
+    background-image: url(../images/fodbold/chanels/6eren_logo_new.png);
+    background-repeat: no-repeat;
+    height: 80px;
+    width: 80px;
+
+}
+.Boxer_new {
+    background-image: url(../images/fodbold/chanels/Boxer_new.png);
+    background-repeat: no-repeat;
+    height: 120px;
+    width: 80px;
+
+}
+.Canal_9_Danmark_new {
+    background-image: url(../images/fodbold/chanels/Canal_9_Danmark_new.png);
+    background-repeat: no-repeat;
+    height: 120px;
+    width: 80px;
+
+}
+.canal8sport_big_new {
+    background-image: url(../images/fodbold/chanels/canal8sport_big_new.png);
+    background-repeat: no-repeat;
+    height: 140px;
+    width: 80px;
+    *float: left;
+}
+.Kanal_5_HD_new {
+    background-image: url(../images/fodbold/chanels/Kanal_5_HD_new.png);
+    background-repeat: no-repeat;
+    height: 120px;
+    width: 80px;
+
+}
+.tdc_new {
+    background-image: url(../images/fodbold/chanels/tdc_new.png);
+    background-repeat: no-repeat;
+    height: 120px;
+    width: 80px;
+
+}
+.telia_new {
+    background-image: url(../images/fodbold/chanels/telia_new.png);
+    background-repeat: no-repeat;
+    height: 120px;
+    width: 80px;
+
+}
+.TV_2_original_boxed_logo_new {
+    background-image: url(../images/fodbold/chanels/TV_2_original_boxed_logo_new.png);
+    background-repeat: no-repeat;
+    height: 120px;
+    width: 80px;
+
+}
+.TV3_logo_2008_new {
+    background-image: url(../images/fodbold/chanels/TV3+_logo_2008_new.png);
+    background-repeat: no-repeat;
+    height: 120px;
+    width: 80px;
+
+}
+.tv3sport1_big_new {
+    background-image: url(../images/fodbold/chanels/tv3sport1_big_new.png);
+    background-repeat: no-repeat;
+    height: 120px;
+    width: 80px;
+
+}
+.tv3-sport-2_new {
+    background-image: url(../images/fodbold/chanels/tv3-sport-2_new.png);
+    background-repeat: no-repeat;
+    height: 120px;
+    width: 80px;
+
+}
+.visat_new {
+    background-image: url(../images/fodbold/chanels/visat_new.png);
+    background-repeat: no-repeat;
+    height: 120px;
+    width: 80px;
+
+}
+
+
+.ico-1{
+    background-image: url(../images/fodbold/live/ico-1-40-D.png);
+    background-repeat: no-repeat;
+    height: 50px;
+    width: 50px;
+    margin-top: 5px;
+}
+.ico-2{
+    background-image: url(../images/fodbold/live/ico-2-40-D.png);
+    background-repeat: no-repeat;
+    height: 50px;
+    width: 50px;
+    margin-top: 5px;
+}
+.ico-3{
+    background-image: url(../images/fodbold/live/ico-3-40-D.png);
+    background-repeat: no-repeat;
+    height: 50px;
+    width: 50px;
+    margin-top: 5px;
+}
+
+.btn_event{
+    padding: 40px;
+    margin-top: 35px;
+}
+
+.live,
+.tvguide {
+    background-repeat: no-repeat;
+    height: 160px;
+    width: 170px;
+    float: left;
+    background-size: contain;
+}
+/**.live {background-image: url(../images/home/live-stream-icon.png);}
+.tvguide {background-image: url(../images/home/tvguide-icon.png);}**/
+
+.danske-medier {
+    background-image: url(../images/home/danske-medier-bg_nw.png);
+    background-repeat: no-repeat;
+    height: 33px;
+    width: 161px;
+}
+.responsive {
+    background-image: url(../images/home/responsive.jpg);
+    background-repeat: no-repeat;
+    height: 170px;
+    width: 170px;
+}

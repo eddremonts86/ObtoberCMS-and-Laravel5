@@ -1,0 +1,233 @@
+==
+<?php
+use Rebelpenguin\Events\Classes\template;
+    function onStart()
+    {
+         $sport='Fodbold';
+         $sports = template::sport_name();
+         $this['sports'] = $sports;
+         
+         $art = template::liveheader($sport);
+         $this['art'] = $art;
+
+    }
+?>
+==
+<html lang="en">
+{% partial "tpl_system/head" %}
+<body>
+
+<!-- Google Tag Manager -->
+<noscript><iframe src="//www.googletagmanager.com/ns.html?id=GTM-XXXXXX" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<script>(function(w,d, s, l, i) {
+    w[l] = w[l] || [];
+    w[l].push({'gtm.start':
+            new Date().getTime(), event: 'gtm.js'});
+    var f = d.getElementsByTagName(s)[0],
+            j = d.createElement(s), dl = l != 'dataLayer' ? '&l=' + l : '';
+    j.async = true;
+    j.src =
+            '//www.googletagmanager.com/gtm.js?id=' + i + dl;
+    f.parentNode.insertBefore(j, f);
+})(window, document, 'script', 'dataLayer', 'GTM-XXXXXX');</script>
+<!-- End Google Tag Manager -->
+{% for sports in sports %}
+{% if loop.index == 1 %}
+<style>
+    .color{
+        color:#{{sports.color}};
+        text-shadow: 7px 2px 3px rgba(00, 00, 00, 0.7);
+    }
+    .bgcolor{
+        background: #{{sports.color}};
+    border-bottom-color: #{{sports.color}};
+    }
+    .btn-success{
+        background: #{{sports.color}};
+        border: 1px solid #{{sports.color}};
+        box-shadow: 0 0 0.001px 1px rgba(122, 170, 17, 0.4);
+
+    }
+    .btn
+</style>
+{%endif%}
+{% endfor %}
+<div class="container_fluid">
+    <header class="header fb_head">
+        <section class="top trans-black">
+            <div class="container">
+                <div class="row">
+                    <div class="col-sm-12 col-xs-12">
+                        <div class="logo">
+                            <a href="/"><img src="/themes/sesportV1/assets/images/home/logo-light-fodbold1.png" alt="Sesport logo" /></a>
+                        </div>
+                        {% partial "tpl_system/sport_menu" %}
+
+                        <div class="navbar-header">
+                            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-8" aria-expanded="false">
+                                <span class="sr-only">Toggle navigation</span>
+                                <span class="fa fa-bars white"></span>
+                            </button>
+                        </div>
+                        <!-- Collect the nav links, forms, and other content for toggling -->
+                        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-8">
+                            <ul class="nav navbar-nav  pull-left text-left">
+                                <li id="Fodbold_" role="presentation" class="top_sport_link"><a href="/Fodbold">Forside</a></li>
+                                <li id="Live" role="presentation" class="top_sport_link"><a href="/Fodbold/fodbold_live_stream/">Live Stream Fodbold</a></li>
+                                <li id="guide" role="presentation" class="top_sport_link"><a href="/Fodbold/kampprogram">Kampprogram</a></li>
+                                <li id="Blog" role="presentation" class="top_sport_link"><a href="/Fodbold/blog">Blog</a></li>
+                            </ul>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </section>
+        <div class="welcome hidden">
+            <div class="welcome-inner">
+                <span class="promo">
+                  <h1 class="white"><span>Live stream</span> fodbold online</h1>
+                  <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
+                      <div class="carousel-inner" role="listbox">
+                          {% for arts in art %}
+                            {% if loop.index == 1 %}            
+                              <div class="item active">
+                                                  <div class="test">
+                                                      <div class="test-inner text-left">
+                                                          <div class="test-col hide-tablet"><h2>Se fodbold med Bet365</h2></div>
+                                                          <div class="test-col">
+                                                              <div class="white-col"><i class="fa fa-user-plus"></i><h3>Opret en gratis konto</h3></div>
+                                                              <div class="white-col"><i class="fa fa-play-circle"></i><h3>Se de kampe du vil</h3></div>
+                                                          </div>
+                                                          <div class="test-col center">
+                                                              <a class="btn round-cta" href="Fodbold/:{{arts.url_free}}/:{{arts.id_evento}}"><div>Bet365</div></a>
+                                                          </div>
+                                                          <div class="test-col center last">
+                                                              <p>Næste topkamp - {{arts.date}}  Kl. {{arts.hora}}<br/>
+                                                                  <a href="Fodbold/:{{arts.url_free}}/:{{arts.id_evento}}">{{arts.artic_name}}</a></p>
+                                                          </div>
+                                                          <div class="onerow"></div>
+                                                          </div>
+                                                      </div>
+                                              </div>
+                            {% else %}
+                                <div class="item">
+                                          <div class="test">
+                                              <div class="test-inner text-left">
+                                                  <div class="test-col hide-tablet"><h2>Se fodbold med Bet365</h2></div>
+                                                  <div class="test-col">
+                                                      <div class="white-col"><i class="fa fa-user-plus"></i><h3>Opret en gratis konto</h3></div>
+                                                      <div class="white-col"><i class="fa fa-play-circle"></i><h3>Se de kampe du vil</h3></div>
+                                                  </div>
+                                                  <div class="test-col center">
+                                                      <a class="btn round-cta" href="Fodbold/:{{arts.url_free}}/:{{arts.id_evento}}"><div>Bet365</div></a>
+                                                  </div>
+                                                  <div class="test-col center last">
+                                                      <p>Næste topkamp - {{arts.date}}  Kl. {{arts.hora}}<br/>
+                                                      <a href="Fodbold/:{{arts.url_free}}/:{{arts.id_evento}}">{{arts.artic_name}}</a></p>
+                                                  </div>
+                                                  <div class="onerow"></div>
+                                              </div>
+                                          </div>
+                                      </div>
+                             {%endif%}
+                             {% endfor %}
+                             </div>
+                  </div>
+                </span>
+            </div>
+        </div>
+        <div class="welcome">
+        <div class="welcome-inner">
+                <span class="promo">
+                  <h1 class="white">Live stream<span> fodbold online</span></h1>
+                              <div class="test">
+                              <div class="test-inner text-left">
+                                      <div class="test-col hide-tablet"><h2>Se fodbold med Bet365</h2></div>
+                                      <div class="test-col">
+                                          <div class="white-col"><i class="fa fa-user-plus"></i><h3>Opret en gratis konto</h3></div>
+                                          <div class="white-col"><i class="fa fa-play-circle"></i><h3>Se de kampe du vil</h3></div>
+                                      </div>
+                                      <div class="test-col center">
+                                           {% for arts in art %}
+                                             {% if loop.index == 1 %}
+                                              <a class="btn round-cta" href="/redirect/:fodbold/:bet365/:fpd"><div>Bet365</div></a>
+                                             {%endif%}
+                                          {% endfor %}
+                                      </div>
+                                      <div class="test-col center last">
+                                          <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
+                                              <div class="carousel-inner" role="listbox">
+                                                  {% for arts in art %}
+                                                  {% if loop.index == 1 %}
+                                                  <div class="item active">
+                                                    <p>Næste topkamp - {{arts.date}}  Kl. {{arts.hora}}<br/>
+                                                    <a href="Fodbold/:{{arts.url_free}}/:{{arts.id_evento}}">{{arts.artic_name}}</a></p>
+                                                  </div>
+                                                      {% else %}
+                                                  <div class="item">
+                                                      <p>Næste topkamp - {{arts.date}}  Kl. {{arts.hora}}<br/>
+                                                          <a href="Fodbold/:{{arts.url_free}}/:{{arts.id_evento}}">{{arts.artic_name}}</a></p>
+                                                  </div>
+                                                  {%endif%}
+                                                      {% endfor %}
+                                        </div>
+                                      <div class="onerow"></div>
+                                  </div>
+                              </div>
+                          </div>
+                      </div>
+                    </span>
+                </div>
+        </div>
+    </header>
+
+    <!-- UDKOM <header>
+    <div class="fb_head">
+        <div class="container">
+            <div class="row">
+                <div class="head_fb">
+                    <div class="col-md-offset-0 col-md-5 marmin_top_head">
+                        <h1 class="text-left   white  ">Se</h1>
+                        <h1 class="text-center color  ">Live Stream</h1>
+                        <h1 class="text-right  white  ">Fodbold</h1>
+                    </div>
+                    <div class="col-md-offset-3 col-md-4 box_fb hidden-xs">
+                        <div class="">
+                            <div class="">
+                                <h2 class="no-padding color">Fodbold skal ses live!</h2>
+                                <p style="margin-top: -10px">Fålg dit yndlingshold:</p>
+                                <h2 class="no-padding color">live på TV</h2>
+                                <h2 class="no-padding color"> live på stadion</h2>
+                                <h2 class="no-padding  color">eller live online</h2>
+                                <p style="margin-top: -10px">på pc, mobil eller tablet.</p>
+                                <hr>
+                                {% for arts in art %}
+                                {% if loop.index == 1 %}
+
+                                <p>Næste topkamp - se i dag: {{arts.date}}</p>
+                                    <b style="margin-top: -10px"> Kl. {{arts.hora}} : {{arts.artic_name}}</b><br>
+                                <a type="button" class="btn btn-success btn-lg marg_top" href="Fodbold/:{{arts.url_free}}/:{{arts.id_evento}}"><i class="icon-wrench">
+                                    </i>{{arts.artic_name}}
+                                </a>
+
+                                {%endif%}
+                                {% endfor %}
+
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</header> UDKOM -->
+    {% page %}
+    {% partial "tpl_system/footer" %}
+    <!-- Scripts -->
+    {% partial "tpl_system/scrit" %}
+    {% framework extras %}
+    {% scripts %}
+</div><!--container_fluid-->
+</body></html>

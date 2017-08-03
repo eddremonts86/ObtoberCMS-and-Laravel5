@@ -1,0 +1,27 @@
+title = "TennisBlog"
+url = "/Tennis/blog"
+layout = "ly_Tennis/NonFooter"
+is_hidden = 0
+meta_title = "Actualitées des top matchs de Tennis | Voirlematch.fr"
+meta_description = "Lisez des aperçus des prochains matchs de Tennis et accédez à toutes les informations essentielles au visionnage en ligne."
+
+[SportEvents]
+max = 0
+Frompage = 0
+Prioritize = 0
+Active = 0
+Layout = "Blog"
+Sport = "a0ddc52a-69fb-11e4-85c8-5254005a5aa0"
+Head = "Aperçus des"
+SubHead = "prochains matchs"
+Link = "/revue-streaming"
+
+[ArticleAPI]
+==
+<section class="container blogblock">
+            <div class="row">
+                {% component 'SportEvents' %}
+            </div>
+       </section>
+    </header>
+</div>

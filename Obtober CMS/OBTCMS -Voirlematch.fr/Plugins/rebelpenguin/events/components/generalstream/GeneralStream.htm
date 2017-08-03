@@ -1,0 +1,294 @@
+{% for conf in conf %}
+    {% for stream in streams %}
+    {% if loop.index == 1 %}
+        <style>
+            
+            
+            .btn-modf{
+                background: #{{stream.color}};
+                border-bottom-color: #{{stream.color}};
+                border-radius: 0;
+                color:#ffffff
+            }
+            .non-hand{
+                cursor: auto;
+            }
+            .nav-tabs > li.active > a {
+                color: #{{stream.color}};
+            }
+            .nav-tabs > li > a:hover,
+            .nav-tabs > li > a:focus,
+            .nav-tabs>li.active>a, .nav-tabs>li.active>a:focus, .nav-tabs>li.active>a:hover{
+                cursor: pointer!important;
+                color: #{{stream.color}};
+            }
+
+        </style>
+    {%endif%}
+    {% endfor %}
+    <div class="row">
+        <div class="heading-border">
+            <i class="fa fa-tv" style="font-size: 5em;margin: 10px auto; display: block;"></i>
+            <h3><span>{{ conf.head }}</span></h3>
+        </div>
+        <div class="col-md-4 col-sm-12 col-lg-4">
+            <ul class="nav nav-tabs text-left">
+                {% for stream in streams %}
+                {% if loop.index == 1 %}
+                <li class="active text-left">
+                    <a href="#{{stream.id_stream}}" data-toggle="tab">
+                        <div class="provider-table">
+                            <div><img class="img_none" width="100px" src="/storage/app/media/Stream Provider/stream_genera/General/{{stream.gnr_label}}.png"></div>
+                            <div>
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star-half-full"></i>
+                            </div>
+                            <div>{{stream.gnr_price}}</div>
+                        </div>
+                    </a>
+                </li>
+                {% else %}
+                <li class="text-left">
+                    <a href="#{{stream.id_stream}}" data-toggle="tab">
+                        <div class="provider-table">
+                            <div><img class="img_none"  width="100px" src="/storage/app/media/Stream Provider/stream_genera/General/{{stream.gnr_label}}.png"></div>
+
+                            <div>
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star-half-full"></i>
+                            </div>
+
+                            <div>{{stream.gnr_price}}</div>
+                        </div>
+                    </a>
+                </li>
+                {%endif%}
+            {% endfor %}
+            </ul>
+        </div> 
+        <div class="col-md-8 col-sm-12 col-lg-8">
+            <div class="text-left tab-content">
+                {% for stream in streams %}
+                {% if loop.index == 1 %}
+                    <div class="tab-pane active margin-top-sm" id="{{stream.id_stream}}"  >
+                        <div class="text-left non-hand">
+                            <h3>{{stream.gpm_head}}</h3>
+                            <p><b style="font-size: 17px">{{stream.gpm_quality_head}}</b> <br/> {{stream.gpm_quality_content}}</p>
+                            <p><b style="font-size: 17px">{{stream.gpm_udv_head}}  </b> <br/> {{stream.gpm_udv_content}}</p>
+                            <p><b style="font-size: 17px">{{stream.gpm_price_head}}  </b> <br/> {{stream.gpm_price_content}}</p>
+                            <br/>
+                            <h4>Comment s'inscrire!</h4>
+                            <hr>
+                            <div class="steps-container non-hand">
+                                <div class="steps-row">
+                                    <div class="step">
+                                        <div class="step-icon">
+                                            <div><img class="img_none hidden-sm hidden-xs" src="/storage/app/media/Stream Provider/stream_genera/General/{{stream.gnr_label}}.png">
+                                            <i class="fa fa-mouse-pointer fa-3x" style="display: block;margin-top: 10px;"></i></div>
+                                        </div>
+                                        <p><b>{{stream.gpm_icon_H_one}}</b><br/>{{stream.gpm_icon_S_one}}</p>
+                                    </div>
+                                    <div class="step">
+                                        <div class="step-icon"><i class="fa fa-user-plus fa-5x"></i></div>
+                                        <p><b>{{stream.gpm_icon_H_two}}</b><br/>{{stream.gpm_icon_S_two}}</p>
+                                    </div>
+                                    <div class="step">
+                                        <div class="step-icon"><i class="fa fa-play-circle fa-5x"></i></div>
+                                        <p><b>{{stream.gpm_icon_H_three}}</b><br/>{{stream.gpm_icon_S_three}}<br/>
+                                        <b style="font-size: 10px">{{stream.gpm_icon_N_three}}</b></p>
+                                    </div>
+                                </div>
+                            </div>
+                            <hr>
+                            <div class="float-right">
+                                <a class="btn btn-default size" href="{{ conf.Link}}/:{{stream.gnr_label}}" >{{stream.gpm_button_rew}}</a>
+                                <a class="btn btn-modf size" href="{{stream.gnr_afflink}}" target="_blank">{{stream.gpm_button_wlive}}<i style="margin-left:5px;" class="fa fa-arrow-circle-o-right"></i></a>
+                            </div>
+                       </div>
+                    </div>
+                {% else %}
+                    <div class="tab-pane" id="{{stream.id_stream}}" >
+                        <div class="text-left non-hand">
+                            <h3>{{stream.gpm_head}}</h3>
+                            <p><b style="font-size: 17px">{{stream.gpm_quality_head}}</b> <br/> {{stream.gpm_quality_content}}</p>
+                            <p><b style="font-size: 17px">{{stream.gpm_udv_head}}  </b> <br/> {{stream.gpm_udv_content}}</p>
+                            <p><b style="font-size: 17px">{{stream.gpm_price_head}}  </b> <br/> {{stream.gpm_price_content}}</p>
+                            <br/>
+                            <h4>Comment s'inscrire!</h4>
+                            <hr>
+                            <div class="steps-container non-hand">
+                                <div class="steps-row">
+                                    <div class="step">
+                                        <div class="step-icon">
+                                            <div><img class="img_none hidden-sm hidden-xs" src="/storage/app/media/Stream Provider/stream_genera/General/{{stream.gnr_label}}.png">
+                                            <i class="fa fa-mouse-pointer fa-3x" style="display: block;margin-top: 10px;"></i></div>
+                                        </div>
+                                        <p><b>{{stream.gpm_icon_H_one}}</b><br/>{{stream.gpm_icon_S_one}}</p>
+                                    </div>
+
+                                    <div class="step">
+                                        <div class="step-icon"><i class="fa fa-user-plus fa-5x"></i></div>
+                                        <p><b>{{stream.gpm_icon_H_two}}</b><br/>{{stream.gpm_icon_S_two}}</p>
+                                    </div>
+
+                                    <div class="step">
+                                        <div class="step-icon"><i class="fa fa-play-circle fa-5x"></i></div>
+                                        <p><b>{{stream.gpm_icon_H_three}}</b><br/>{{stream.gpm_icon_S_three}}<br/>
+                                        <b style="font-size: 10px">{{stream.gpm_icon_N_three}}</b></p>
+                                    </div>
+                                </div>
+                            </div>
+                            <hr>
+                            <div class="float-right">
+                                <a class="btn btn-default size" href="{{ conf.Link}}/:{{stream.gnr_label}}" >{{stream.gpm_button_rew}}</a>
+                                <a class="btn btn-modf size" href="{{stream.gnr_afflink}}" target="_blank">{{stream.gpm_button_wlive}}<i style="margin-left:5px;" class="fa fa-arrow-circle-o-right"></i></a>
+                            </div>
+                            
+                       </div>
+                    </div>
+                {%endif%}
+            {% endfor %}
+            </div>
+        </div>
+    <!-- </div>
+
+     <div>
+        <div>
+            <h3 class="border"><span>Find din</span> live stream udbyder</h3>
+        </div>
+        <div class="tabbable tabs-left ">
+        <ul class="nav nav-tabs col-lg-4 ">
+                {% for stream in streams %}
+                {% if loop.index == 1 %}
+                <li class="active text-left">
+                    <a href="#{{stream.id_stream}}" data-toggle="tab">
+                        <b class="text-left" style="float: left;margin-right: 15px">
+                            <img class="img_none" src="/storage/app/media/Stream Provider/stream_genera/General/{{stream.gnr_label}}.png">
+                        </b>
+                        <b class="text-center">
+                            <i class="fa fa-star"></i>
+                            <i class="fa fa-star"></i>
+                            <i class="fa fa-star"></i>
+                            <i class="fa fa-star"></i>
+                            <i class="fa fa-star-half-full"></i>
+                        </b>
+                        <b class="text-right" style="float: right"> {{stream.gnr_price}}</b>
+                    </a>
+                </li>
+                {% else %}
+                <li class="text-left">
+                    <a href="#{{stream.id_stream}}" data-toggle="tab">
+                        <b class="text-left" style="float: left;margin-right: 15px">
+                            <img class="img_none" src="/storage/app/media/Stream Provider/stream_genera/General/{{stream.gnr_label}}.png">
+                        </b>
+                        <b class="text-center">
+                            <i class="fa fa-star"></i>
+                            <i class="fa fa-star"></i>
+                            <i class="fa fa-star"></i>
+                            <i class="fa fa-star"></i>
+                            <i class="fa fa-star-half-full"></i>
+                        </b>
+                        <b class="text-right"style="float: right">  {{stream.gnr_price}}</b>
+                    </a>
+                    </a>
+                </li>
+                {%endif%}
+            {% endfor %}
+        </ul>
+        <div class="tab-content col-lg-7 text-left">
+            {% for stream in streams %}
+                {% if loop.index == 1 %}
+                    <div class="tab-pane active" id="{{stream.id_stream}}" >
+
+                        <div class="col-xs-12 text-left">
+                        <b class="text-left" style="float: left;margin-right: 15px">
+                            <i class="fa fa-tv"></i>
+                            <img class="img_none" src="/storage/app/media/Stream Provider/stream_genera/General/{{stream.gnr_label}}.png">
+                        </b>
+                        <b style="font-size: 20px">{{stream.gpm_head}}</b><br>
+
+                        <b style="font-size: 20px">{{stream.gpm_quality_head}}</b><br>
+                        <p>{{stream.gpm_quality_content |md}}</p>
+                        <b style="font-size: 20px">{{stream.gpm_udv_head}}</b><br>
+                        <p>{{stream.gpm_udv_content |md}}</p>
+                        <b style="font-size: 20px">{{stream.gpm_price_head}}</b><br>
+                        <p>{{stream.gpm_price_content |md}}</p>
+                        Comment s'inscrire:<br><br>
+                        </div>
+                        <div class="col-xs-4 text-center">
+                            <p style="height: 30px">{{stream.gpm_icon_H_one}}</p>
+                            <img class="img_none" src="storage/app/media/Stream Provider/stream_genera/{{stream.name_sport}}/{{stream.gnr_label}}.png">
+                            <p>{{stream.gpm_icon_S_one |md}}</p>
+                        </div>
+                        <div class="col-xs-4 text-center">
+                            <p style="height: 30px">{{stream.gpm_icon_H_two}}</p>
+                            <img class="img_none" src="storage/app/media/Stream Provider/stream_genera/{{stream.name_sport}}/ico-green-2.png">
+                            <p>{{stream.gpm_icon_S_two |md}}</p>
+                        </div>
+                        <div class="col-xs-4 text-center">
+                            <p style="height: 30px">{{stream.gpm_icon_H_three}}</p>
+                            <img class="img_none" src="storage/app/media/Stream Provider/stream_genera/{{stream.name_sport}}/ico-green-3.png">
+                            <p>{{stream.gpm_icon_S_three |md}}
+                                <b style="font-size: 10px">{{stream.gpm_icon_N_three}}</b></p>
+                        </div>
+                        <div class="col-lg-6">
+                            <a class="btn btn-default size" href="{{ conf.Link}}" >{{stream.gpm_button_rew}}</a>
+                        </div>
+                        <div class="col-lg-6">
+                            <a class="btn btn-modf size" href="{{stream.gnr_afflink}}" target="_blank">{{stream.gpm_button_wlive}}</a>
+                        </div>
+                        
+                    </div>
+                {% else %}
+                    <div class="tab-pane" id="{{stream.id_stream}}" >
+
+                        <div class="col-xs-12 text-left">
+                        <b class="text-left" style="float: left;margin-right: 15px">
+                            <i class="fa fa-tv"></i>
+                            <img class="img_none" src="/storage/app/media/Stream Provider/stream_genera/General/{{stream.gnr_label}}.png">
+                        </b>
+                        <b style="font-size: 20px">{{stream.gpm_head}}</b><br>
+                        <b style="font-size: 20px">{{stream.gpm_quality_head}}</b><br>
+                        <p>{{stream.gpm_quality_content |md}}</p>
+                        <b style="font-size: 20px">{{stream.gpm_udv_head}}</b><br>
+                        <p>{{stream.gpm_udv_content |md}}</p>
+                        <b style="font-size: 20px">{{stream.gpm_price_head}}</b><br>
+                        <p>{{stream.gpm_price_content |md}}</p>
+                            Comment s'inscrire:<br><br>
+                        </div>
+                        <div class="col-lg-4 text-center">
+                            <p>{{stream.gpm_icon_H_one}}</p>
+                            <img class="img_none" src="storage/app/media/Stream Provider/stream_genera/{{stream.name_sport}}/{{stream.gnr_label}}.png">
+                            <p>{{stream.gpm_icon_S_one |md}}</p>
+                        </div>
+                        <div class="col-lg-4 text-center">
+                            <p>{{stream.gpm_icon_H_two}}</p>
+                            <img class="img_none" src="storage/app/media/Stream Provider/stream_genera/{{stream.name_sport}}/ico-green-2.png">
+                            <p>{{stream.gpm_icon_S_two |md}}</p>
+                        </div>
+                        <div class="col-lg-4 text-center">
+                            <p>{{stream.gpm_icon_H_three}}</p>
+                            <img class="img_none" src="storage/app/media/Stream Provider/stream_genera/{{stream.name_sport}}/ico-green-3.png">
+                            <p>{{stream.gpm_icon_S_three |md}}
+                                <b style="font-size: 10px">{{stream.gpm_icon_N_three}}</b></p>
+                        </div>
+                        <div class="col-xs-6">
+                            <a class="btn btn-default size" href="{{ conf.Link}}" >{{stream.gpm_button_rew}}</a>
+                        </div>
+                        <div class="col-xs-6">
+                            <a class="btn btn-modf size" href="{{stream.gnr_afflink}}" target="_blank">{{stream.gpm_button_wlive}}</a>
+                        </div>
+
+                    </div>
+                {%endif%}
+            {% endfor %}
+        </div> -->
+    </div>
+    </div>
+{% endfor %}

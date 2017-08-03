@@ -1,0 +1,26 @@
+title = "FodboldKampprogram"
+url = "/Football/calendrier"
+layout = "ly_fodbold/selive"
+is_hidden = 0
+meta_title = "Calendrier des matchs de Football | Voirlematch.fr"
+meta_description = "Consultez ce calendrier pour avoir un aperçu de tout les matchs de football disponibles chez les différents sites de streaming - Choissisez votre match."
+
+[Events Kampprogram]
+max = 0
+Layout = "Table"
+Sport = "a0c77e28-69fb-11e4-85c8-5254005a5aa0"
+Head = "Calendrier"
+SubHead = "- Matchs disponibles"
+
+[StreamPage]
+Sport = "a0c77e28-69fb-11e4-85c8-5254005a5aa0"
+Head0 = "Regardez le match"
+Head1 = "en direct"
+Head2 = "Grâce au calendrier ci-dessous vous pouvez facilement accéder à tout les matchs disponibles en streaming. Une fois que vous avez trouvé le match que vous voulez voir, cliquez sur \"Voir le Match\" afin de continuer."
+Head3 = "Prochains matchs"
+==
+{% component 'StreamPage' %}
+{% content 'FodbaldKampprogram.htm' %}
+<section class="container" style="background:white;padding-top:30px;padding-rigth:30px color:#212121">
+    {% component 'Kampprogram' %}
+</section>

@@ -1,0 +1,47 @@
+description = "default"
+
+[MenuSistem]
+Layout = "MENUTOP"
+==
+<html lang="en">
+    {% partial "tpl_system/head" %}
+    <body id="allbody">
+        {% partial "tpl_system/Gtm_script" %}
+        <div class="container_fluid">
+            <header class="header">
+                <section class="top trans-black">
+                    <div class="container">
+                        <div class="row"> 
+                            <div class="col-sm-12 col-xs-12">
+                                <div class="logo">
+                                    <a href="/"><img src="../themes/Footballstream/assets/images/home/voirlematchlogos/voirlematch-logo.png" alt="Sesport logo" /></a>
+                                </div>
+                                {% partial "tpl_system/sport_menu" %}
+                                <div class="onerow"></div>
+
+                            </div>
+                        </div>
+                    </div>
+                </section>
+                <div class="welcome">
+                    <div class="welcome-inner">
+                         <span>
+                            <h1 class="white"><span>Streaming de Foot & Tennis</span><br/>Regardez du sport en direct</h1>
+                            <b>Sûr tout vos écrans - PC/Mac | Portable | Tablette</b>
+                            {% component 'MenuSistem' %}
+
+                        </span>
+                    </div>
+
+                </div>
+            </header>
+           {% page %}
+           {% partial "tpl_system/footer" %}
+           {% partial "tpl_system/SystemPopUp" %}
+        </div>
+    <!-- Scripts -->
+    {% partial "tpl_system/scrit" %}
+    {% framework extras %}
+    {% scripts %}
+    </body>
+</html>

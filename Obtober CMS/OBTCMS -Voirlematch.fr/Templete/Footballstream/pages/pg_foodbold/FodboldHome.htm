@@ -1,0 +1,43 @@
+title = "FodboldHome"
+url = "/Football"
+layout = "ly_fodbold/home"
+description = "sport"
+is_hidden = 0
+meta_title = "Regardez votre match de Foot içi | Voirlematch.fr"
+meta_description = "Vous cherchez à voir du football en streaming gratuitement et légalement? Trouvez tout les matchs de foot disponibles en streaming sur Voirlematch.fr."
+
+[SportEvents]
+max = 3
+VIM = 1
+Frompage = 0
+Prioritize = 0
+Active = 1
+Layout = "New"
+Sport = "a0c77e28-69fb-11e4-85c8-5254005a5aa0"
+Head = "Aperçus des"
+SubHead = "prochains matchs"
+Link = "/revue-streaming"
+
+[Rebelpenguin\Events\Components\Events Events]
+max = 0
+Layout = "IndexTables"
+Sport = "a0c77e28-69fb-11e4-85c8-5254005a5aa0"
+Head = "Calendrier"
+SubHead = "– Matchs disponibles"
+Link = "/revue-streaming"
+
+[Rebelpenguin\Events\Components\GeneralStream GeneralStream]
+max = 10
+Layout = "TABLE"
+Sport = "a0c77e28-69fb-11e4-85c8-5254005a5aa0"
+Head = "Choissisez votre site de streaming"
+Link = "/revue-streaming"
+==
+<section class="container-fluid" style="background: #fff;">
+ {% component 'SportEvents' %}
+ {% component 'Events' %}
+
+<section class="container">
+	{% component 'GeneralStream' %}
+</section>
+</section>

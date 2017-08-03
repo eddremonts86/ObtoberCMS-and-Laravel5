@@ -1,0 +1,20 @@
+<style>
+    .title p {
+        font-size: 25px;
+    }
+</style>
+
+{% for result in result %}
+    <div class="container">
+        <div class=" col-xs-offset-2 col-xs-8" style="border: 0px solid #ccc;padding-top: 0px;">
+            <div class="col-xs-12" style="padding: 0">
+                <img src="http://content.rebelpenguin.dk/sites/default/files/2016-04/generateImage_RYqX1V.png" style="width: 100%; height:400px;padding: 0">
+            </div>
+            <div class="col-xs-12 text-left" style="margin-top:12px; padding: 15px;background: rgba(255, 0, 0, 0)" >
+                <div> {{result.created}}</div>
+                <div class="title"> {{result.title |md}}</div>
+               <div>{{result.body |md}}</div>
+            </div>
+        </div>
+    </div>
+{% endfor %}

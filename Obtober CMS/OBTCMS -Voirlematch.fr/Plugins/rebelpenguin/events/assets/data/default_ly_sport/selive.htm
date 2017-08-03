@@ -1,0 +1,70 @@
+description = "fodbold"
+==
+<?php
+use Rebelpenguin\Events\Classes\template;
+    function onStart()
+    {
+         $sports = template::sport_name();
+         $this['sports'] = $sports;
+
+    }
+?>
+==
+<html lang="en">
+{% partial "tpl_system/head" %}
+<body>
+     
+    <!-- Google Tag Manager -->
+    <noscript><iframe src="//www.googletagmanager.com/ns.html?id=GTM-XXXXXX" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+    <script>(function(w,d, s, l, i) {
+            w[l] = w[l] || [];
+            w[l].push({'gtm.start':
+                        new Date().getTime(), event: 'gtm.js'});
+            var f = d.getElementsByTagName(s)[0],
+                    j = d.createElement(s), dl = l != 'dataLayer' ? '&l=' + l : '';
+            j.async = true;
+            j.src =
+                    '//www.googletagmanager.com/gtm.js?id=' + i + dl;
+            f.parentNode.insertBefore(j, f);
+        })(window, document, 'script', 'dataLayer', 'GTM-XXXXXX');</script>
+    <!-- End Google Tag Manager -->
+    
+<div class="container_fluid">
+    <header class="header main-page">
+        <section class="top trans-black">
+            <div class="container">
+                <div class="row">
+                    <div class="col-sm-12 col-xs-12">
+                        <div class="logo">
+                            <a href="/"><img src="../themes/sesportV1/assets/images/home/logo-light-fodbold1.png" alt="Sesport logo" /></a>
+                        </div>
+                        {% partial "tpl_system/sport_menu" %}
+
+                        <div class="navbar-header">
+                            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-8" aria-expanded="false">
+                                <span class="sr-only">Toggle navigation</span>
+                                <span class="fa fa-bars white"></span>
+                            </button>
+                        </div>
+                        <!-- Collect the nav links, forms, and other content for toggling -->
+                        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-8">
+                            <ul class="nav navbar-nav  pull-left text-left">
+                                <li id="Fodbold_" role="presentation" class="top_sport_link"><a href="/Fodbold">Forside</a></li>
+                                <li id="Live" role="presentation" class="top_sport_link"><a href="/Fodbold/fodbold_live_stream/">Live Stream Fodbold</a></li>
+                                <li id="guide" role="presentation" class="top_sport_link"><a href="/Fodbold/kampprogram">Kampprogram</a></li>
+                                <li id="Blog" role="presentation" class="top_sport_link"><a href="/Fodbold/blog">Blog</a></li>
+                            </ul>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </section>
+    
+{% page %}
+{% partial "tpl_system/footer" %}
+<!-- Scripts -->
+{% partial "tpl_system/scrit" %}
+{% framework extras %}
+{% scripts %}
+</body></html>

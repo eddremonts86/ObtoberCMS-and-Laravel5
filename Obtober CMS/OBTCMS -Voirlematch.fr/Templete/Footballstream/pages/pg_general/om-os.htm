@@ -1,0 +1,69 @@
+title = "Om os"
+url = "/om-os"
+layout = "ly_fodbold/selive"
+description = "Om os"
+is_hidden = 0
+meta_title = "A propos de l'équipe | Voirlematch.fr"
+meta_description = "Nous voulons être votre guide du streaming en ligne - Découvrez içi tout les services proposés sur le site et bien plus encore."
+==
+<?php
+use Rebelpenguin\Events\Classes\template;
+    function onStart()
+    {
+      $sports = template::sport_name();
+      $this['sports'] = $sports;
+    }
+?>
+==
+<section class="container" style="background:white;padding-top:50px;margin-bottom:0;">
+            <div class="row">
+                <div class="col-md-offset-1 col-md-10">
+                    <div class="heading-border special text-center">
+                        <h2>À propos de <span>Voirlematch.fr</span></h2>
+                        <p><b>Nous sommes votre guide du streaming legal!</b> Que votre passion soit le Football (Ligue 1, Ligue des champions de l'UEFA, etc.) ou bien le Tennis (Tours WTA/ATP, Roland Garros, Wimbledon, etc.) vous trouverez tous les match disponible en streaming sur Voirlematch.com. Nous travaillons chaque jour pour améliorer nos services et ajouter d'autres sports - Suivez nous sur nos réseaux sociaux pour suivre les actualités en éxclusivité!</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </header>
+</div><!--container_fluid-->
+<section class="container" style="margin-top:0;">
+<div class="row">
+        <div class="col-xs-12 text-left">
+            <div class="live"><i class="fa fa-play-circle fa-10x"></i></div>
+            <h3>Streaming en direct</h3>
+            <p>
+                Voirlematch.com vous offre la possibilité de voir des matchs, souvent inaccéssibles autrement, à partir de n'importe quel écran (ordinateur, tablette et portables). Choisissez votre match à partir de notre calendrier, séléctionnez un des fournisseurs et suivez les instructions pour voir le match. <br><br>
+                Voir le <a href="live-stream">calendrier du sport</a>.
+            </p>
+        </div>
+        
+    <!--    <div class="col-xs-12 text-left"><hr></div>
+        <div class="col-xs-12 text-left">
+            <div class="tvguide"><i class="fa fa-television fa-8x"></i></div>
+            <h3>TV-guide</h3>
+            <p>
+                Hvem er det lige, der møder hvem i weekenden, og hvor kan jeg se det? Det er slut med at bruge
+                hjerneceller på at tænke over det, for med vores store oversigt kan du altid finde din
+                yndlingskamp og din favorit sportsgren med <a href="general_tv_guide">ét klik her</a>.
+            </p>
+        </div>-->
+        <div class="col-xs-12 text-left"><hr></div>
+
+        
+        <div class="col-md-offset-2 col-md-8 text-left">  
+            <h3>Comment voir un match</span></h3>
+            <p>Choissisez ci-dessous le sport qui vous intéresse, vous serez redirigé à la page principale de ce sport. À partir d'içi vous pouvez choissir le match que vous voulez regarder dans le calendrier ou vous informer sur les fournisseurs disponibles sur ce site.<br><br>Avez vous des commentaires ou suggestions? Nous vous invitons à nous contacter par <a href="mailto:support@voirlematch.fr">mail</a> ou par nos réseaux sociaux.</a></p>
+        </div>
+        
+        <div class="col-sm-12" style="margin:20px 0;">
+            {% for sport in sports %}
+                <a style="float:right;margin-left:10px;" href="{{sport.name}}"><button type="button" class="btn  btn-lg xs_" style="background:#{{sport.color}};color:#fff ">
+                       Voir {{sport.name}}
+                <i style="margin-left:5px;" class="fa fa-arrow-circle-o-right"></i></button></a>
+            {% endfor %}
+
+        </div>
+        
+    </div>
+</section>

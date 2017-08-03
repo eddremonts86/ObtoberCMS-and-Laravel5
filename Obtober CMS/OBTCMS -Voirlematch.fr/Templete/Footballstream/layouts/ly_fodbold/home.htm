@@ -1,0 +1,91 @@
+description = "Home Page Layaut"
+
+[SlideSport]
+Sport = "a0c77e28-69fb-11e4-85c8-5254005a5aa0"
+Stream = "2284dbf6-e52d-11e5-a352-525400f795f0"
+Head0 = "Allez à"
+Head1 = "Créez un compte gratuit"
+Head2 = "Regardez votre match"
+Head3 = "Allez à"
+==
+<?php
+use Rebelpenguin\Events\Classes\template;
+    function onStart()
+    {
+         $sport='Fodbold';
+         $sports = template::sport_name();
+         $this['sports'] = $sports;
+         }
+?>
+==
+<html lang="en">
+{% partial "tpl_system/head" %}
+<body id="allbody" data-spy="scroll" data-target=".navbar-custom" >
+    
+   
+        {% partial "tpl_system/Gtm_script" %}
+        {% for sports in sports %}
+        {% if loop.index == 1 %}
+        <style>
+            .color{
+                color:#{{sports.color}};
+                text-shadow: 7px 2px 3px rgba(00, 00, 00, 0.7);
+            }
+            .bgcolor{
+                background: #{{sports.color}};
+            border-bottom-color: #{{sports.color}};
+            }
+            .btn-success{
+                background: #{{sports.color}};
+                border: 1px solid #{{sports.color}};
+                box-shadow: 0 0 0.001px 1px rgba(122, 170, 17, 0.4);
+        
+            }
+          
+        </style>
+        {%endif%}
+        {% endfor %}
+        <div class="container_fluid">
+            <header class="header fb_head">
+                <section class="top trans-black">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-sm-12 col-xs-12">
+                                <div class="logo">
+                                    <a href="/"><img src="/themes/Footballstream/assets/images/home/voirlematchlogos/voirlematch-logo-green.png" alt="Sesport logo" /></a>
+                                </div>
+                                {% partial "tpl_system/sport_menu" %}
+        
+                                <div class="navbar-header">
+                                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-8" aria-expanded="false">
+                                        <span class="sr-only">Toggle navigation</span>
+                                        <span class="fa fa-bars white"></span>
+                                    </button>
+                                </div>
+                                <!-- Collect the nav links, forms, and other content for toggling -->
+                                <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-8">
+                                    <ul class="nav navbar-nav navbar-custom pull-left text-left">
+                                        <li id="Fodbold_" role="presentation" class="top_sport_link"><a href="/Football">Page d'Accueil</a></li>
+                                        <li id="Live" role="presentation" class="top_sport_link"><a href="/Football/fodbold_live_stream/">Sites de Streaming</a></li>
+                                        <li id="guide" role="presentation" class="top_sport_link"><a href="/Football/calendrier">Calendrier</a></li>
+                                        <li id="Blog" role="presentation" class="top_sport_link"><a href="/Football/blog">Actualitées</a></li>
+                                    </ul>
+                                </div>
+        
+                            </div>
+                        </div>
+                    </div>
+                </section>
+               {% component 'SlideSport' %}
+            </header>
+         
+            {% page %}
+            {% partial "tpl_system/footer" %}
+            {% partial "tpl_system/SystemPopUp" %}
+            <!-- Scripts -->
+            {% partial "tpl_system/scrit" %}
+            {% framework extras %}
+            {% scripts %}
+        </div><!--container_fluid-->
+ 
+</body></html>

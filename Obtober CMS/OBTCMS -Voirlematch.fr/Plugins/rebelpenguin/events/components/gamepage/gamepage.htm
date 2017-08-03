@@ -1,0 +1,321 @@
+{% for conf in conf %}
+{% for dataEvent in dataevents %}
+
+{% for sports in sport %}
+<script type="text/javascript" language="JavaScript">
+    var popup_game = true;
+</script>
+<style>
+    .float_img {
+        float: none;
+    }
+    .color{
+    color:#{{sports.color}} !important;
+    font-size:25px
+    }
+
+    .colorh_left{
+        color:#{{sports.color}} !important;
+    font-size:15px
+    }
+    .colorShadow{
+        text-shadow: 7px 2px 3px rgba(00, 00, 00, 0.7);
+    }
+    .bgcolor{
+    background: #{{sports.color}} !important;
+    border-bottom-color: #{{sports.color}} !important;
+    }
+    .img_regular_fb {
+        border: 2px solid #{{sports.color}} !important;
+        opacity:0.95;
+    }
+    .btn-success_{
+    background: #{{sports.color}}!important;
+    border: 2px solid #{{sports.color}} !important;
+    }
+    .plgpanel_head {
+        margin: 0;
+        padding-bottom: 10px;
+        padding-top: 10px;
+        padding-left: 30px;
+        padding-right: 30px;
+        background: #{{sports.color}}!important;
+    text-align: left;
+    font-size: 14px;
+    color: #ffffff;
+    min-height: 50px;
+    height: auto;
+    border: 1px solid #{{sports.color}}!important;
+    }
+    .btn-danger_ {
+        background: #b0120a;
+        border: 1px solid #b0120a;
+        font-size:20px;
+        padding:15px;
+        color:#ffffff;
+        border-radius: 4px;
+    }
+    .streams{
+        background: #9E9E9E;
+        padding:15px;
+        border-radius: 3px;
+        margin-bottom: 3em;
+        display:block;
+        webkit-box-shadow: 6px 6px 14px -5px rgba(166,159,166,1);
+        -moz-box-shadow: 6px 6px 14px -5px rgba(166,159,166,1);
+        box-shadow: 6px 6px 14px -5px rgba(166,159,166,1);
+    }
+    .streams:last-child{margin-bottom: 0;}
+
+    @media screen and (max-width: 768px) {
+        .mobil_margen {
+            margin-bottom: 40px;
+            margin-top: 40px
+        }
+        .paddleft{
+            display: block;
+        }
+        .head_stream{
+            float: none !important;
+            display: block !important;
+        }
+    }
+    .paddtop{margin-top: 18px}
+
+</style>
+
+    <div class="top-container container">
+        <div class="welcome-match">
+            <div class="welcome-match-inner hide-tablet hide-mobile">
+                            <span class="promo">
+                              <h1 class="white"><span id="gtm-team1"><b class="md-head">{{ dataEvent.home_team |md}}</b></span> vs <span id="gtm-team1">
+                                  <b class="md-head">{{ dataEvent.away_team |md}}</b></span></h1>
+                                <h1 class="white">{{ dataEvent.id_sport }}</h1>
+                                <p class="white">Regardez le match grâce au guide ci-dessous.</p>
+                            </span>
+            </div>
+            <div class="margin-40">
+                <div class="box_fb col-sm-5 col-md-4" style="float:right">
+                    <div class="box_fb-container">
+
+                        <div class="team-names">
+                            <div><h4 class="white">{{dataEvent.home_team |md}}</h4></div>
+                            <div>vs</div>
+                            <div><h4 class="white">{{dataEvent.away_team |md}}</h4></div>
+                        </div>
+
+                        <div class="team-names">
+                            <div><img class="float_img img_regular_fb" src="{{dataEvent.home_team_logo }}"></div>
+                            <div> _ </div>
+                            <div><img class="float_img img_regular_fb" src="{{dataEvent.away_team_logo }}"></div>
+                        </div>
+
+
+                        <div style="border-top: 1px solid black;padding-top: 10px;margin: 10px 0;">
+                            <span id="gtm-date"><i class="fa fa-calendar">  </i>  {{dataEvent.date_D}}</span>
+                            <span id="gtm-time" style="margin-left:10px;"><i class="fa fa-clock-o">  </i>  {{dataEvent.date_H}}</span>
+                        </div>
+                        {% for stream in eventS %}
+                        {% if loop.index == 1 %}
+                        <div class="team-steps">
+                            <div class="team-steps-i"><i class="fa fa-mouse-pointer fa-1x"></i></div>
+                            <div class="team-steps-text">{{stream.gpm_icon_H_one}}</div>
+
+                            <div class="team-steps-i"><i class="fa fa-user-plus fa-1x"></i></div>
+                            <div class="team-steps-text">{{stream.gpm_icon_H_two}}</div>
+
+                            <div class="team-steps-i"><i class="fa fa-play-circle fa-1x"></i></div>
+                            <div class="team-steps-text">{{stream.gpm_icon_H_three}}</div>
+                        </div>
+
+                        <a  href="{{stream.gpm_button_aff}}" type="button" class="btn btn-success_  marg_top">
+                            <i class="icon-wrench"></i>Voir le match<i style="margin-left:5px;" class="fa fa-arrow-circle-o-right"></i>
+                        </a><br>
+                        {% if stream.rest != '' %}
+                        <b style="font-size: 10px;"><i style="color:#F8595F"class="icon-info fa fa-info-circle">&nbsp;&nbsp;</i>{{stream.rest}}</b></p>
+                        {%endif%}
+                        {% if stream.id_stream == '8ceb67ee-9bd7-11e4-92ee-5254005a5aa0' %}
+                        <div onclick="$('#terms_winows').modal('show')" class="terms"></div>
+                        {%endif%}
+                        {%endif%}
+                        {%endfor%}
+
+
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+    </header></div>
+
+    <div class="body_content" style="background: #262b2d; padding: 40px 0;">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12"style="background: #fff;">
+                    <div style="padding: 20px;display:table;width:100%;">
+                        <div class="col-xs-2 hide-mobile" style="float:left;">
+                            {% if dataEvent.autor == '' %}
+                            <img class="img-thumbnail img-rounded float_img" src="/storage/app/media/Periodistas/Admin.jpg">
+                            {% else%}
+                            <img class="img-thumbnail img-rounded float_img" src="/storage/app/media/Periodistas/{{dataEvent.autor}}.jpg">
+                            {%endif%}
+                            <div style="font-size:13px; color: #212121;padding-top: 10px">{{dataEvent.autor_name}}</div>
+                        </div>
+                        <div class="col-xs-12 col-md-10 text-justify" style="color:#212121">
+
+                            <!--To Tennis-->
+
+                            {% if sports.id_sport == 'a0ddc52a-69fb-11e4-85c8-5254005a5aa0' %}
+                                <h4>Voir <b class="md">{{ dataEvent.home_team |md}} vs {{ dataEvent.away_team |md}}</b></h4>
+                                {{dataEvent.date }}<hr>
+
+                                {% if dataEvent.article_body == "" and dataEvent.caption == "" %}
+                                <div id="articlecaption"  class="col-xs-12" style="margin-bottom: 40px">
+                                <b class="mdcaptions">
+                                    "Le match entre {{ dataEvent.home_team|md }}</b> et <b class="mdcaptions"> {{ dataEvent.away_team |md}}</b>
+                                    se déroulera le  {{ dataEvent.date_D }} à  {{ dataEvent.date_H }} -  Regardez <b> du tennis</b> en cliquant ci-dessous."<br>
+                                </div>
+                                {%endif%}
+
+                                {% if dataEvent.article_body != "" and dataEvent.caption == ""%}
+                                <div id="articlecaption"  class="col-xs-12" style="margin-bottom: 40px">
+                                    <b class="mdcaptions">
+                                        "Le match entre {{ dataEvent.home_team|md }}</b> et <b class="mdcaptions"> {{ dataEvent.away_team |md}}</b>
+                                    se déroulera le  {{ dataEvent.date_D }} à  {{ dataEvent.date_H }} -  Regardez <b> du tennis</b> en cliquant ci-dessous."<br>
+                                </div>
+                                <div id="articleBody" class="hidden col-xs-12" style="margin-bottom: 40px">{{dataEvent.article_body|md}}</div>
+                                <div id="data" onclick="data();"  class="active label label-default">Lire plus</div>
+                                {%endif%}
+                            {%endif%}
+
+                        <!--To Fodbald-->
+
+                            {% if sports.id_sport != 'a0ddc52a-69fb-11e4-85c8-5254005a5aa0' %}
+                                <h4>Voir <b class="md">{{ dataEvent.home_team |md}} vs {{ dataEvent.away_team |md}}</b></h4>
+                                {{dataEvent.date }}<hr>
+
+                                {% if dataEvent.article_body == "" and dataEvent.caption == "" %}
+                                <div id="articlecaption"  class="col-xs-12" style="margin-bottom: 40px">
+                                    <b class="mdcaptions">
+                                        {{ dataEvent.home_team|md }}</b> - <b class="mdcaptions">
+                                    {{ dataEvent.away_team |md}}</b> se déroulera le  {{ dataEvent.date_D }}
+                                    à  {{ dataEvent.date_H }} - Regardez ce match de la {{ dataEvent.liga }}
+                                    en cliquant ci-dessous.<br>
+                                </div>
+                                {%endif%}
+
+                                {% if dataEvent.article_body != "" and dataEvent.caption == ""%}
+                                <div id="articlecaption"  class="col-xs-12" style="margin-bottom: 40px">
+                                    <b class="mdcaptions">
+                                        {{ dataEvent.home_team|md }}</b> - <b class="mdcaptions">
+                                    {{ dataEvent.away_team |md}}</b> se déroulera le  {{ dataEvent.date_D }}
+                                    à  {{ dataEvent.date_H }} - Regardez ce match de la {{ dataEvent.liga }}
+                                    en cliquant ci-dessous.<br>
+                                </div>
+                                <div id="articleBody" class="hidden col-xs-12" style="margin-bottom: 40px">{{dataEvent.article_body|md}}</div>
+                                <div id="data" onclick="data();"  class="active label label-default">Lire plus</div>
+                                {%endif%}
+                            {%endif%}
+
+
+
+
+                            {% if dataEvent.article_body != "" and dataEvent.caption != ""%}
+                            <div id="articlecaption" class="show col-xs-12" style="margin-bottom: 40px">{{dataEvent.caption|md}}</div>
+                            <div id="articleBody" class="hidden margen_bottom col-xs-12" style="margin-bottom: 40px">{{dataEvent.article_body|md}}</div>
+                            <div id="data" onclick="data();" class="active label label-default">Lire plus</div>
+                            {%endif%}
+
+                            <div id="target">
+                                <div id="log"></div>
+
+                            </div>
+                            {% for stream in eventS %}
+                            {% if loop.index == 1 %}
+                            <div class="center-mobile" style="float:right;">
+                                <a href="{{stream.gpm_button_aff}}" class="btn btn-success_ btn_close">Voir le match <i style="margin-left:5px;" class="fa fa-arrow-circle-o-right"></i></a>
+                                <br><br>
+                                {% if stream.rest != '' %}
+                                <b style="font-size: 10px;"><i style="color:#F8595F"class="icon-info fa fa-info-circle">&nbsp;&nbsp;</i>{{stream.rest}}</b></p>
+                                {%endif%}
+                                {% if stream.id_stream == '8ceb67ee-9bd7-11e4-92ee-5254005a5aa0' %}
+                                <div onclick="$('#terms_winows').modal('show')" class="terms"></div>
+                                {%endif%}
+                            </div>
+                            {%endif%}
+                            {%endfor%}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container mobil_margen" id="streamseccion">
+        <div class="col-sm-12">
+            <div class="text-left ">
+                {% for stream in stream %}
+                <div class="margin_buttom streams" style="background: #fff; color: #212121" id="{{stream.id_stream}}">
+                    <div class="text-left">
+                        <div class="col-xs-12">
+                            <div class="col-md-5"><p class="mdheadstream">Voir le match avec <b>{{stream.gnr_label}}</b></p></div>
+                            <div class="col-md-6 paddtop">
+                                <div class="col-md-4"><b> <i class="fa fa-check"></i>Qualité:</b> {{stream.gnr_quality}}</div>
+                                <div class="col-md-4"><b> <i class="fa fa-play-circle"></i> Vidéo:</b> {{stream.gnr_size}}</div>
+                                <div class="col-md-4"><b><i class="fa fa-money "></i> Prix:</b> {{stream.gnr_price}}</div>
+                            </div>
+                        </div>
+                        <div style="display:inline-block">
+                            <hr>
+                            <div class="col-xs-12 col-md-4" style="float:left;margin: 25px auto;margin-top:0px;background: #fff;min-height: 150px;height:auto;text-align:center">
+                                <img class="img_none" src="/storage/app/media/Stream%20Provider/stream/{{stream.gnr_label}}.png" style="width:300px;float:none;margin-bottom: 12px">
+                                <div class="text-left">{{stream.gpd_icon_note}}</div>
+                            </div>
+                            <div class="col-xs-12 col-md-8" style="float:left">
+                                <div class="steps-container">
+                                    <div class="steps-row">
+                                        <div class="step">
+                                            <div class="step-icon ">
+                                                <div>
+                                                    <img class="hidden-xs hidden-sm img_none" src="/storage/app/media/Stream Provider/stream_genera/General/{{stream.gnr_label}}.png">
+                                                    <i class="fa fa-mouse-pointer fa-3x" style="display: block;margin-top: 10px;"></i></div>
+                                            </div>
+                                            <p><b>1. {{stream.gpp_icon_H_one}}</b><br/>{{stream.gpp_icon_S_one}}</p>
+                                        </div>
+
+                                        <div class="step">
+                                            <div class="step-icon"><i class="fa fa-user-plus fa-5x"></i></div>
+                                            <p><b>2. {{stream.gpp_icon_H_two}}</b><br/>{{stream.gpp_icon_S_two}}</p>
+                                        </div>
+
+                                        <div class="step">
+                                            <div class="step-icon"><i class=" fa fa-play-circle fa-5x"></i></div>
+                                            <p><b>3. {{stream.gpp_icon_H_three}}</b><br/>{{stream.gpp_icon_S_three}}<br/>
+                                                <b style="font-size: 10px">{{stream.gpp_icon_note}}</b><br>
+                                                {% if stream.rest != '' %}
+                                                <b style="font-size: 10px"><i style="color:#F8595F"class="icon-info fa fa-info-circle">&nbsp;&nbsp;</i>{{stream.rest}}</b><br>
+                                                {%endif%}
+                                                {% if stream.id_stream == '8ceb67ee-9bd7-11e4-92ee-5254005a5aa0' %}
+                                            <div onclick="$('#terms_winows').modal('show')" class="terms"></div>
+                                            {%endif%}
+                                            </p>
+                                        </div>
+                                        <div class="float-right">
+                                            <a class="btn btn-default_ size" style="color:#333;" href="{{conf.Link}}/:{{stream.gnr_label}}." >{{stream.gpm_button_rew}}</a>
+                                            <a class="btn btn-modf btn btn-success_  size" href="{{stream.gpp_button_aff}}" target="_blank">{{stream.gpm_icon_H_one}}
+                                                <i style="margin-left:5px;" class="fa fa-arrow-circle-o-right"></i></a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+{%endfor%}
+{% endfor %}
+{% endfor %}

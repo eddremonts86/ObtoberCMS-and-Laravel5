@@ -1,0 +1,11 @@
+{% for dataEvent in dataevents %}
+    <script type="text/javascript" language="JavaScript">
+    var game = true;
+    document.title = 'Voir {{ dataEvent.home_team }} VS {{ dataEvent.away_team }} {{dataEvent.date_D}} ';
+    meta = document.createElement("meta");
+    meta.setAttribute("name", "description");
+    meta.setAttribute("content", "Voir le match {{ dataEvent.home_team }} vs {{ dataEvent.away_team }} Regardez votre match içi | Voirlematch.fr");
+    var head = document.getElementsByTagName("head")[0];
+    head.appendChild(meta);
+</script>
+{% endfor %}

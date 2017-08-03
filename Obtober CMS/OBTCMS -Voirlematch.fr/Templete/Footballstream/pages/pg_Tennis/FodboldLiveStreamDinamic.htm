@@ -1,0 +1,33 @@
+title = "TennisLiveStreamDinamic"
+url = "/Tennis/Tennis_liveevents/:id_event"
+layout = "ly_Tennis/selive"
+is_hidden = 0
+meta_title = "Sites de Streaming Tennis disponibles | Voirlematch.fr"
+meta_description = "Consultez la liste des sites de streaming afin de découvrir leurs séléction et voir vos matchs de tennis en streaming live."
+
+[StreamUdbyder StreamUdbyderlive]
+max = 0
+Layout = "LIVEEVENTS"
+Sport = "a0ddc52a-69fb-11e4-85c8-5254005a5aa0"
+Head = "Choisissez votre site de streaming"
+SubHead = "Ci-dessous vous pouvez choissir entre les différents sites de streaming et d'içi quelques minutes vous aurez accés à une multitude de matchs en direct."
+
+[Events Eventslives]
+max = 0
+Layout = "TableProgram"
+Sport = "a0ddc52a-69fb-11e4-85c8-5254005a5aa0"
+Head = "Calendrier"
+SubHead = "- Matchs disponibles"
+
+[StreamPageDinamic]
+Sport = "a0ddc52a-69fb-11e4-85c8-5254005a5aa0"
+==
+{% component 'StreamPageDinamic' %}
+
+ <div class="container" style="background: #fff">
+   {% component 'StreamUdbyderlive' %}
+</div>
+
+<div class="container_fluid" style="background:#252627">
+    {% component 'Eventslives' %}
+</div>

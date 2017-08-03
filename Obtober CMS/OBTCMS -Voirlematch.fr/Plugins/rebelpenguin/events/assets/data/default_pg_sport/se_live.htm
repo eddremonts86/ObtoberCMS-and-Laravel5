@@ -1,0 +1,279 @@
+title = "Game Page"
+url = "/Fodbold/:id_name/:id_fb"
+layout = "ly_fodbold/selive"
+is_hidden = 0
+==
+<?php
+use Rebelpenguin\Events\Classes\template;
+    function onStart()
+    {
+        $id_fb = $this->param('id_fb');
+        $Sport = "Fodbold";
+        $id_fb = explode(':',$id_fb );
+
+        $dataevents= template::fb_se_live($id_fb[1]);
+        $this['dataEvents'] = $dataevents;
+
+        $sport = template::getSportbyName($Sport);
+        $this['sport'] = $sport;
+
+         $stream_prov = template::StraempPerEvent($id_fb[1],$Sport);
+         $this['eventS'] = $stream_prov;
+    }
+?>
+==
+
+
+{% for dataEvent in dataEvents %}
+    {% for sports in sport %}
+     <style>
+     .float_img {
+            float: none;
+        }
+        .color{
+            color:#{{sports.color}};
+        font-size:25px
+        }
+        
+        .colorh_left{
+        color:#{{sports.color}};
+        font-size:15px
+        }
+        .colorShadow{
+            text-shadow: 7px 2px 3px rgba(00, 00, 00, 0.7);
+        }
+        .bgcolor{
+            background: #{{sports.color}};
+        border-bottom-color: #{{sports.color}};
+        }
+        .btn-success_{
+        background: #{{sports.color}};
+        border: 1px solid #{{sports.color}};
+        box-shadow: 0 0 0.001px 1px rgba(122, 170, 17, 0.4);
+        }
+        .plgpanel_head {
+            margin: 0;
+            padding-bottom: 10px;
+            padding-top: 10px;
+            padding-left: 30px;
+            padding-right: 30px;
+            background: #{{sports.color}};
+            text-align: left;
+            font-size: 14px;
+            color: #ffffff;
+            min-height: 50px;
+            height: auto;
+            border: 1px solid #{{sports.color}};
+        }
+        .btn {
+            display: inline-block;
+            padding: 6px 12px;
+            margin-bottom: 0;
+            font-size: 14px;
+            font-weight: 400;
+            line-height: 1.42857143;
+            text-align: center;
+            white-space: nowrap;
+            vertical-align: middle;
+            -ms-touch-action: manipulation;
+            touch-action: manipulation;
+            cursor: pointer;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+            background-image: none;
+            border: 1px solid transparent;
+            border-radius: 4px;
+        }
+        .btn-danger_ {
+            background: #b0120a;
+            border: 1px solid #b0120a;
+            font-size:20px;
+            padding:15px;
+            color:#ffffff;
+            border-radius: 4px;
+        }
+    </style>
+    {%endfor%}
+    
+   
+        <div class="top-container container">
+            
+            <div class="welcome-match">
+                <div class="welcome-match-inner hide-tablet hide-mobile">
+                    <span class="promo">
+                      <h1 class="white"><span id="gtm-team1">{{ dataEvent.home_team }}</span> vs <span id="gtm-team1">{{ dataEvent.away_team }}</span></h1>
+                        <h1 class="white  ">{{ dataEvent.id_sport }}</h1>
+                        <p class="white  ">Se kampen – følg vores guide</p>
+                    </span>
+                </div>
+                <div class="margin-50">
+                    <div class="box_fb col-sm-5 col-md-4" style="float:right">
+                        <div class="box_fb-container">
+                            
+                            <div class="team-names">
+                                <div><h4 class="white">{{dataEvent.home_team }}</h4></div>
+                                <div>vs</div>
+                                <div><h4 class="white">{{dataEvent.away_team }}</h4></div>
+                            </div>
+
+                            <div class="team-names">
+                                <div><img class="float_img img_regular_fb" src="{{dataEvent.home_team_logo }}"></div>
+                                <div> _ </div>
+                                <div><img class="float_img img_regular_fb" src="{{dataEvent.away_team_logo }}"></div>
+                            </div>
+                        
+                        
+                            <div style="border-top: 1px solid black;padding-top: 10px;margin: 10px 0;">
+                                <span id="gtm-date"><i class="fa fa-calendar">  </i>  {{dataEvent.date_D}}</span>
+                                <span id="gtm-time" style="margin-left:10px;"><i class="fa fa-clock-o">  </i>  {{dataEvent.date_H}}</span>
+                            </div>
+                            {% for stream in eventS %}
+                            {% if loop.index == 1 %}
+                                <div class="team-steps">
+                                    <div class="team-steps-i"><i class="fa fa-mouse-pointer fa-2x"></i></div>
+                                    <div class="team-steps-text">{{stream.gpm_icon_H_one}}</div>
+
+                                    <div class="team-steps-i"><i class="fa fa-user-plus fa-2x"></i></div>
+                                    <div class="team-steps-text">{{stream.gpm_icon_H_two}}</div>
+
+                                    <div class="team-steps-i"><i class="fa fa-play-circle fa-2x"></i></div>
+                                    <div class="team-steps-text">{{stream.gpm_icon_H_three}}</div>
+                               </div>
+                               
+                                    <a  href="{{stream.gpm_button_aff}}" type="button" class="btn btn-success_  marg_top">
+                                        <i class="icon-wrench"></i>Se fodbold live
+                                    </a>
+                                
+                                {%endif%}
+                            {%endfor%}
+                        
+                            
+                        </div>
+                        
+                </div>
+            </div>
+            </div>
+            
+        </div>
+
+    </header>
+</div><!--container_fluid-->        
+            
+    
+    <div class="body_content" style="background: #262b2d; padding: 40px 0;">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <div><img class="img-thumbnail img-rounded float_img" src="http://images.sesport.dk/sesport.dk-ver5/authors/mathilde-miller.jpg"></div>
+                    <div class="col-md-8 text-justify">
+                        <h4>testSe {{ dataEvent.home_team }} vs {{ dataEvent.away_team }}</h4>
+                        <p>{{dataEvent.date }}</p>
+                        
+                         {% if dataEvent.article_body == "" %}
+                           {{ dataEvent.home_team }} møder {{ dataEvent.away_team }} d.{{ dataEvent.date_D }}
+                           kl.{{ dataEvent.date_H }} i den spændende {{ dataEvent.liga }} kamp. 
+                           Følg opgøret live - se med her.
+                         {% else %}
+                             {{dataEvent.article_body}}
+                         {%endif%}
+                        <p>Læs mere her</p>
+                    
+                        {% for stream in eventS %}
+                            {% if loop.index == 1 %}
+                            <div style="float:right">
+                                <a href="{{stream.gpm_button_aff}}" class="btn btn-success_ btn_close">Se Kampen live <i class="fa fa-angle-right"></i></a>
+                            </div>
+                            {%endif%}
+                        {%endfor%}
+                    </div>
+                    
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    
+    <div class="container">
+        {% for event in eventS %}
+        <div class="row" style="margin-top: 25px">
+            <div class="panel panel-default">
+                <div class="plgpanel">
+                    <div class="plgpanel_head">
+                        <div class="col-xs-12 col-sm-4 text-left">
+                        <img class="float_img" src="../../storage/app/media/Stream%20Provider/Index/{{event.gnr_label}}_index.png" alt="{{event.gnr_label}}">
+                        <b style="font-size: 18px">{{event.gnr_label}} {{event.gnr_rating}}</b>
+                        </div>
+                        <div class="col-xs-12 col-sm-8" style="font-size: 18px">
+                            <div class="col-xs-4 text-center">
+                            <i class="fa fa-check">  </i>  Kvalitet : {{event.gnr_quality}}
+                            </div>
+                            <div class="col-xs-4 text-center">
+                            <i class="fa fa-play-circle">  </i>  Afspiller : {{event.gnr_size}}
+                            </div>
+                            <div class="col-xs-4 text-center">
+                            <i class="fa fa-money">  </i>  Pris : {{event.gnr_price}}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="plgpanel_body" style="min-height:250px;height: auto; padding: 10px">
+                       <div class="text-left col-xs-12 color" style="margin-bottom: 15px; margin-bottom: 15px">{{event.gpm_head}} </div>
+
+                        <div class="text-center col-md-2 col-xs-3">
+                            {{event.gpm_icon_H_one}}<br>
+                            <img class="float_img" src="../../storage/app/media/Stream%20Provider/stream_genera/Fodbold/{{event.gnr_label}}.png" alt="{{event.gnr_label}}"><br>
+                            {{event.gpm_icon_S_one}}<br>
+                        </div>
+
+                        <div class="text-center col-xs-1" style="margin-top: 50px">
+                            <img class="float_img" src="../../storage/app/media/General/line-arw.png" alt="{{event.gnr_label}}"><br>
+                        </div>
+
+                        <div class="text-center col-md-2 col-xs-3">
+                            {{event.gpm_icon_H_two}}<br>
+                            <img class="float_img" src="../../storage/app/media/Stream%20Provider/stream_genera/Fodbold/ico-green-2.png" alt="{{event.gnr_label}}"><br>
+                            {{event.gpm_icon_S_two}}<br>
+                        </div>
+
+                        <div class="text-center col-xs-1" style="margin-top: 50px">
+                            <img class="float_img" src="../../storage/app/media/General/line-arw.png" alt="{{event.gnr_label}}"><br>
+                        </div>
+
+                        <div class="text-center col-md-2 col-xs-3 ">
+                            {{event.gpm_icon_H_three}}<br>
+                            <img class="float_img" src="../../storage/app/media/Stream%20Provider/stream_genera/Fodbold/ico-green-3.png" alt="{{event.gnr_label}}"><br>
+                            {{event.gpm_icon_S_three}}<br>
+                        </div>
+
+                        <div class="text-center col-xs-1 hidden-sm hidden-xs" style="margin-top: -40px">
+                            <img class="float_img" src="../../storage/app/media/General/sep-arw.png" alt="{{event.gnr_label}}"><br>
+                        </div>
+
+                        <div class="text-center col-xs-12 col-md-3">
+                            {% for stream in eventS %}
+                                {% if loop.index == 1 %}
+                            <a class="btn btn-danger_ btn-lg" href="{{event.gpm_button_aff}}"><i class="fa fa-chevron-circle-right"></i>  Se kampe live <br> <small class="sm_subtex">- hos {{event.gnr_label}}</small></a>
+                             {% endif %}
+                              {% endfor %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            {% endfor %}
+        </div>
+    </div>
+
+
+
+    <script type="text/javascript" language="JavaScript">
+        document.title = 'Se {{ dataEvent.home_team }} VS {{ dataEvent.away_team }} {{dataEvent.date_D}} ';
+        meta = document.createElement("meta");
+        meta.setAttribute("name", "description");
+        meta.setAttribute("content", "Følg med og se {{ dataEvent.home_team }} vs {{ dataEvent.away_team }} live stream Fodbold | Se Fodbold live når de to fodboldhold møder hinanden.");
+        var head = document.getElementsByTagName("head")[0];
+        head.appendChild(meta);
+    </script>
+    
+{% endfor %}

@@ -1,0 +1,260 @@
+title = "Se live"
+url = "/live_Stream_March/:id_name/:id_fb"
+layout = "ly_home"
+is_hidden = 0
+meta_title = "Voir votre match en ligne | Voirlematch.fr"
+meta_description = "Regardez votre match en ligne en streaming - avec nos fournisseurs vous avez accés à pleins de match en streaming."
+==
+<?php
+use Rebelpenguin\Events\Classes\template;
+    function onStart()
+    {
+        $id_fb = $this->param('id_fb');
+        $id_fb = explode(':',$id_fb );
+
+        $dataevents= template::fb_se_live($id_fb[1]);
+        $this['dataEvents'] = $dataevents;
+
+        $events= template::event($id_fb[1]);
+        $this['mysvents'] = $events;
+
+        $stream_prov = template::straemp_event($id_fb[1]);
+        $this['eventS'] = $stream_prov;
+}
+?>
+==
+<div class="body_content">
+
+{% for mysvents in mysvents %}
+<header>
+    <div class=" slider fb_head_selive">
+        <div class="container">
+            <div class="row">
+                <div style="padding-top: 50px" class=" text-center col-md-offset-3 col-md-6">
+
+                    <div class="col-md-3">
+                        <img class="img_regular_fb" src="{{mysvents.home_team_logo }}">
+                    </div>
+
+                    <div class="col-md-6" style="padding-top: 0px">
+                        <div class="text-center text-event">{{ mysvents.home_team }} vs {{ mysvents.away_team }}</div>
+                        <div class="text-center"><b>{{mysvents.date }}</b></div>
+                    </div>
+
+                    <div class="col-md-3">
+                        <img class="img_regular_fb" src="{{mysvents.away_team_logo }}">
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-12 marg_top_banner">
+                    <div class="banner-strip"></div>
+                    <div class="text text-justify ">
+
+                        <div class="col-md-3 text-right" style="color: #fff;font-size:16px"><b>Voir le <br>match en ligne</b></div>
+                        <div class="col-md-2 text-center">
+                            <div style="float: left;margin-right: 10px; margin-left: 5px">
+                                <i class="fa fa-external-link-square fa-3x"></i>
+                            </div>
+                           <div style="float: left">
+                               <b style="font-size:16px">
+                                   Aller à </b><br>
+                               <span><a href="http://www.google.com">
+                                   <span class="green-color"><span style="font-size:12px;float: left">Cliquez içi</span></span></a></span>
+                           </div>
+                        </div>
+                        <div class="col-md-3 text-left">
+
+                            <div style="float: left ; margin-right: 10px; margin-left: 5px">
+                                <i class="fa fa-pencil-square-o fa-3x"></i>
+                            </div>
+                            <div style="float: left">
+                                <b style="font-size:16px">Créer un compte gratuit</b><br><span style="font-size:12px">c'est facile!</span>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div style="float: left ; margin-right: 10px; margin-left: 5px">
+                                <i class="fa fa-desktop fa-3x"></i>
+                            </div>
+                            <div style="float: left">
+                                <b style="font-size:16px">Voir le match</b><br><span style="font-size:12px">Aller a la section streaming <br> et regardez le match</span>
+                            </div>
+                        </div>
+                        <div class="col-md-1 se_nu">Voir le match</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</header>
+{% endfor %}
+
+{% for dataEvent in dataEvents %}
+    {%if dataEvent.article_body != "" %}
+    <section class="" style="background: #262b2d">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12"
+                     style="background: #fff; padding-top: 30px; padding-bottom: 25px; padding-left: 5px; padding-right: 5px;margin: 30px">
+                    <div class="col-md-2 text-left">
+                        <img class="img-thumbnail img-rounded"
+                             src="http://images.sesport.dk/sesport.dk-ver5/authors/mathilde-miller.jpg">
+
+                    </div>
+                    <div class="col-md-8 text-justify">
+                        <h4>Se {{ dataEvent.home_team }} vs {{ dataEvent.away_team }}</h4>
+                        <p>{{dataEvent.date }}</p>
+                        {{dataEvent.article_body}}
+                        <p>Voir plus</p>
+                    </div>
+                    <div class="col-md-2" style="top:50%">
+                        <button class="btn btn-success btn_close">Voir le match en direct <i class="fa fa-angle-right"></i></button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    {%endif%}
+
+<section class="" style="margin: 0px; background: #e1e2de; border-bottom: 5px #e1e2de solid">
+    <div class="container">
+       <div class="row">
+           <div class="col-md-12" style="background: #e1e2de; padding-bottom:15px ">
+              <div class="text-left col-md-12">
+                  <h3>Choissisez votre fournisseur de streaming</h3>
+              </div>
+                   <!-- tabs left -->
+                   <div class="tabbable tabs-left ">
+                       <ul class="nav nav-tabs col-md-4 ">
+                         {% for stream in eventS %}
+                           {% if loop.index == 1 %}
+                              <li class="active text-left">
+                                <a href="#{{stream.id}}" data-toggle="tab">
+                                    <b class="text-left">
+                                        <i class="fa fa-tv"></i>
+                                        {{stream.name}}
+                                    </b>
+                                    <b class="text-center">
+                                        <i class="fa fa-star"></i>
+                                        <i class="fa fa-star"></i>
+                                        <i class="fa fa-star"></i>
+                                        <i class="fa fa-star"></i>
+                                        <i class="fa fa-star-half-full"></i>
+                                    </b>
+                                    <b class="text-right"> PRICE CHANGE</b>
+                                 </a>
+                              </li>
+                           {% else %}
+                              <li class="text-left">
+                                  <a href="#{{stream.id}}" data-toggle="tab">
+                                  <b class="text-left">
+                                      <i class="fa fa-tv"></i>
+                                      {{stream.name}}
+                                  </b>
+                                  <b class="text-center">
+                                      <i class="fa fa-star"></i>
+                                      <i class="fa fa-star"></i>
+                                      <i class="fa fa-star"></i>
+                                      <i class="fa fa-star"></i>
+                                      <i class="fa fa-star-half-full"></i>
+                                  </b>
+                                  <b class="text-right"> PRICE CHANGE</b>
+                              </a>
+                              </a></li>
+                           {%endif%}
+                         {% endfor %}
+                       </ul>
+
+                       <div class="tab-content col-md-6 text-left">
+
+                       {% for stream in eventS %}
+                            {% if loop.index == 1 %}
+                                    <div class="tab-pane active" id="{{stream.id}}">
+                                        <b style="font-size: 20px">{{stream.name}}</b><br>
+                                        Kvalitet:<br>
+                                        <p>Viaplay lever toptunet kvalitet, når det gælder live sport.
+                                           Her kan du vælge og vrage i mellem masser af fodbold, og du
+                                            er altid sikker på en lækker indpakning. Desuden får du de
+                                            danske kommentatorer, som du kender.</p>
+
+                                        Udvalg:<br>
+                                        <p>Premier League og champions League, altså de to mest fulgte turneringer
+                                        i verden. Naturligvis får du også den danske Superliga under huden,
+                                        og her sendes alle kampe, så du ikke er afhængig af en tv-pakke.</p>
+
+                                        Pris:<br>
+                                        <p>For 229 kr. om måneden får du adgang til sport, film og serier fra det store katalog.</p>
+
+                                        Sådan gør du:<br>
+                                        <p>Læs vores uddybende vurdering af viaplay.dk som udbyder her</p>
+                                        <hr>
+                                        <br>
+                                        <div class="col-lg-4 text-center">
+                                            <i class="fa fa-cube fa-4x"></i><br>
+                                            1. Ga til {{stream.name}}
+                                        </div>
+                                        <div class="col-lg-4 text-center">
+                                            <i class="fa fa-edit fa-4x"></i><br>
+                                            2. Opret jonto<br>
+                                            og betal for adgang
+                                        </div>
+                                        <div class="col-lg-4 text-center">
+                                            <i class="fa fa-play fa-4x"></i><br>
+                                            3.Se kampen live <br>
+                                            Velg {{ dataEvent.home_team }} - {{ dataEvent.away_team }}
+                                        </div>
+
+                                    </div>
+                           {% else %}
+                                   <div class="tab-pane" id="{{stream.id}}">
+                                       <b style="font-size: 20px">{{stream.name}}</b><br>
+                                       Kvalitet:<br>
+                                       <p>Viaplay lever toptunet kvalitet, når det gælder live sport.
+                                           Her kan du vælge og vrage i mellem masser af fodbold, og du
+                                           er altid sikker på en lækker indpakning. Desuden får du de
+                                           danske kommentatorer, som du kender.</p>
+
+                                       Udvalg:<br>
+                                       <p>Premier League og champions League, altså de to mest fulgte turneringer
+                                           i verden. Naturligvis får du også den danske Superliga under huden,
+                                           og her sendes alle kampe, så du ikke er afhængig af en tv-pakke.</p>
+
+                                       Pris:<br>
+                                       <p>For 229 kr. om måneden får du adgang til sport, film og serier fra det store katalog.</p>
+
+                                       Sådan gør du:<br>
+                                       <p>Læs vores uddybende vurdering af viaplay.dk som udbyder her</p>
+
+                                       <hr>
+                                       <br>
+                                       <div class="col-lg-4 text-center">
+                                           <i class="fa fa-cube fa-4x"></i><br>
+                                           1. Ga til {{stream.name}}
+                                       </div>
+                                       <div class="col-lg-4 text-center">
+                                           <i class="fa fa-edit fa-4x"></i><br>
+                                           2. Opret jonto<br>
+                                           og betal for adgang
+                                       </div>
+                                       <div class="col-lg-4 text-center">
+                                           <i class="fa fa-play fa-4x"></i><br>
+                                           3.Se kampen live <br>
+                                           Velg {{ dataEvent.home_team }} - {{ dataEvent.away_team }}
+                                       </div>
+                                   </div>
+                           {%endif%}
+                       {% endfor %}
+
+                       </div>
+
+                   </div>
+                   <!-- /tabs -->
+           </div>
+       </div>
+    </div>
+</section>
+{% endfor %}
+</div>

@@ -1,0 +1,2266 @@
+    <?php if (!$this->fatalError): ?>
+
+        <div class="content-fluid">
+            <div class="control-tabs content-tabs" data-control="tab">
+                <ul class="nav nav-tabs">
+
+                    <!--General System-->
+                    <li class="active"><a href="#tab_system">General System</a></li>
+
+                    <!--Article System-->
+                    <li><a href="#tab_article">Article System</a></li>
+
+                    <!--Restrictions System-->
+                    <li><a href="#tab_Blacklists">Restrictions System</a></li>
+
+                    <!--Sport-->
+                    <?php for($a=0; $a< count($sports); $a++ ){
+                             if($sports[$a]['active']==1){ ?>
+                    <li>
+                        <a href="#sport_<?php echo $sports[$a]['id'].'_'.$sports[$a]['name']?>"><?php echo $sports[$a]['name']?></a>
+                    </li>
+                    <?php }} ?>
+
+                    <!--Stream Providers-->
+                    <li><a href="#tab_streamgeneral">StreamProviders</a></li>
+
+                </ul>
+                <div class="tab-content" style="background:#2B3E50;padding: 5px">
+            <!--General System-->
+                    <div id="tab_system" class="tab-pane active">
+                        <!--Update Stream Providers-->
+                        <div class="col-md-3" style="margin: 5px;padding: 10px;border: 1px solid #fff; color: #fff">
+                            <div class="col-xs-12">
+                            <h3>Conf Global</h3>
+                            </div>
+
+
+
+                            <div class="col-xs-12">
+                            <hr>
+                            <div class="col-xs-6">
+                            <p style="color:#fff;">Update Stream Providers</p>
+                            <p style="color:#fff;">Click to sync newly added providers</p>
+                            </div>
+                            <div class="col-xs-6">
+                            <button class="btn btn-primary btn-large" id="update_stP"><i class="fa fa-refresh"></i> Synchronize</button>
+                            </div>
+                            </div>
+
+
+
+                            <div class="col-xs-12">
+                                <hr>
+                            <div class="col-xs-6">
+                            <p style="color:#fff;">Synchronize New Events</p>
+                            <p style="color:#fff;">Click to sync newly Events</p>
+                            </div>
+                            <div class="col-xs-6">
+                            <button class="btn btn-primary btn-large" id="updateEvents"><i class="fa fa-refresh"></i> Synchronize</button>
+                            </div>
+                            </div>
+
+                        </div>
+                        <!--Admin Sport( Create and activate/desactivate )-->
+                        <div class="col-md-4" style="margin: 5px;padding: 10px;border: 1px solid #fff; color: #fff">
+                                <h3>Sports List</h3>
+                                <table class="table data" data-control="rowlink" id="str_pro1">
+                                    <thead>
+                                    <tr class="th_list">
+                                        <th class=""><span>State</span></th>
+                                        <th class=""><span>Name</span></th>
+                                        <th class="hidden"><span>URL API SPORT</span></th>
+                                        <th class=""><span>Edit</span></th>
+                                    </tr>
+                                    </thead>
+                                    <tbody id="tbody_list1">
+                                    <?php for($a=0; $a< count($sports); $a++ ){ ?>
+                                    <tr class="active">
+                                        <td class="list-checkbox nolink">
+                                            <label class="custom-switch">
+                                                <?php if ($sports[$a]['active']== 1){ ?>
+                                                <input class="active_btn_sport" name="<?php echo $sports[$a]['name'] ?>"
+                                                       id="sport_<?php echo $sports[$a]['id'] ?>" type="checkbox" checked/>
+                                                <?php } else {?>
+                                                <input class="active_btn_sport" name="<?php echo $sports[$a]['name'] ?>"
+                                                       id="sport_<?php echo $sports[$a]['id'] ?>" type="checkbox"/>
+                                                <?php }?>
+                                                            <span><span>On</span>
+                                                            <span>Off</span></span>
+                                                <a class="slide-button"></a>
+                                            </label>
+                                        </td>
+                                        <td><strong><?php echo $sports[$a]['name']?></strong></td>
+                                        <td class="hidden"><strong><?php echo $sports[$a]['url_api_server']?></strong></td>
+                                        <td>
+                                            <button id="Edtsport_<?php echo $sports[$a]['id'] ?>"
+                                                    class="btn btn-primary icon-edit edit_show" type="button"></button>
+                                        </td>
+                                    </tr>
+                                    <?php } ?>
+                                    </tbody>
+                                </table>
+
+                        </div>
+
+
+                    </div>
+            <!-----Article System ---->
+                    <div id="tab_article" class="tab-pane ">
+                        <div class="row">
+                            <div class="col-md-2">
+                                <div class="input-group date" data-provide="datepicker" data-date-format="yyyy-mm-dd" style="margin: 15px;">
+                                    <input id="date_imput" type="text" class="form-control">
+                                    <div class="input-group-addon">
+                                        <span class="icon icon-calendar" style="line-height: inherit"></span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-2">
+                                <!--- Drop down ------>
+                                <div style="margin: 15px;">
+                                    <select id="spot_article" class="form-control custom-select">
+                                        <?php for($a=0; $a< count($sports); $a++ ){if($sports[$a]['active']== 1){?>
+                                        <option value="<?php echo $sports[$a]['id'] ?>"><?php echo $sports[$a]['name'] ?></option>
+                                        <?php }} ?>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-md-2">
+                                <div style="margin: 15px;" id="search_time_art" class="btn btn-success"><i
+                                        class="icon icon-search"></i> Search
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="col-md-4 text-right" id="home_img"></div>
+                                <div class="col-md-2 text-center" style="font-size: 40px;color: #fff" id="vs_team"></div>
+                                <div class="col-md-4 text-left" id="awey_img"></div>
+
+                            </div>
+
+                        </div>
+                        <div class="row">
+                            <div class="col-md-5">
+                                <div style="background: #fff">
+                                    <div class="control-list list-unresponsive">
+                                        <table class="table data" data-control="rowlink" id="art_data">
+                                            <thead>
+                                                <tr>
+                                                <th class="hidden sort-desc"><a href="/"></a></th>
+                                                <th class="hidden-xs sort-desc"><a href="/">Time</a></th>
+                                                <th class="sort-desc"><a href="/">Match</a></th>
+                                                <th class="hidden-xs hidden-sm hidden-md sort-desc"><a href="/">Country</a></th>
+                                                <th class="hidden-xs hidden-sm sort-desc"><a href="/">League</a></th>
+                                                <th class="sort-desc"><a href="/">Add</a></th>
+                                                <th class="sort-desc"><a href="/">Edit</a></th>
+                                            </tr>
+                                            </thead>
+                                            <tbody id="art_match">
+                                            <?php  for($a=0; $a< count($events); $a++ ){
+                                                if($events[$a]['error']!= 1){?>
+                                                    <tr class="tr_art">
+                                                        <td class="hidden  td_art"><?php echo $events[$a]['id_box']?></td>
+                                                        <td class="hidden-xs  td_art"><?php echo $events[$a]['date_hour']?></td>
+                                                        <td class="td_art"><?php echo $events[$a]['name']?></td>
+                                                        <td class="hidden-xs hidden-sm hidden-md td_art"><?php echo $events[$a]['country']?></td>
+                                                        <td class="hidden-xs hidden-sm td_art"><?php echo $events[$a]['tournament']?></td>
+                                                        <td class="td_art hidden"><?php echo $events[$a]['id']?></td>
+                                                        <td class="td_art hidden"><?php echo $events[$a]['date']?></td>
+                                                        <td class="td_art hidden"><?php echo trim($events[$a]['home_team'],"\t\n\r\0\x0B")?></td>
+                                                        <td class="td_art hidden"><?php echo trim($events[$a]['away_team'],"\t\n\r\0\x0B")?></td>
+                                                        <td class="td_art hidden"><?php echo $events[$a]['home_team_logo']?></td>
+                                                        <td class="td_art hidden"><?php echo $events[$a]['away_team_logo']?></td>
+                                                        <td class="list-checkbox nolink">
+                                                            <label class="custom-switch">
+                                                                <?php if ($events[$a]['showcase']== 1){ ?>
+                                                                <input class="landing_" name="<?php echo $events[$a]['name'] ?>" id="landing_<?php echo $events[$a]['id'] ?>" type="checkbox" checked/>
+                                                                <?php } else {?>
+                                                                <input class="landing_" name="<?php echo $events[$a]['name'] ?>" id="landing_<?php echo $events[$a]['id'] ?>" type="checkbox"/>
+                                                                <?php }?>
+                                                                    <span><span>On</span>
+                                                                    <span>Off</span></span>
+                                                                <a class="slide-button"></a>
+                                                            </label>
+                                                        </td>
+                                                        <td name = "<?php echo $events[$a]['name']?>" class="td_art hidden "><?php echo $events[$a]['sport_id']?></td>
+                                                        <td>
+                                                            <?php if($events[$a]['id_event_result']== '1'){?>
+                                                            <button id="art_<?php echo $events[$a]['id']?>"class="btn btn-warning icon-edit edit_show" type="button"></button>
+                                                            <?php } else{ ?>
+                                                            <button id="art_<?php echo $events[$a]['id']?>"class="btn btn-primary icon-edit edit_show" type="button"></button>
+                                                            <?php } ?>
+
+                                                        </td>
+                                                    </tr>
+                                                    <?php if($events[$a]['mine']=='true'){?>
+                                                        <tr class="hidden-xs hidden-sm hidden-md">
+                                                            <td>Preview URLs</td>
+                                                            <td colspan="2">
+                                                             <a  class="btn btn-info btn-sm"  target="_blank" onclick="document.location ='/<?php echo $events[$a]['sport_name']?>/kamp/:<?php echo $events[$a]['url_free']?>'">
+                                                                 <b>Landing Page</b>
+                                                             </a>
+                                                             </td>
+                                                            <td colspan="2" >
+                                                             <a  class="btn btn-info btn-sm"  target="_blank" onclick="document.location ='/<?php echo $events[$a]['sport_name']?>/<?php echo $events[$a]['sport_name']?>_liveevents/:<?php echo $events[$a]['url_free']?>">
+                                                                    <b>Showcase Page</b>
+                                                                </a>
+                                                            </td>
+                                                            <td colspan="2">
+                                                                <a class="btn btn-info btn-sm" target="_blank" onclick="document.location ='/<?php echo $events[$a]['sport_name']?>/:<?php echo $events[$a]['url_free']?>'">
+                                                                    <b>Game Page</b>
+                                                                </a>
+                                                            </td>
+                                                        </tr>
+                                                    <?php } ?>
+                                                <?php } else{ ?>
+                                                <tr class="tr_art">
+                                                    <td class="hidden-xs  td_art"><?php echo $events[$a]['error']?></td>
+                                                    <td class="hidden-xs  td_art"><?php echo $events[$a]['date']?></td>
+                                                    <td class="td_art"><?php echo $events[$a]['name']?></td>
+                                                </tr>
+                                                <?php } ?>
+                                            <?php } ?>
+                                            </tbody>
+                                            <tfoot>
+                                            <tr>
+                                                <td colspan="8" class="list-pagination nolink">
+                                                </td>
+                                            </tr>
+                                            </tfoot>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-7">
+                                <div style="background: #fff; padding: 10px">
+                                    <form class="form-elements" role="form">
+                                        <div id="resumen"></div>
+                                        <div class="form-group span-left">
+                                        <!--- Text Input (Full) ------>
+                                        <div class="form-group text-field  is-required">
+                                            <label>Article Title</label>
+                                            <input id="article_name" type="text" name="" value="" class="form-control"/>
+                                            <input id="id_eventos" type="text" name="" value="" class="form-control hidden"/>
+                                        </div>
+                                        <!--- Drop down ------>
+                                        <div class="form-group dropdown-field hidden ">
+                                            <label>Author</label>
+                                            <select id="article_autor" class="form-control custom-select">
+                                                <option selected="selected" value="Approved">Approved</option>
+                                                <option value="Deleted">Deleted</option>
+                                                <option value="New">New</option>
+                                            </select>
+                                        </div>
+                                        </div>
+                                        <div class="form-group span-right ">
+                                        <!--- Switcher ------>
+                                        <div class="form-group switch-field">
+                                            <div class="field-switch">
+                                                <label>Add article caption to this sports front page</label>
+                                                <p class="help-block">Adds the article caption and ‘Read more’ link to this sports front page</p>
+                                            </div>
+                                            <label class="custom-switch">
+                                                <input type="checkbox" id="article_frontpage"/>
+                                                <span><span>On</span><span>Off</span></span>
+                                                <a class="slide-button"></a>
+                                            </label>
+                                        </div>
+                                        <!--- Switcher ------>
+                                        <div class="form-group switch-field">
+                                            <div class="field-switch">
+                                                <label>Add this match to provider page carousel</label>
+                                                <p class="help-block">Adds this match to the provider page carousel</p>
+                                            </div>
+                                            <label class="custom-switch">
+                                                <input type="checkbox" id="article_prioritize"/>
+                                                <span><span>On</span><span>Off</span></span>
+                                                <a class="slide-button"></a>
+                                            </label>
+                                        </div>
+                                        <!--- Switcher ------>
+                                        <div class="form-group switch-field">
+                                            <div class="field-switch">
+                                                <label>Mark as important match on this sports front page</label>
+                                                <p class="help-block">Highlights the match article caption in the sports front page (adds colored button)</p>
+                                            </div>
+                                            <label class="custom-switch">
+                                                <input type="checkbox" id="vip_article"/>
+                                                <span><span>On</span><span>Off</span></span>
+                                                <a class="slide-button"></a>
+                                            </label>
+                                        </div>
+                                        </div>
+                                        <!--- Text area ------>
+                                        <div class="form-group text-field span-full is-required">
+                                            <label>Caption </label>
+                                            <div id="article_caption"></div>
+                                        </div>
+                                        <!--- Text area ------>
+                                        <div class="form-group text-field span-full is-required">
+                                            <label>Article </label>
+                                            <div id="article_body"></div>
+                                        </div>
+                                        <!-- Text Input (Left) -->
+                                        <div class="hidden form-group text-field span-full is-required">
+                                            <label>Sport id</label>
+                                            <input type="text" id="sport_id_art" name="gnr_label" value=""class="form-control "/>
+                                        </div>
+                                        <!---button------>
+                                        <div id="group_btn" class="form-group text-field span-right text-right ">
+                                            <a class="btn btn-success" id="send_art"> Save</a>
+                                            <a class="btn btn-danger" id="cancel_art"> Cancel</a>
+                                        </div>
+                                        <div class="form-group text-field span-left text-left ">
+                                            <a class="btn btn-success" id="conf_art"> Conf Provider</a>
+
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+            <!-----Blacklists System ---->
+                    <div id="tab_Blacklists" class="tab-pane ">
+                        <div class="container-fluid">
+                            <div class="row">
+                                <div class="col-md-2">
+                                    <div class="input-group date" data-provide="datepicker" data-date-format="yyyy-mm-dd" style="margin: 15px;">
+                                        <input id="black_date_imput" type="text" class="form-control">
+                                        <div class="input-group-addon">
+                                            <span class="icon icon-calendar" style="line-height: inherit"></span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-2">
+                                    <!--- Drop down ------>
+                                    <div style="margin: 15px;">
+                                        <select id="_black_spot_article" class="form-control custom-select">
+                                            <?php for($a=0; $a< count($sports); $a++ ){if($sports[$a]['active']== 1){?>
+                                            <option value="<?php echo $sports[$a]['id'] ?>"><?php echo $sports[$a]['name'] ?></option>
+                                            <?php }} ?>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-md-2">
+                                    <div style="margin: 15px;" id="search_events" class="btn btn-success"><i class="icon icon-search"></i> Search
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                            <div class="col-md-4 col-xs-12" style="margin-bottom:25px; padding:15px; background: #fff; border-right: 2px solid #2B3E50">
+                                <div class="label" style="padding: 5px;">
+                                    <i id="allcountrys" class="fa fa-plus"></i>
+                                    <img style="width:35px;height:35px;margin-right:10px;" class="img-circle" alt="international" src="/plugins/rebelpenguin/events/assets/imgs/flag/intl.png">
+                                    The world
+                                </div>
+                                <div class="hidden" style="padding: 5px;" id="conuntrys_list">
+                                <?php for($a=0; $a< count($countrys); $a++ ){ ?>
+                                <div class="row">
+                                <div class="label" style="padding-bottom: 15px;padding-top: 15px; margin-left: 30px;padding-left: 7px;">
+                                    <i id="countrys_<?php echo $countrys[$a]['id']?>" class="fa fa-plus"></i>
+                                    <img style="width:35px;height:35px;margin-right:10px; padding-left: 7px; " class="img-circle" alt="<?php echo $countrys[$a]['name']?>" src="/plugins/rebelpenguin/events/assets/imgs/flag/<?php echo $countrys[$a]['alpha2']?>.png">
+                                    <?php echo $countrys[$a]['name']?>
+
+                                    <?php if($countrys[$a]['actrest']==1){?>
+                                             <a id="black_<?php echo $countrys[$a]['id']?>" name="<?php echo $countrys[$a]['name']?>" class="pull-right btn btn-success icon-edit edit_show" type="button"></a>
+                                    <?php } else { ?>
+                                            <a id="black_<?php echo $countrys[$a]['id']?>" name="<?php echo $countrys[$a]['name']?>" class="pull-right btn btn-danger icon-edit edit_show" type="button"></a>
+                                    <?php } ?>
+
+                                </div>
+                                <div id="ligas_<?php echo $countrys[$a]['id']?>" class="label hidden" style="padding-bottom: 15px; padding-top: 15px; margin-left: 50px; padding-left: 7px; margin-bottom: 30px" ></div>
+                                </div>
+                                <?php } ?>
+                            </div>
+                            </div>
+                            <div class="col-md-8 col-xs-12" style="padding:15px; background: #fff; border-left: 2px solid #2B3E50">
+                                <div class="control-list list-unresponsive">
+                                 <table class="table data" data-control="rowlink" id="black_march_data">
+                                                <thead>
+                                                <tr>
+                                                    <th class="hidden-xs hidden-sm hidden-md sort-desc"><a href="/"></a></th>
+                                                    <th class="hidden-xs sort-desc"><a href="/">Time</a></th>
+                                                    <th class="sort-desc"><a href="/">Match</a></th>
+                                                    <th class="hidden-xs hidden-sm hidden-md sort-desc"><a href="/">Country</a></th>
+                                                    <th class="hidden-xs hidden-sm sort-desc"><a href="/">League</a></th>
+                                                    <th class="sort-desc"><a href="/">Add</a></th>
+                                                    <th class="sort-desc"><a href="/">Edit</a></th>
+                                                </tr>
+                                                </thead>
+                                                <tbody id="black_march_match">
+                                                <?php  for($a=0; $a< count($events); $a++ ){
+                                                if($events[$a]['error']!= 1){?>
+                                                <tr class="tr_art">
+                                                    <td class="hidden-xs hidden-sm hidden-md td_art"><?php echo $events[$a]['id_box']?></td>
+                                                    <td class="hidden-xs  td_art"><?php echo $events[$a]['date_hour']?></td>
+                                                    <td class="td_art"><?php echo $events[$a]['name']?></td>
+                                                    <td class="hidden-xs hidden-sm hidden-md td_art"><?php echo $events[$a]['country']?></td>
+                                                    <td class="hidden-xs hidden-sm td_art"><?php echo $events[$a]['tournament']?></td>
+                                                    <td class="td_art hidden"><?php echo $events[$a]['id']?></td>
+                                                    <td class="td_art hidden"><?php echo $events[$a]['date']?></td>
+                                                    <td class="td_art hidden"><?php echo $events[$a]['home_team']?></td>
+                                                    <td class="td_art hidden"><?php echo $events[$a]['away_team']?></td>
+                                                    <td class="td_art hidden"><?php echo $events[$a]['home_team_logo']?></td>
+                                                    <td class="td_art hidden"><?php echo $events[$a]['away_team_logo']?></td>
+                                                    <td class="list-checkbox nolink">
+                                                        <label class="custom-switch">
+                                                            <?php if ($events[$a]['blockevent']== 1){ ?>
+                                                            <input class="" name="<?php echo $events[$a]['name'] ?>" onclick="restrictionsblack(this,info = 1);" id="back_march_<?php echo $events[$a]['id'] ?>" type="checkbox" checked/>
+                                                            <?php } else {?>
+                                                            <input class="" name="<?php echo $events[$a]['name'] ?>" onclick="restrictionsblack(this,info = 1);" id="back_march_<?php echo $events[$a]['id'] ?>" type="checkbox"/>
+                                                            <?php }?>
+                                                                <span><span>On</span>
+                                                                <span>Off</span></span>
+                                                            <a class="slide-button"></a>
+                                                        </label>
+                                                    </td>
+                                                    <td name = "<?php echo $events[$a]['name']?>" class="td_art hidden "><?php echo $events[$a]['sport_id']?></td>
+                                                    <td>
+                                                        <?php if($events[$a]['active_rest']== '1'){?>
+                                                        <button id="rest_march_<?php echo $events[$a]['id']?>"class="btn btn-success icon-edit edit_show" type="button"></button>
+                                                        <?php } else{ ?>
+                                                        <button id="rest_march_<?php echo $events[$a]['id']?>" name="<?php echo $events[$a]['name']?>" class="btn btn-danger icon-edit edit_show" type="button"></button>
+                                                        <?php } ?>
+
+                                                    </td>
+                                                </tr>
+                                                <?php }  else{ ?>
+                                                <tr class="tr_art">
+                                                    <td class="hidden-xs  td_art"><?php echo $events[$a]['error']?></td>
+                                                    <td class="hidden-xs  td_art"><?php echo $events[$a]['date']?></td>
+                                                    <td class="td_art"><?php echo $events[$a]['name']?></td>
+                                                </tr>
+                                                <?php }  ?>
+                                                <?php }  ?>
+                                                </tbody>
+                                                <tfoot>
+                                                <tr>
+                                                    <td colspan="8" class="list-pagination nolink">
+                                                    </td>
+                                                </tr>
+                                                </tfoot>
+                                            </table>
+                                </div>
+                            </div>
+                        </div>
+                        </div>
+                    </div>
+
+            <!--Sports-->
+                    <?php for($a=0; $a< count($sports); $a++ ){
+                        if($sports[$a]['active']==1){ ?>
+                         <div id="#sport_<?php echo $sports[$a]['id'].'_'.$sports[$a]['name']?>" class="tab-pane" style="background:#fff;padding: 5px">
+                        <div id="" class="" style="background: #fff;border:1px solid #fff">
+                            <div id="sport_<?php echo $sports[$a]['id']?>_index" class="padd_block col-md-12">
+                                <div class="padd_block col-md-12" style="background: #fff;border:1px solid #fff">
+                                    <div class="control-list list-unresponsive">
+                                        <table class="table data" data-control="rowlink" id="sport_<?php echo $sports[$a]['name']?>_str_pro">
+                                            <thead>
+                                            <tr class="th_list">
+                                                <th class=""><span><?php echo $sports[$a]['name']?> Articles</span></th>
+                                                <th class=""><span>Landing Page</span></th>
+                                                <th class="hidden"><span>Tv Schedule</span></th>
+
+                                            </tr>
+                                            </thead>
+                                            <tbody id="sport_<?php echo $sports[$a]['name']?>_tbody_list">
+
+                                            <?php
+                                            if( isset( $fb_result[ $sports[$a]['name'] ] ) )
+                                            {
+                                                for($i=0; $i< count($fb_result[$sports[$a]['name']]); $i++ ){?>
+                                                    <tr class="active">
+                                                        <td>
+                                                            <div class="pull-left">
+                                                                <img class="img-rounded img-thumbnail" style="height: 40px; height: 40px" src="<?php echo $fb_result[$sports[$a]['name']][$i]['away_team_logo']?>">
+                                                                <strong>vs</strong>
+                                                                <img class="img-rounded img-thumbnail" style="height: 40px; height: 40px" src="<?php echo $fb_result[$sports[$a]['name']][$i]['home_team_logo']?>">
+                                                            </div>
+                                                            <div class="pull-left" style="margin-left: 15px">
+                                                                <strong><?php echo $fb_result[$sports[$a]['name']][$i]['artic_name']?></strong><br/>
+                                                                <?php echo $fb_result[$sports[$a]['name']][$i]['date']?>
+                                                            </div>
+                                                        </td>
+                                                        <td>
+                                                            <button class="btn btn-danger btn-sm" name="<?php echo $fb_result[$sports[$a]['name']][$i]['artic_name']?>" id="landpage_<?php echo $fb_result[$sports[$a]['name']][$i]['id']?>">Land Pages</button>
+                                                        </td>
+                                                        <td class="hidden">
+                                                            <button class="btn btn-danger btn-sm" name="<?php echo $fb_result[$sports[$a]['name']][$i]['artic_name']?>" id="Tv_<?php echo $fb_result[$sports[$a]['name']][$i]['id']?>">Tv Schedule</button>
+                                                        </td>
+                                                    </tr>
+                                                <?php  }?>
+                                            <?php  }?>
+                                            </tbody>
+                                            <tfoot></tfoot>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                        <?php } ?>
+                    <?php } ?>
+            <!--Stream Providers-->
+                    <div id="tab_streamgeneral" class="tab-pane">
+                        <div class="padd_block col-md-3" style="background: #fff;border:1px solid #fff">
+                            <div class="control-list list-unresponsive">
+                                <table class="table data" data-control="rowlink" id="str_pro">
+                                    <thead>
+                                    <tr class="th_list">
+                                        <th class=""><span>Enable</span></th>
+                                        <th class=""><span>Stream Providers</span></th>
+                                        <th class=""><span>Sport Confg</span></th>
+                                        <th class=""><span>Edit</span></th>
+                                    </tr>
+                                    </thead>
+                                    <tbody id="tbody_list">
+                                    <?php for($a=0; $a< count($stream); $a++ ){ ?>
+                                    <tr class="active">
+                                        <td class="list-checkbox nolink">
+                                            <label class="custom-switch">
+                                                <?php if ($stream[$a]['active']== 1){ ?>
+                                                <input class="active_btn" id="active_<?php echo $stream[$a]['id'] ?>"
+                                                       type="checkbox" checked/>
+                                                <?php } else {?>
+                                                <input class="active_btn" id="active_<?php echo $stream[$a]['id'] ?>"
+                                                       type="checkbox"/>
+                                                <?php }?>
+                                                            <span><span>On</span>
+                                                            <span>Off</span></span>
+                                                <a class="slide-button"></a>
+                                            </label>
+                                        </td>
+                                        <td><strong><?php echo $stream[$a]['name']?></strong></td>
+                                        <td>
+                                            <button id="sportconf_<?php echo$stream[$a]['id'] ?>"
+                                                    class="btn btn-primary icon-edit edit_show" type="button"></button>
+                                        </td>
+                                        <td>
+                                            <button id="edit_<?php echo$stream[$a]['id'] ?>"
+                                                    class="btn btn-primary icon-edit edit_show" type="button"></button>
+                                            <button id="ok_<?php echo$stream[$a]['id']?>" type="button"
+                                                    class="editable  btn btn-success icon-floppy-o hidden"
+                                                    data-dismiss="modal"></button>
+                                            <button id="cancel_<?php echo$stream[$a]['id'] ?>" type="button"
+                                                    class="editable btn btn-danger icon-close hidden"
+                                                    data-dismiss="modal"></button>
+                                        </td>
+                                    </tr>
+                                    <?php } ?>
+
+
+                                    </tbody>
+                                    <tfoot></tfoot>
+                                </table>
+                            </div>
+                        </div>
+                        <div id="edit_tab" class="mrg_block padd_block col-md-9" style="background: #fff;border:1px solid #fff">
+                            <form class="form-elements " role="form">
+                                <div class="control-tabs content-tabs" data-control="tab">
+                                    <ul class="nav nav-tabs">
+                                        <li class="active"><a href="#home">General</a></li>
+                                        <li class=" "><a href="#home">Meta</a></li>
+                                        <li class=" "><a href="#home">Content</a></li>
+                                        <li class=" "><a href="#home">Udvalget</a></li>
+                                        <li class=" "><a href="#home">Produkter og Spiludvalg</a></li>
+                                        <li class=" "><a href="#home">live-Streaming</a></li>
+                                        <li class=" "><a href="#home">Odds-tilbagebetaling</a></li>
+                                        <li class=" "><a href="#home">Support</a></li>
+                                        <li class=" "><a href="#home">Bonusser</a></li>
+                                        <li class=" "><a href="#home">Brugervenlighed</a></li>
+                                        <li class=" "><a href="#home">Ind-og-udbtalinger</a></li>
+                                        <li class=" "><a href="#home">Vores-erfaring</a></li>
+                                        <li class=" "><a href="#home">Livebetting</a></li>
+                                        <li class=" "><a href="#home">Indsatspolitik</a></li>
+                                        <li class=" "><a href="#home">Konklusion</a></li>
+                                    </ul>
+                                    <div class="tab-content" style="padding: 15px">
+                                        <div id="prueba"></div>
+                                        <form id="form_account" method="post">
+                                            <!--General-->
+                                            <div class="tab-pane active">
+                                                <!-- Text Input (Left) -->
+                                                <div class="form-group switch-field span-left">
+                                                    <div class="field-switch">
+                                                        <label>Activar/Desactivar proevedor?</label>
+                                                    </div>
+                                                    <label class="custom-switch">
+                                                        <input type="checkbox" id="gnr_active" name="gnr_active"/>
+                                                                <span><span>On</span>
+                                                                <span>Off</span></span>
+                                                        <a class="slide-button"></a>
+                                                    </label>
+                                                </div>
+                                                <!-- Text Input (Left) -->
+                                                <div class="form-group text-field span-left is-required">
+                                                    <label>Label</label>
+                                                    <input type="text" name="gnr_label" id="gnr_label" value=""
+                                                           class="form-control"/>
+
+                                                </div>
+                                                <!-- Text Input (Right) -->
+                                                <div class="form-group text-field span-right is-required">
+                                                    <label>Affiliate Link</label>
+                                                    <input type="text" name="gnr_affi" id="gnr_affi" value=""
+                                                           class="form-control"/>
+
+                                                </div>
+                                                <div class="form-group text-field span-right is-required">
+                                                    <label>False Affiliate Link</label>
+                                                    <input type="text" name="gnr_false" id="gnr_false" value=""
+                                                           class="form-control"/>
+
+                                                </div>
+                                                <!-- Text Input (Left) -->
+                                                <div class="form-group text-field span-left is-required">
+                                                    <label>Review Button Text</label>
+                                                    <input type="text" name="gnr_review_butt" id="gnr_review_butt" value=""
+                                                           class="form-control"/>
+
+                                                </div>
+                                                <!-- Text Input (Right) -->
+                                                <div class="form-group text-field span-right is-required">
+                                                    <label>Live Stream Button Text</label>
+                                                    <input type="text" name="gnr_live_butt" id="gnr_live_butt" value=""
+                                                           class="form-control"/>
+
+                                                </div>
+                                                <!-- Text Input (Right) -->
+                                                <div class="form-group text-field span-left is-required">
+                                                    <label>Sort Order</label>
+                                                    <input type="text" name="gnr_sort" id="gnr_sort" value=""
+                                                           class="form-control"/>
+
+                                                </div>
+                                                <!-- Text Input (Left) -->
+                                                <div class="form-group text-field span-right is-required">
+                                                    <label>Rating</label>
+                                                    <input type="text" name="gnr_rating" id="gnr_rating" value=""
+                                                           class="form-control"/>
+
+                                                </div>
+                                                <!--Text Area-->
+                                                <div class="form-group text-field span-full is-required">
+                                                    <label>Content </label>
+                                                    <div id="gnr_coment"></div>
+                                                </div>
+                                                <!--Text Area-->
+                                                <div class="form-group text-field span-full is-required hidden">
+                                                    <label>Img to show </label>
+                                                    <div id="img_genr"></div>
+                                                </div>
+                                            </div>
+                                            <!--Meta-->
+                                            <div class="tab-pane">
+                                                <div class="form-group text-field span-left is-required">
+                                                    <label>Title</label>
+                                                    <input type="text" name="meta_title" id="meta_title" value=""
+                                                           class="form-control"/>
+
+                                                </div>
+                                                <!-- Text Input (Right) -->
+                                                <div class="form-group text-field span-right is-required">
+                                                    <label>Meta Description</label>
+                                                    <input type="text" name="meta_desc" id="meta_desc" value=""
+                                                           class="form-control"/>
+
+                                                </div>
+                                                <!-- Text Input (Left) -->
+                                                <!--Text Area-->
+                                                <div class="form-group text-field span-full is-required">
+                                                    <label>Meta Keywords
+                                                    </label>
+                                                        <textarea rows="4" cols="100" name="meta_keywords" id="meta_keywords"
+                                                                  value="" class="form-control"></textarea>
+                                                </div>
+                                            </div>
+                                            <!--Content-->
+                                            <div class="tab-pane">
+                                                <!--Text Area-->
+                                                <div class="form-group text-field span-full is-required">
+                                                    <label>Pros </label>
+                                                        <textarea rows="4" cols="100" name="cont_pros" id="cont_pros" value=""
+                                                                  class="form-control"></textarea>
+                                                </div>
+                                                <!--Text Area-->
+                                                <div class="form-group text-field span-full is-required">
+                                                    <label>Introduction </label>
+                                                        <textarea rows="4" cols="100" name="cont_introduction"
+                                                                  id="cont_introduction" value=""
+                                                                  class="form-control"></textarea>
+                                                </div>
+
+                                                <div class="form-group text-field span-left is-required">
+                                                    <label>Bonus</label>
+                                                    <input type="text" name="cont_bonus" id="cont_bonus" value=""
+                                                           class="form-control"/>
+
+                                                </div>
+                                                <!-- Text Input (Right) -->
+                                                <div class="form-group text-field span-right is-required">
+                                                    <label>Top Button Text </label>
+                                                    <input type="text" name="cont_topbutton" id="cont_topbutton" value=""
+                                                           class="form-control"/>
+
+                                                </div>
+                                                <!-- Text Input (Left) -->
+                                                <div class="form-group text-field span-left is-required">
+                                                    <label>Bottom Button Text</label>
+                                                    <input type="text" name="cont_botbutton" id="cont_botbutton" value=""
+                                                           class="form-control"/>
+
+                                                </div>
+                                                <!-- Text Input (Right) -->
+                                                <div class="form-group text-field span-right is-required">
+                                                    <label>Affiliate Link</label>
+                                                    <input type="text" name="cont_affiliate" id="cont_affiliate" value=""
+                                                           class="form-control"/>
+
+                                                </div>
+                                                <div class="form-group text-field span-right is-required">
+                                                    <label>False Affiliate Link</label>
+                                                    <input type="text" name="cont_false_affiliate" id="cont_false_affiliate" value=""
+                                                           class="form-control"/>
+
+                                                </div>
+                                                <!-- Text Input (Left) -->
+                                                <div class="form-group switch-field span-left">
+                                                    <div class="field-switch">
+                                                        <label>Activar/Desactivar proevedor?</label>
+                                                    </div>
+                                                    <label class="custom-switch">
+                                                        <input type="checkbox" name="cont_active" id="cont_active"/>
+                                                                <span><span>On</span>
+                                                                <span>Off</span></span>
+                                                        <a class="slide-button"></a>
+                                                    </label>
+                                                </div>
+                                                <!--Text Area-->
+                                                <div class="form-group text-field span-full is-required hidden">
+                                                    <label>Img to show </label>
+                                                    <div id="img_cont"></div>
+                                                </div>
+
+
+                                            </div>
+                                            <!--Udvalget-->
+                                            <div class="tab-pane">
+                                                <div class="form-group text-field span-left is-required">
+                                                    <label>Heading</label>
+                                                    <input type="text" name="udv_heading" id="udv_heading" value=""
+                                                           class="form-control"/>
+
+                                                </div>
+                                                <!-- Text Input (Right) -->
+                                                <div class="form-group text-field span-right is-required">
+                                                    <label>Rating</label>
+                                                    <input type="text" name="udv_ratin" id="udv_ratin" value=""
+                                                           class="form-control"/>
+
+                                                </div>
+                                                <!--Text Area-->
+                                                <div class="form-group text-field span-full is-required">
+                                                    <label>Content </label>
+                                                        <textarea rows="4" cols="50" name="udv_content" id="udv_content"
+                                                                  value="" class="form-control"></textarea>
+                                                </div>
+                                            </div>
+                                            <!-- Produkter og spiludvalg-->
+                                            <div class="tab-pane">
+                                                <div class="form-group text-field span-left is-required">
+                                                    <label>Heading</label>
+                                                    <input type="text" name="prod_heading" id="prod_heading" value=""
+                                                           class="form-control"/>
+
+                                                </div>
+                                                <!-- Text Input (Right) -->
+                                                <div class="form-group text-field span-right is-required">
+                                                    <label>Rating</label>
+                                                    <input type="text" name="prod_ratin" id="prod_ratin" value=""
+                                                           class="form-control"/>
+
+                                                </div>
+                                                <!--Text Area-->
+                                                <div class="form-group text-field span-full is-required">
+                                                    <label>Content </label>
+                                                        <textarea rows="4" cols="100" name="prod_content" id="prod_content"
+                                                                  value="" class="form-control"></textarea>
+                                                </div>
+                                            </div>
+                                            <!--Live streaming-->
+                                            <div class="tab-pane">
+                                                <div class="form-group text-field span-left is-required">
+                                                    <label>Heading</label>
+                                                    <input type="text" name="lives_heading" id="lives_heading" value=""
+                                                           class="form-control"/>
+
+                                                </div>
+                                                <!-- Text Input (Right) -->
+                                                <div class="form-group text-field span-right is-required">
+                                                    <label>Rating</label>
+                                                    <input type="text" name="lives_ratin" id="lives_ratin" value=""
+                                                           class="form-control"/>
+
+                                                </div>
+                                                <!--Text Area-->
+                                                <div class="form-group text-field span-full is-required">
+                                                    <label>Content </label>
+                                                        <textarea rows="4" cols="100" name="lives_content" id="lives_content"
+                                                                  value="" class="form-control"></textarea>
+                                                </div>
+                                            </div>
+                                            <!--Odds / Tilbagebetaling-->
+                                            <div class="tab-pane">
+                                                <div class="form-group text-field span-left is-required">
+                                                    <label>Heading</label>
+                                                    <input type="text" name="odds_heading" id="odds_heading" value=""
+                                                           class="form-control"/>
+
+                                                </div>
+                                                <!-- Text Input (Right) -->
+                                                <div class="form-group text-field span-right is-required">
+                                                    <label>Rating</label>
+                                                    <input type="text" name="odds_ratin" id="odds_ratin" value=""
+                                                           class="form-control"/>
+
+                                                </div>
+                                                <!--Text Area-->
+                                                <div class="form-group text-field span-full is-required">
+                                                    <label>Content </label>
+                                                        <textarea rows="4" cols="100" name="odds_content" id="odds_content"
+                                                                  value="" class="form-control"></textarea>
+                                                </div>
+                                            </div>
+                                            <!--Support-->
+                                            <div class="tab-pane">
+                                                <div class="form-group text-field span-left is-required">
+                                                    <label>Heading</label>
+                                                    <input type="text" name="supp_heading" id="supp_heading" value=""
+                                                           class="form-control"/>
+
+                                                </div>
+                                                <!-- Text Input (Right) -->
+                                                <div class="form-group text-field span-right is-required">
+                                                    <label>Rating</label>
+                                                    <input type="text" name="supp_ratin" id="supp_ratin" value=""
+                                                           class="form-control"/>
+
+                                                </div>
+                                                <!--Text Area-->
+                                                <div class="form-group text-field span-full is-required">
+                                                    <label>Content </label>
+                                                        <textarea rows="4" cols="100" name="supp_content" id="supp_content"
+                                                                  value="" class="form-control"></textarea>
+                                                </div>
+                                            </div>
+                                            <!--Bonusser-->
+                                            <div class="tab-pane">
+                                                <div class="form-group text-field span-left is-required">
+                                                    <label>Heading</label>
+                                                    <input type="text" name="bonusser_heading" id="bonusser_heading"
+                                                           value="" class="form-control"/>
+
+                                                </div>
+                                                <!-- Text Input (Right) -->
+                                                <div class="form-group text-field span-right is-required">
+                                                    <label>Rating</label>
+                                                    <input type="text" name="bonusser_ratin" id="bonusser_ratin" value=""
+                                                           class="form-control"/>
+
+                                                </div>
+                                                <!--Text Area-->
+                                                <div class="form-group text-field span-full is-required">
+                                                    <label>Content </label>
+                                                        <textarea rows="4" cols="100" name="bonusser_content"
+                                                                  id="bonusser_content" value=""
+                                                                  class="form-control"></textarea>
+                                                </div>
+                                            </div>
+                                            <!--Brugervenlighed-->
+                                            <div class="tab-pane">
+                                                <div class="form-group text-field span-left is-required">
+                                                    <label>Heading</label>
+                                                    <input type="text" name="bruger_heading" id="bruger_heading" value=""
+                                                           class="form-control"/>
+
+                                                </div>
+                                                <!-- Text Input (Right) -->
+                                                <div class="form-group text-field span-right is-required">
+                                                    <label>Rating</label>
+                                                    <input type="text" name="bruger_ratin" id="bruger_ratin" value=""
+                                                           class="form-control"/>
+
+                                                </div>
+                                                <!--Text Area-->
+                                                <div class="form-group text-field span-full is-required">
+                                                    <label>Content </label>
+                                                        <textarea rows="4" cols="100" name="bruger_content" id="bruger_content"
+                                                                  value="" class="form-control"></textarea>
+                                                </div>
+                                            </div>
+                                            <!--Ind- og udbetalinger-->
+                                            <div class="tab-pane">
+                                                <div class="form-group text-field span-left is-required">
+                                                    <label>Heading</label>
+                                                    <input type="text" name="ind_og_heading" id="ind_og_heading" value=""
+                                                           class="form-control"/>
+
+                                                </div>
+                                                <!-- Text Input (Right) -->
+                                                <div class="form-group text-field span-right is-required">
+                                                    <label>Rating</label>
+                                                    <input type="text" name="ind_og_ratin" id="ind_og_ratin" value=""
+                                                           class="form-control"/>
+
+                                                </div>
+                                                <!--Text Area-->
+                                                <div class="form-group text-field span-full is-required">
+                                                    <label>Content </label>
+                                                        <textarea rows="4" cols="100" name="ind_og_content" id="ind_og_content"
+                                                                  value="" class="form-control"></textarea>
+                                                </div>
+                                            </div>
+                                            <!--Vores erfaring-->
+                                            <div class="tab-pane">
+                                                <div class="form-group text-field span-left is-required">
+                                                    <label>Heading</label>
+                                                    <input type="text" name="vores_heading" id="vores_heading" value=""
+                                                           class="form-control"/>
+
+                                                </div>
+                                                <!-- Text Input (Right) -->
+                                                <div class="form-group text-field span-right is-required">
+                                                    <label>Rating</label>
+                                                    <input type="text" name="vores_ratin" id="vores_ratin" value=""
+                                                           class="form-control"/>
+
+                                                </div>
+                                                <!--Text Area-->
+                                                <div class="form-group text-field span-full is-required">
+                                                    <label>Content </label>
+                                                        <textarea rows="4" cols="100" name="vores_content" id="vores_content"
+                                                                  value="" class="form-control"></textarea>
+                                                </div>
+                                            </div>
+                                            <!--Livebetting-->
+                                            <div class="tab-pane">
+                                                <div class="form-group text-field span-left is-required">
+                                                    <label>Heading</label>
+                                                    <input type="text" name="liveb_heading" id="liveb_heading" value=""
+                                                           class="form-control"/>
+
+
+                                                </div>
+                                                <!-- Text Input (Right) -->
+                                                <div class="form-group text-field span-right is-required">
+                                                    <label>Rating</label>
+                                                    <input type="text" name="liveb_ratin" id="liveb_ratin" value=""
+                                                           class="form-control"/>
+
+
+                                                </div>
+                                                <!--Text Area-->
+                                                <div class="form-group text-field span-full is-required">
+                                                    <label>Content </label>
+                                                        <textarea rows="4" cols="100" name="liveb_content" id="liveb_content"
+                                                                  value="" class="form-control"></textarea>
+                                                </div>
+                                            </div>
+                                            <!--Indsatspolitik-->
+                                            <div class="tab-pane">
+                                                <div class="form-group text-field span-left is-required">
+                                                    <label>Heading</label>
+                                                    <input type="text" name="indsat_heading" id="indsat_heading" value=""
+                                                           class="form-control"/>
+
+
+                                                </div>
+                                                <!-- Text Input (Right) -->
+                                                <div class="form-group text-field span-right is-required">
+                                                    <label>Rating</label>
+                                                    <input type="text" name="indsat_ratin" id="indsat_ratin" value=""
+                                                           class="form-control"/>
+
+
+                                                </div>
+                                                <!--Text Area-->
+                                                <div class="form-group text-field span-full is-required">
+                                                    <label>Content </label>
+                                                        <textarea rows="4" cols="100" name="indsat_content" id="indsat_content"
+                                                                  value="" class="form-control"></textarea>
+                                                </div>
+                                            </div>
+                                            <!--Konklusion-->
+                                            <div class="tab-pane">
+                                                <div class="form-group text-field span-left is-required">
+                                                    <label>Heading</label>
+                                                    <input type="text" name="konk_heading" id="konk_heading" value=""
+                                                           class="form-control"/>
+
+
+                                                </div>
+                                                <!-- Text Input (Right) -->
+                                                <div class="form-group text-field span-right is-required">
+                                                    <label>Rating</label>
+                                                    <input type="text" name="konk_ratin" id="konk_ratin" value=""
+                                                           class="form-control"/>
+
+
+                                                </div>
+                                                <!--Text Area-->
+                                                <div class="form-group text-field span-full is-required">
+                                                    <label>Content </label>
+                                                        <textarea rows="4" cols="100" name="konk_content" id="konk_content"
+                                                                  value="" class="form-control"></textarea>
+                                                </div>
+                                            </div>
+                                        </form>
+
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+        <!-------------------------------------------------------Ventanas de eventos-------------------------------------------------!>
+        <!--Succes-->
+            <div class="control-popup modal fade" id="respondts_succes" tabindex="-1" role="dialog">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header modal-header_succes">
+                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                            <h4 class="modal-title" id="id_name_str_succes"></h4>
+                            <small>Stream providers editor</small>
+                        </div>
+                        <div class="modal-body" id="modal_body_succes">
+                            <h1>Succes</h1>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        <!--error-->
+            <div class="control-popup modal fade" id="respondts_error" tabindex="-1" role="dialog">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header modal-header_error">
+                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                            <h4 class="modal-title" id="id_name_str_error"></h4>
+                            <small id="modal_titleerror">Stream providers editor</small>
+                        </div>
+                        <div class="modal-body" id="modal_body_error">
+                            <h1>Error</h1>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        <!--info-->
+            <div class="control-popup modal fade" id="respondts_info" tabindex="-1" role="dialog">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header modal-header_info">
+                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                            <h4 class="modal-title" id="id_name_str_info">Stream providers editor</h4>
+                        </div>
+                        <div class="modal-body" id="modal_body_info">
+                            <h1>INFO</h1>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        <!--Stream providers editor(Sports)-->
+            <div class="control-popup modal fade" id="stream_sport" static tabindex="-1" role="dialog">
+                <div class="modal-dialog modal-lg">
+                    <div class="modal-content" style="padding-bottom: 20px">
+                        <div class="modal-header modal-header_info">
+                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                            <h4 class="modal-title" id="id_name_str_stream">Stream providers editor</h4>
+                        </div>
+                        <div class="modal-body" id="modal_body_stream">
+                            <div class="control-tabs content-tabs" data-control="tab">
+                                <ul id="tabsport_stream" class="nav nav-tabs">
+                                    <?php for($a=0; $a< count($sports); $a++ ){
+                                         if($sports[$a]['active']==1){ if ($a == 0){?>
+
+                                        <li class="active">
+                                            <a href="#sport_<?php echo $sports[$a]['id'].'_'.$sports[$a]['name']?>_windows" id="#<?php echo $sports[$a]['id']?>" title="<?php echo $sports[$a]['name']?>"><?php echo $sports[$a]['name']?></a>
+                                        </li>
+
+                                    <?php } else {?>
+
+                                        <li>
+                                            <a href="#sport_<?php echo $sports[$a]['id'].'_'.$sports[$a]['name']?>_windows" id="#<?php echo $sports[$a]['id']?>" title="<?php echo $sports[$a]['name']?>"><?php echo $sports[$a]['name']?></a>
+                                        </li>
+
+                                    <?php }}} ?>
+                                </ul>
+                                <div id="tab_contens" class="tab-content" style="background:#2B3E50;padding: 5px;">
+                                    <?php for($a=0; $a< count($sports); $a++ ){
+                                        if($sports[$a]['active']==1){ if ($a == 0){?>
+                                            <div id="#sport_<?php echo $sports[$a]['id'].'_'.$sports[$a]['name']?>_windows" class="active tab-pane" style="background:#f1f3f4;padding: 5px">
+                                            <!-- Form Elements -->
+                                                <form class="form-elements col-lg-12" role="form">
+                                                    <!--------------- Genera Info ---------------->
+                                                    <h3 class="HS_general"><i class=" fa fa-plus"></i> General. <small style="font-size: 11px">(<?php echo $sports[$a]['name']?>/Stream Providers/Edit )</small> </h3>
+                                                    <div class="gnr_sport hidden">
+                                                        <div class="col-lg-6">
+                                                            <div class="hidden form-group text-field span-full is-required">
+                                                                <label>Id_Sport</label>
+                                                                <input type="text" id="<?php echo $sports[$a]['id']?>" name="Id_Sport" value="<?php echo $sports[$a]['id']?>" class="form-control"/>
+                                                            </div>
+                                                            <!-- Text Input (Left) -->
+                                                            <div class="form-group text-field span-full is-required">
+                                                                <label>Label</label>
+                                                                <input type="text" id="gnr_label_<?php echo $sports[$a]['id']?>" name="gnr_label" value="" class="form-control"/>
+                                                            </div>
+                                                            <!-- Text Input (Right) -->
+                                                            <div class="form-group text-field span-full is-required">
+                                                                <label>Affiliate Link</label>
+                                                                <input type="text" name="gnr_afflink" id="gnr_aff_<?php echo $sports[$a]['id']?>" value="" class="form-control"/>
+                                                            </div>
+                                                            <div class="form-group text-field span-full is-required">
+                                                                <label>False Affiliate Link</label>
+                                                                <input type="text" name="gnr_false_aff_" id="gnr_false_aff_<?php echo $sports[$a]['id']?>" value="" class="form-control"/>
+                                                            </div>
+                                                            <!-- Text Input (Full) -->
+                                                            <div class="form-group text-field span-full is-required">
+                                                                <label>Sort Order</label>
+                                                                <input type="text" id="gnr_sort_<?php echo $sports[$a]['id']?>" name="gnr_sort" value="" class="form-control"/>
+                                                            </div>
+                                                            <!-- Checkbox -->
+                                                            <div class="form-group checkbox-field span-left is-required">
+                                                                <div class="checkbox custom-checkbox">
+                                                                    <input id="gnr_checkbox<?php echo $sports[$a]['id']?>" name="gnr_active" value="1" type="checkbox">
+                                                                    <label for="gnr_checkbox<?php echo $sports[$a]['id']?>">Enable</label>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-lg-6">
+                                                            <!-- Text Input (Right) -->
+                                                            <div class="form-group text-field span-full is-required">
+                                                                <label>Rating</label>
+                                                                <input type="text" id="gnr_raiting_<?php echo $sports[$a]['id']?>"
+                                                                       name="gnr_rating" value="" class="form-control"/>
+                                                            </div>
+                                                            <!-- Text Input (Full) -->
+                                                            <div class="form-group text-field span-full is-required">
+                                                                <label>Video Quality</label>
+                                                                <input type="text" id="gnr_quality_<?php echo $sports[$a]['id']?>"
+                                                                       name="gnr_quality" value="" class="form-control"/>
+                                                            </div>
+                                                            <!-- Text Input (Right) -->
+                                                            <div class="form-group text-field span-full is-required">
+                                                                <label>Video Size</label>
+                                                                <input type="text" id="gnr_size_<?php echo $sports[$a]['id']?>"
+                                                                       name="gnr_size" value="" class="form-control"/>
+                                                            </div>
+                                                            <!-- Text Input (Full) -->
+                                                            <div class="form-group text-field span-full is-required">
+                                                                <label>Price</label>
+                                                                <input type="text" id="gnr_price_<?php echo $sports[$a]['id']?>" name="gnr_price" value="" class="form-control"/>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                    <!--------------- Stream_general_manager ---------------->
+                                                    <h3 class="HS_Page"><i class="fa fa-plus">
+                                                    </i> Front Page Details. <small style="font-size: 11px">(<?php echo $sports[$a]['name']?>/General-Pages/Front Page/Manage Stream Providers/Mamage Content )</small></h3>
+                                                    <div class="gnr_Page hidden">
+                                                        <div class="col-lg-12">
+                                                            <!-- Text Input (Left) -->
+                                                            <div class="form-group text-field span-full is-required">
+                                                                <label>Heading</label><input id="gpm_head_<?php echo $sports[$a]['id']?>" type="text" name="gpm_head" value="" class="form-control"/></div>
+                                                            <!-- Checkbox -->
+                                                            <div class="form-group checkbox-field span-left is-required">
+                                                                <div class="checkbox custom-checkbox">
+                                                                    <input id="gn_checkbox<?php echo $sports[$a]['id']?>" name="gpm_active" value="1" type="checkbox">
+                                                                    <label for="gn_checkbox<?php echo $sports[$a]['id']?>">Show on Front Page</label>
+                                                                </div>
+                                                            </div>
+
+                                                        </div>
+                                                        <div class="col-lg-6">
+                                                            <!-- Text Input (Right) -->
+                                                            <div class="form-group text-field span-full is-required">
+                                                                <h4>Quality Section</h4>
+                                                                <label>Heading</label>
+                                                                <input type="text" id="gpm_quality_head_<?php echo $sports[$a]['id']?>" name="gpm_quality_head" value="" class="form-control"/>
+                                                            </div>
+                                                            <!-- Text Input (Full) -->
+                                                            <div class="form-group text-field span-full is-required">
+                                                                <label>Content</label>
+                                                                <input type="text" id="gpm_quality_content_<?php echo $sports[$a]['id']?>" name="gpm_quality_content" value="" class="form-control"/>
+                                                            </div>
+                                                            <!-- Text Input (Right) -->
+                                                            <div class="form-group text-field span-full is-required">
+                                                                <h4> Udvalg Section </h4><label>Heading</label>
+                                                                <input type="text" id="gpm_udv_head_<?php echo $sports[$a]['id']?>" name="gpm_udv_head" value="" class="form-control"/>
+                                                            </div>
+                                                            <!-- Text Input (Full) -->
+                                                            <div class="form-group text-field span-full is-required">
+                                                                <label>Content</label>
+                                                                <input type="text" id="gpm_udv_content_<?php echo $sports[$a]['id']?>" name="gpm_udv_content" value="" class="form-control"/>
+                                                            </div>
+                                                            <!-- Text Input (Right) -->
+                                                            <div class="form-group text-field span-full is-required">
+                                                                <h4>Price Section</h4>
+                                                                <label>Heading</label>
+                                                                <input type="text" id="gpm_price_head_<?php echo $sports[$a]['id']?>" name="gpm_price_head" value="" class="form-control"/>
+                                                            </div>
+                                                            <!-- Text Input (Full) -->
+                                                            <div class="form-group text-field span-full is-required">
+                                                                <label>Content</label>
+                                                                <input type="text" id="gpm_price_content_<?php echo $sports[$a]['id']?>" name="gpm_price_content" value="" class="form-control"/>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-lg-6">
+                                                            <!-- Text Input (Right) -->
+                                                            <div class="form-group text-field span-full is-required">
+                                                                <h4>How to Icons Section</h4>
+                                                                <label>Icon 1 Heading</label>
+                                                                <input type="text" id="gpm_icon_H_one_<?php echo $sports[$a]['id']?>" name="gpm_icon_H_one" value="" class="form-control"/>
+                                                            </div>
+                                                            <!-- Text Input (Right) -->
+                                                            <div class="form-group text-field span-full is-required">
+                                                                <label>Icon 1 Subheading</label>
+                                                                <input type="text" id="gpm_icon_S_one_<?php echo $sports[$a]['id']?>" name="gpm_icon_S_one" value="" class="form-control"/>
+                                                            </div>
+                                                            <!-- Text Input (Right) -->
+                                                            <div class="form-group text-field span-full is-required" >
+                                                                <label>Icon 2 Heading</label>
+                                                                <input type="text" id="gpm_icon_H_two_<?php echo $sports[$a]['id']?>" name="gpm_icon_H_two" value="" class="form-control"/>
+                                                            </div>
+                                                            <!-- Text Input (Right) -->
+                                                            <div class="form-group text-field span-full is-required">
+                                                                <label>Icon 2 Subheading</label>
+                                                                <input type="text" id="gpm_icon_S_two_<?php echo $sports[$a]['id']?>" name="gpm_icon_S_two" value="" class="form-control"/>
+                                                            </div>
+                                                            <!-- Text Input (Right) -->
+                                                            <div class="form-group text-field span-full is-required">
+                                                                <label>Icon 3 Heading</label>
+                                                                <input type="text" id="gpm_icon_H_three_<?php echo $sports[$a]['id']?>" name="gpm_icon_H_three" value="" class="form-control"/>
+                                                            </div>
+                                                            <!-- Text Input (Right) -->
+                                                            <div class="form-group text-field span-full is-required">
+                                                                <label>Icon 3 Subheading</label>
+                                                                <input type="text" id="gpm_icon_S_three_<?php echo $sports[$a]['id']?>" name="gpm_icon_S_three" value="" class="form-control"/>
+                                                            </div>
+                                                            <!-- Text Input (Right) -->
+                                                            <div class="form-group text-field span-full is-required">
+                                                                <label>Icon 3 Note</label>
+                                                                <input type="text" id="gpm_icon_N_three_<?php echo $sports[$a]['id']?>" name="gpm_icon_N_three" value="" class="form-control"/>
+                                                            </div>
+
+                                                            <div class="form-group text-field span-full is-required">
+                                                                <h4>Buttons Section</h4>
+                                                                <label>Review Button</label>
+                                                                <input type="text" id="gpm_button_rew_<?php echo $sports[$a]['id']?>" name="gpm_button_rew" value="" class="form-control"/>
+                                                            </div>
+                                                            <!-- Text Input (Full) -->
+                                                            <div class="form-group text-field span-full is-required">
+                                                                <label>Watch Live Button</label>
+                                                                <input type="text" id="gpm_button_wlive_<?php echo $sports[$a]['id']?>" name="gpm_button_wlive" value="" class="form-control"/>
+                                                            </div>
+                                                            <!-- Text Input (Full) -->
+                                                            <div class="form-group text-field span-full is-required">
+                                                                <label>Affiliate Link</label>
+                                                                <input type="text" id="gpm_button_aff_<?php echo $sports[$a]['id']?>" name="gpm_button_aff" value="" class="form-control"/>
+                                                            </div>
+                                                            <div class="form-group text-field span-full is-required">
+                                                                <label>False Affiliate Link</label>
+                                                                <input type="text" name="gpm_false_button_aff_" id="gpm_false_button_aff_<?php echo $sports[$a]['id']?>" value="" class="form-control"/>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                    <!--------------- Provider Page Details ---------------->
+                                                    <h3 class="HS_PageD"><i class="fa fa-plus">
+                                                    </i> Provider Page Details.  <small style="font-size: 11px">(<?php echo $sports[$a]['name']?>/Stream Providers/Edit Provider Page Detail )</small></h3>
+                                                    <div class="gnr_PageD hidden">
+                                                        <div class="col-lg-12">
+                                                            <!-- Text Input (Left) -->
+                                                            <div class="form-group text-field span-full is-required">
+                                                                <label>Heading</label>
+                                                                <input type="text" id="gpp_head_<?php echo $sports[$a]['id']?>" name="gpp_head" value="" class="form-control"/>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-lg-6">
+                                                            <!-- Text Input (Right) -->
+                                                            <div class="form-group text-field span-full is-required">
+                                                                <h4>Quality Section</h4>
+                                                                <label>Heading</label>
+                                                                <input type="text" id="gpp_quality_head_<?php echo $sports[$a]['id']?>" name="gpp_quality_head" value="" class="form-control"/>
+                                                            </div>
+                                                            <!-- Text Input (Full) -->
+                                                            <div class="form-group text-field span-full is-required">
+                                                                <label>Content</label>
+                                                                <input type="text" id="gpp_quality_content_<?php echo $sports[$a]['id']?>" name="gpp_quality_content" value=""
+                                                                       class="form-control"/>
+                                                            </div>
+                                                            <!-- Text Input (Right) -->
+                                                            <div class="form-group text-field span-full is-required">
+                                                                <h4> Udvalg Section </h4>
+                                                                <label>Heading</label>
+                                                                <input type="text" id="gpp_udv_head_<?php echo $sports[$a]['id']?>" name="gpp_udv_head" value="" class="form-control"/>
+                                                            </div>
+                                                            <!-- Text Input (Full) -->
+                                                            <div class="form-group text-field span-full is-required">
+                                                                <label>Content</label>
+                                                                <input type="text" id="gpp_udv_content_<?php echo $sports[$a]['id']?>" name="gpp_udv_content" value="" class="form-control"/>
+                                                            </div>
+                                                            <!-- Text Input (Right) -->
+                                                            <div class="form-group text-field span-full is-required">
+                                                                <h4>Price Section</h4>
+                                                                <label>Heading</label>
+                                                                <input type="text" id="gpp_price_head_<?php echo $sports[$a]['id']?>" name="gpp_price_head" value="" class="form-control"/>
+                                                            </div>
+                                                            <!-- Text Input (Full) -->
+                                                            <div class="form-group text-field span-full is-required">
+                                                                <label>Content</label>
+                                                                <input type="text" id="gpp_price_content_<?php echo $sports[$a]['id']?>" name="gpp_price_content" value="" class="form-control"/>
+                                                            </div>
+
+                                                            <!-- Text Input (Right) -->
+                                                            <div class="form-group text-field span-full is-required"><h4>Note</h4>
+                                                                <label>Provider Note</label>
+                                                                <input type="text" id="gpp_icon_note_<?php echo $sports[$a]['id']?>" name="gpp_icon_note" value="" class="form-control"/>
+                                                            </div>
+                                                            <!-- Text Input (Right) -->
+                                                            <div class="form-group text-field span-full is-required">
+                                                                <h4> Disclaimer</h4> <label>Content</label>
+                                                                <input type="text" id="gpp_button_disclaimer_<?php echo $sports[$a]['id']?>" name="gpp_button_disclaimer" value=" "
+                                                                       class="form-control"/>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-lg-6">
+
+                                                            <!-- Text Input (Right) -->
+                                                            <div class="form-group text-field span-full is-required">
+                                                                <h4> Content</h4>
+                                                                <label>Icon 1 Heading</label>
+                                                                <input type="text" id="gpp_icon_H_one_<?php echo $sports[$a]['id']?>" name="gpp_icon_H_one" value="" class="form-control"/>
+                                                            </div>
+                                                            <!-- Text Input (Right) -->
+                                                            <div class="form-group text-field span-full is-required">
+                                                                <label>Icon 1 Subheading</label>
+                                                                <input type="text" id="gpp_icon_S_one_<?php echo $sports[$a]['id']?>" name="gpp_icon_S_one" value="" class="form-control"/>
+                                                            </div>
+                                                            <!-- Text Input (Right) -->
+                                                            <div class="form-group text-field span-full is-required">
+                                                                <label>Icon 2 Heading</label>
+                                                                <input type="text" id="gpp_icon_H_two_<?php echo $sports[$a]['id']?>" name="gpp_icon_H_two" value="" class="form-control"/>
+                                                            </div>
+                                                            <!-- Text Input (Right) -->
+                                                            <div class="form-group text-field span-full is-required">
+                                                                <label>Icon 2 Subheading</label>
+                                                                <input type="text" id="gpp_icon_S_two_<?php echo $sports[$a]['id']?>" name="gpp_icon_S_two" value="" class="form-control"/>
+                                                            </div>
+                                                            <!-- Text Input (Right) -->
+                                                            <div class="form-group text-field span-full is-required">
+                                                                <label>Icon 3 Heading</label>
+                                                                <input type="text" id="gpp_icon_H_three_<?php echo $sports[$a]['id']?>" name="gpp_icon_H_three" value="" class="form-control"/>
+                                                            </div>
+                                                            <!-- Text Input (Right) -->
+                                                            <div class="form-group text-field span-full is-required">
+                                                                <label>Icon 3 Subheading</label>
+                                                                <input type="text" id="gpp_icon_S_three_<?php echo $sports[$a]['id']?>" name="gpp_icon_S_three" value="" class="form-control"/>
+                                                            </div>
+
+                                                            <div class="form-group text-field span-full is-required">
+                                                                <h4>Buttons Section</h4>
+                                                                <label>Review Button</label>
+                                                                <input type="text" id="gpp_button_rew_<?php echo $sports[$a]['id']?>" name="gpp_button_rew" value="" class="form-control"/>
+                                                            </div>
+                                                            <!-- Text Input (Full) -->
+                                                            <div class="form-group text-field span-full is-required">
+                                                                <label>Watch Live Button</label>
+                                                                <input type="text" id="gpp_button_wlive_<?php echo $sports[$a]['id']?>" name="gpp_button_wlive" value="" class="form-control"/>
+                                                            </div>
+                                                            <!-- Text Input (Full) -->
+                                                            <div class="form-group text-field span-full is-required">
+                                                                <label>Affiliate Link</label>
+                                                                <input type="text" id="gpp_button_aff_<?php echo $sports[$a]['id']?>" name="gpp_button_aff" value="" class="form-control"/>
+                                                            </div>
+                                                            <div class="form-group text-field span-full is-required">
+                                                                <label>False Affiliate Link</label>
+                                                                <input type="text" id="gpp_false_button_aff_<?php echo $sports[$a]['id']?>" name="gpp_false_button_aff_" value="" class="form-control"/>
+                                                            </div>
+
+                                                            <div class="form-group text-field span-full is-required">
+                                                                <h4>Points Section</h4>
+                                                                <label>Heading</label>
+                                                                <input type="text" id="gpd_points_head_<?php echo $sports[$a]['id']?>" name="gpd_points_head_" value="" class="form-control"/>
+                                                            </div>
+                                                            <!-- Text Input (Right) -->
+                                                            <div class="form-group text-field span-full is-required">
+                                                                <label>Point 1</label>
+                                                                <input type="text" id="gpd_points_pointOne_<?php echo $sports[$a]['id']?>" name="gpd_points_pointOne_" value="" class="form-control"/>
+                                                            </div>
+                                                            <!-- Text Input (Right) -->
+                                                            <div class="form-group text-field span-full is-required">
+                                                                <label>Point 2</label>
+                                                                <input type="text" id="gpd_points_pointTwo_<?php echo $sports[$a]['id']?>" name="gpd_points_pointTwo_" value="" class="form-control"/>
+                                                            </div>
+                                                            <!-- Text Input (Right) -->
+                                                            <div class="form-group text-field span-full is-required">
+                                                                <label>Point 3</label>
+                                                                <input type="text" id="gpd_points_pointTree_<?php echo $sports[$a]['id']?>" name="gpd_points_pointTree_" value="" class="form-control"/>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                    <!--------------- Game Page Details.  ---------------->
+                                                    <h3 class="HS_Game"><i class="fa fa-plus">
+                                                    </i> Game Page Details.  <small style="font-size: 11px">(<?php echo $sports[$a]['name']?>/Stream Providers/Edit Provider Game Page Detail )</small></h3>
+                                                    <div class="gnr_Game hidden">
+                                                        <div class="col-lg-12">
+                                                            <!-- Text Input (Left) -->
+                                                            <div class="form-group text-field span-full is-required">
+                                                                <label>Heading</label>
+                                                                <input type="text" id="gpd_head_<?php echo $sports[$a]['id']?>" name="gpd_head" value="" class="form-control"/>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-lg-6">
+                                                            <!-- Text Input (Right) -->
+                                                            <div class="form-group text-field span-full ">
+                                                                <h4>Note Section</h4>
+                                                                <label>Provider Note</label>
+                                                                <input type="text" id="gpd_icon_note_<?php echo $sports[$a]['id']?>" name="gpd_icon_note" value="" class="form-control"/>
+                                                            </div>
+                                                            <div class="form-group text-field span-full is-required">
+                                                                <h4>Buttons Section</h4>
+                                                                <label>Button Heading </label>
+                                                                <input type="text" id="gpd_button_head_<?php echo $sports[$a]['id']?>" name="gpd_button_head" value="" class="form-control"/>
+                                                            </div>
+                                                            <!-- Text Input (Full) -->
+                                                            <div class="form-group text-field span-full is-required">
+                                                                <label>Button Subheading</label>
+                                                                <input type="text" id="gpd_button_subhead_<?php echo $sports[$a]['id']?>" name="gpd_button_subhead" value="" class="form-control"/>
+                                                            </div>
+                                                            <!-- Text Input (Full) -->
+                                                            <div class="form-group text-field span-full is-required">
+                                                                <label>Affiliate Link</label>
+                                                                <input type="text" id="gpd_button_aff_<?php echo $sports[$a]['id']?>" name="gpd_button_aff" value="" class="form-control"/>
+                                                            </div>
+                                                            <div class="form-group text-field span-full is-required">
+                                                                <label>False Affiliate Link</label>
+                                                                <input type="text" id="gpd_false_button_aff_<?php echo $sports[$a]['id']?>" name="gpd_false_button_aff_" value="" class="form-control"/>
+                                                            </div>
+                                                            <!-- Text Input (Right) -->
+                                                            <div class="form-group text-field span-full is-required">
+                                                                <h4> Disclaimer</h4>
+                                                                <label>Content</label>
+                                                                <input type="text" id="gpd_button_disclaimer_<?php echo $sports[$a]['id']?>" name="gpd_button_disclaimer" value=""
+                                                                       class="form-control"/>
+                                                            </div>
+
+                                                        </div>
+                                                        <div class="col-lg-6">
+
+                                                            <!-- Text Input (Right) -->
+                                                            <div class="form-group text-field span-full is-required">
+                                                                <h4>Icons Section</h4>
+                                                                <label>Icon 1 Heading</label>
+                                                                <input type="text" id="gpd_icon_H_one_<?php echo $sports[$a]['id']?>" name="gpd_icon_H_one" value="" class="form-control"/>
+                                                            </div>
+                                                            <!-- Text Input (Right) -->
+                                                            <div class="form-group text-field span-full is-required">
+                                                                <label>Icon 1 Subheading</label>
+                                                                <input type="text" id="gpd_icon_S_one_<?php echo $sports[$a]['id']?>" name="gpd_icon_S_one" value="" class="form-control"/>
+                                                            </div>
+                                                            <!-- Text Input (Right) -->
+                                                            <div class="form-group text-field span-full is-required">
+                                                                <label>Icon 2 Heading</label>
+                                                                <input type="text" id="gpd_icon_H_two_<?php echo $sports[$a]['id']?>" name="gpd_icon_H_two" value="" class="form-control"/>
+                                                            </div>
+                                                            <!-- Text Input (Right) -->
+                                                            <div class="form-group text-field span-full is-required">
+                                                                <label>Icon 2 Subheading</label>
+                                                                <input type="text" id="gpd_icon_S_two_<?php echo $sports[$a]['id']?>" name="gpd_icon_S_two" value="" class="form-control"/>
+                                                            </div>
+                                                            <!-- Text Input (Right) -->
+                                                            <div class="form-group text-field span-full is-required">
+                                                                <label>Icon 3 Heading</label>
+                                                                <input type="text" id="gpd_icon_H_three_<?php echo $sports[$a]['id']?>" name="gpd_icon_H_three" value="" class="form-control"/>
+                                                            </div>
+                                                            <!-- Text Input (Right) -->
+                                                            <div class="form-group text-field span-full is-required">
+                                                                <label>Icon 3 Subheading</label>
+                                                                <input type="text" id="gpd_icon_S_three_<?php echo $sports[$a]['id']?>" name="gpd_icon_S_three" value="" class="form-control"/>
+                                                            </div>
+
+                                                        </div>
+                                                    </div>
+
+                                                    <!--------------- Sport Buttom ---------------->
+                                                    <a class="btn btn-success" id="data_<?php echo $sports[$a]['id']?>">Save Data( <?php echo $sports[$a]['name']?> )</a>
+                                                </form>
+                                            </div>
+                                    <?php } else {?>
+                                            <div id="#sport_<?php echo $sports[$a]['id'].'_'.$sports[$a]['name']?>_windows" class="tab-pane" style="background:#f1f3f4;padding: 5px">
+                                        <!-- Form Elements -->
+                                        <form class="form-elements col-lg-12" role="form">
+                                            <!--------------- Genera Info ---------------->
+                                            <h3 class="HS_general"><i class=" fa fa-plus"></i> General. <small style="font-size: 11px">(<?php echo $sports[$a]['name']?>/Stream Providers/Edit )</small> </h3>
+                                            <div class="gnr_sport hidden">
+                                                <div class="col-lg-6">
+                                                    <div class="hidden form-group text-field span-full is-required">
+                                                        <label>Id_Sport</label>
+                                                        <input type="text" id="<?php echo $sports[$a]['id']?>" name="Id_Sport" value="<?php echo $sports[$a]['id']?>" class="form-control"/>
+                                                    </div>
+                                                    <!-- Text Input (Left) -->
+                                                    <div class="form-group text-field span-full is-required">
+                                                        <label>Label</label>
+                                                        <input type="text" id="gnr_label_<?php echo $sports[$a]['id']?>" name="gnr_label" value="" class="form-control"/>
+                                                    </div>
+                                                    <!-- Text Input (Right) -->
+                                                    <div class="form-group text-field span-full is-required">
+                                                        <label>Affiliate Link</label>
+                                                        <input type="text" name="gnr_afflink" id="gnr_aff_<?php echo $sports[$a]['id']?>" value="" class="form-control"/>
+                                                    </div>
+                                                    <div class="form-group text-field span-full is-required">
+                                                        <label>False Affiliate Link</label>
+                                                        <input type="text" name="gnr_false_aff_" id="gnr_false_aff_<?php echo $sports[$a]['id']?>" value="" class="form-control"/>
+                                                    </div>
+                                                    <!-- Text Input (Full) -->
+                                                    <div class="form-group text-field span-full is-required">
+                                                        <label>Sort Order</label>
+                                                        <input type="text" id="gnr_sort_<?php echo $sports[$a]['id']?>" name="gnr_sort" value="" class="form-control"/>
+                                                    </div>
+                                                    <!-- Checkbox -->
+                                                    <div class="form-group checkbox-field span-left is-required">
+                                                        <div class="checkbox custom-checkbox">
+                                                            <input id="gnr_checkbox<?php echo $sports[$a]['id']?>" name="gnr_active" value="1" type="checkbox">
+                                                            <label for="gnr_checkbox<?php echo $sports[$a]['id']?>">Enable</label>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-6">
+                                                    <!-- Text Input (Right) -->
+                                                    <div class="form-group text-field span-full is-required">
+                                                        <label>Rating</label>
+                                                        <input type="text" id="gnr_raiting_<?php echo $sports[$a]['id']?>"
+                                                               name="gnr_rating" value="" class="form-control"/>
+                                                    </div>
+                                                    <!-- Text Input (Full) -->
+                                                    <div class="form-group text-field span-full is-required">
+                                                        <label>Video Quality</label>
+                                                        <input type="text" id="gnr_quality_<?php echo $sports[$a]['id']?>"
+                                                               name="gnr_quality" value="" class="form-control"/>
+                                                    </div>
+                                                    <!-- Text Input (Right) -->
+                                                    <div class="form-group text-field span-full is-required">
+                                                        <label>Video Size</label>
+                                                        <input type="text" id="gnr_size_<?php echo $sports[$a]['id']?>"
+                                                               name="gnr_size" value="" class="form-control"/>
+                                                    </div>
+                                                    <!-- Text Input (Full) -->
+                                                    <div class="form-group text-field span-full is-required">
+                                                        <label>Price</label>
+                                                        <input type="text" id="gnr_price_<?php echo $sports[$a]['id']?>" name="gnr_price" value="" class="form-control"/>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <!--------------- Stream_general_manager ---------------->
+                                            <h3 class="HS_Page"><i class="fa fa-plus">
+                                            </i> Front Page Details. <small style="font-size: 11px">(<?php echo $sports[$a]['name']?>/General-Pages/Front Page/Manage Stream Providers/Mamage Content )</small></h3>
+                                            <div class="gnr_Page hidden">
+                                                <div class="col-lg-12">
+                                                    <!-- Text Input (Left) -->
+                                                    <div class="form-group text-field span-full is-required">
+                                                        <label>Heading</label><input id="gpm_head_<?php echo $sports[$a]['id']?>" type="text" name="gpm_head" value="" class="form-control"/></div>
+                                                    <!-- Checkbox -->
+                                                    <div class="form-group checkbox-field span-left is-required">
+                                                        <div class="checkbox custom-checkbox">
+                                                            <input id="gn_checkbox<?php echo $sports[$a]['id']?>" name="gpm_active" value="1" type="checkbox">
+                                                            <label for="gn_checkbox<?php echo $sports[$a]['id']?>">Show on Front Page</label>
+                                                        </div>
+                                                    </div>
+
+                                                </div>
+                                                <div class="col-lg-6">
+                                                    <!-- Text Input (Right) -->
+                                                    <div class="form-group text-field span-full is-required">
+                                                        <h4>Quality Section</h4>
+                                                        <label>Heading</label>
+                                                        <input type="text" id="gpm_quality_head_<?php echo $sports[$a]['id']?>" name="gpm_quality_head" value="" class="form-control"/>
+                                                    </div>
+                                                    <!-- Text Input (Full) -->
+                                                    <div class="form-group text-field span-full is-required">
+                                                        <label>Content</label>
+                                                        <input type="text" id="gpm_quality_content_<?php echo $sports[$a]['id']?>" name="gpm_quality_content" value="" class="form-control"/>
+                                                    </div>
+                                                    <!-- Text Input (Right) -->
+                                                    <div class="form-group text-field span-full is-required">
+                                                        <h4> Udvalg Section </h4><label>Heading</label>
+                                                        <input type="text" id="gpm_udv_head_<?php echo $sports[$a]['id']?>" name="gpm_udv_head" value="" class="form-control"/>
+                                                    </div>
+                                                    <!-- Text Input (Full) -->
+                                                    <div class="form-group text-field span-full is-required">
+                                                        <label>Content</label>
+                                                        <input type="text" id="gpm_udv_content_<?php echo $sports[$a]['id']?>" name="gpm_udv_content" value="" class="form-control"/>
+                                                    </div>
+                                                    <!-- Text Input (Right) -->
+                                                    <div class="form-group text-field span-full is-required">
+                                                        <h4>Price Section</h4>
+                                                        <label>Heading</label>
+                                                        <input type="text" id="gpm_price_head_<?php echo $sports[$a]['id']?>" name="gpm_price_head" value="" class="form-control"/>
+                                                    </div>
+                                                    <!-- Text Input (Full) -->
+                                                    <div class="form-group text-field span-full is-required">
+                                                        <label>Content</label>
+                                                        <input type="text" id="gpm_price_content_<?php echo $sports[$a]['id']?>" name="gpm_price_content" value="" class="form-control"/>
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-6">
+                                                    <!-- Text Input (Right) -->
+                                                    <div class="form-group text-field span-full is-required">
+                                                        <h4>How to Icons Section</h4>
+                                                        <label>Icon 1 Heading</label>
+                                                        <input type="text" id="gpm_icon_H_one_<?php echo $sports[$a]['id']?>" name="gpm_icon_H_one" value="" class="form-control"/>
+                                                    </div>
+                                                    <!-- Text Input (Right) -->
+                                                    <div class="form-group text-field span-full is-required">
+                                                        <label>Icon 1 Subheading</label>
+                                                        <input type="text" id="gpm_icon_S_one_<?php echo $sports[$a]['id']?>" name="gpm_icon_S_one" value="" class="form-control"/>
+                                                    </div>
+                                                    <!-- Text Input (Right) -->
+                                                    <div class="form-group text-field span-full is-required" >
+                                                        <label>Icon 2 Heading</label>
+                                                        <input type="text" id="gpm_icon_H_two_<?php echo $sports[$a]['id']?>" name="gpm_icon_H_two" value="" class="form-control"/>
+                                                    </div>
+                                                    <!-- Text Input (Right) -->
+                                                    <div class="form-group text-field span-full is-required">
+                                                        <label>Icon 2 Subheading</label>
+                                                        <input type="text" id="gpm_icon_S_two_<?php echo $sports[$a]['id']?>" name="gpm_icon_S_two" value="" class="form-control"/>
+                                                    </div>
+                                                    <!-- Text Input (Right) -->
+                                                    <div class="form-group text-field span-full is-required">
+                                                        <label>Icon 3 Heading</label>
+                                                        <input type="text" id="gpm_icon_H_three_<?php echo $sports[$a]['id']?>" name="gpm_icon_H_three" value="" class="form-control"/>
+                                                    </div>
+                                                    <!-- Text Input (Right) -->
+                                                    <div class="form-group text-field span-full is-required">
+                                                        <label>Icon 3 Subheading</label>
+                                                        <input type="text" id="gpm_icon_S_three_<?php echo $sports[$a]['id']?>" name="gpm_icon_S_three" value="" class="form-control"/>
+                                                    </div>
+                                                    <!-- Text Input (Right) -->
+                                                    <div class="form-group text-field span-full is-required">
+                                                        <label>Icon 3 Note</label>
+                                                        <input type="text" id="gpm_icon_N_three_<?php echo $sports[$a]['id']?>" name="gpm_icon_N_three" value="" class="form-control"/>
+                                                    </div>
+
+                                                    <div class="form-group text-field span-full is-required">
+                                                        <h4>Buttons Section</h4>
+                                                        <label>Review Button</label>
+                                                        <input type="text" id="gpm_button_rew_<?php echo $sports[$a]['id']?>" name="gpm_button_rew" value="" class="form-control"/>
+                                                    </div>
+                                                    <!-- Text Input (Full) -->
+                                                    <div class="form-group text-field span-full is-required">
+                                                        <label>Watch Live Button</label>
+                                                        <input type="text" id="gpm_button_wlive_<?php echo $sports[$a]['id']?>" name="gpm_button_wlive" value="" class="form-control"/>
+                                                    </div>
+                                                    <!-- Text Input (Full) -->
+                                                    <div class="form-group text-field span-full is-required">
+                                                        <label>Affiliate Link</label>
+                                                        <input type="text" id="gpm_button_aff_<?php echo $sports[$a]['id']?>" name="gpm_button_aff" value="" class="form-control"/>
+                                                    </div>
+                                                    <div class="form-group text-field span-full is-required">
+                                                        <label>False Affiliate Link</label>
+                                                        <input type="text" name="gpm_false_button_aff_" id="gpm_false_button_aff_<?php echo $sports[$a]['id']?>" value="" class="form-control"/>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <!--------------- Provider Page Details ---------------->
+                                            <h3 class="HS_PageD"><i class="fa fa-plus">
+                                            </i> Provider Page Details.  <small style="font-size: 11px">(<?php echo $sports[$a]['name']?>/Stream Providers/Edit Provider Page Detail )</small></h3>
+                                            <div class="gnr_PageD hidden">
+                                                <div class="col-lg-12">
+                                                    <!-- Text Input (Left) -->
+                                                    <div class="form-group text-field span-full is-required">
+                                                        <label>Heading</label>
+                                                        <input type="text" id="gpp_head_<?php echo $sports[$a]['id']?>" name="gpp_head" value="" class="form-control"/>
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-6">
+                                                    <!-- Text Input (Right) -->
+                                                    <div class="form-group text-field span-full is-required">
+                                                        <h4>Quality Section</h4>
+                                                        <label>Heading</label>
+                                                        <input type="text" id="gpp_quality_head_<?php echo $sports[$a]['id']?>" name="gpp_quality_head" value="" class="form-control"/>
+                                                    </div>
+                                                    <!-- Text Input (Full) -->
+                                                    <div class="form-group text-field span-full is-required">
+                                                        <label>Content</label>
+                                                        <input type="text" id="gpp_quality_content_<?php echo $sports[$a]['id']?>" name="gpp_quality_content" value=""
+                                                               class="form-control"/>
+                                                    </div>
+                                                    <!-- Text Input (Right) -->
+                                                    <div class="form-group text-field span-full is-required">
+                                                        <h4> Udvalg Section </h4>
+                                                        <label>Heading</label>
+                                                        <input type="text" id="gpp_udv_head_<?php echo $sports[$a]['id']?>" name="gpp_udv_head" value="" class="form-control"/>
+                                                    </div>
+                                                    <!-- Text Input (Full) -->
+                                                    <div class="form-group text-field span-full is-required">
+                                                        <label>Content</label>
+                                                        <input type="text" id="gpp_udv_content_<?php echo $sports[$a]['id']?>" name="gpp_udv_content" value="" class="form-control"/>
+                                                    </div>
+                                                    <!-- Text Input (Right) -->
+                                                    <div class="form-group text-field span-full is-required">
+                                                        <h4>Price Section</h4>
+                                                        <label>Heading</label>
+                                                        <input type="text" id="gpp_price_head_<?php echo $sports[$a]['id']?>" name="gpp_price_head" value="" class="form-control"/>
+                                                    </div>
+                                                    <!-- Text Input (Full) -->
+                                                    <div class="form-group text-field span-full is-required">
+                                                        <label>Content</label>
+                                                        <input type="text" id="gpp_price_content_<?php echo $sports[$a]['id']?>" name="gpp_price_content" value="" class="form-control"/>
+                                                    </div>
+
+                                                    <!-- Text Input (Right) -->
+                                                    <div class="form-group text-field span-full is-required"><h4>Note</h4>
+                                                        <label>Provider Note</label>
+                                                        <input type="text" id="gpp_icon_note_<?php echo $sports[$a]['id']?>" name="gpp_icon_note" value="" class="form-control"/>
+                                                    </div>
+                                                    <!-- Text Input (Right) -->
+                                                    <div class="form-group text-field span-full is-required">
+                                                        <h4> Disclaimer</h4> <label>Content</label>
+                                                        <input type="text" id="gpp_button_disclaimer_<?php echo $sports[$a]['id']?>" name="gpp_button_disclaimer" value=" "
+                                                               class="form-control"/>
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-6">
+
+                                                    <!-- Text Input (Right) -->
+                                                    <div class="form-group text-field span-full is-required">
+                                                        <h4> Content</h4>
+                                                        <label>Icon 1 Heading</label>
+                                                        <input type="text" id="gpp_icon_H_one_<?php echo $sports[$a]['id']?>" name="gpp_icon_H_one" value="" class="form-control"/>
+                                                    </div>
+                                                    <!-- Text Input (Right) -->
+                                                    <div class="form-group text-field span-full is-required">
+                                                        <label>Icon 1 Subheading</label>
+                                                        <input type="text" id="gpp_icon_S_one_<?php echo $sports[$a]['id']?>" name="gpp_icon_S_one" value="" class="form-control"/>
+                                                    </div>
+                                                    <!-- Text Input (Right) -->
+                                                    <div class="form-group text-field span-full is-required">
+                                                        <label>Icon 2 Heading</label>
+                                                        <input type="text" id="gpp_icon_H_two_<?php echo $sports[$a]['id']?>" name="gpp_icon_H_two" value="" class="form-control"/>
+                                                    </div>
+                                                    <!-- Text Input (Right) -->
+                                                    <div class="form-group text-field span-full is-required">
+                                                        <label>Icon 2 Subheading</label>
+                                                        <input type="text" id="gpp_icon_S_two_<?php echo $sports[$a]['id']?>" name="gpp_icon_S_two" value="" class="form-control"/>
+                                                    </div>
+                                                    <!-- Text Input (Right) -->
+                                                    <div class="form-group text-field span-full is-required">
+                                                        <label>Icon 3 Heading</label>
+                                                        <input type="text" id="gpp_icon_H_three_<?php echo $sports[$a]['id']?>" name="gpp_icon_H_three" value="" class="form-control"/>
+                                                    </div>
+                                                    <!-- Text Input (Right) -->
+                                                    <div class="form-group text-field span-full is-required">
+                                                        <label>Icon 3 Subheading</label>
+                                                        <input type="text" id="gpp_icon_S_three_<?php echo $sports[$a]['id']?>" name="gpp_icon_S_three" value="" class="form-control"/>
+                                                    </div>
+
+                                                    <div class="form-group text-field span-full is-required">
+                                                        <h4>Buttons Section</h4>
+                                                        <label>Review Button</label>
+                                                        <input type="text" id="gpp_button_rew_<?php echo $sports[$a]['id']?>" name="gpp_button_rew" value="" class="form-control"/>
+                                                    </div>
+                                                    <!-- Text Input (Full) -->
+                                                    <div class="form-group text-field span-full is-required">
+                                                        <label>Watch Live Button</label>
+                                                        <input type="text" id="gpp_button_wlive_<?php echo $sports[$a]['id']?>" name="gpp_button_wlive" value="" class="form-control"/>
+                                                    </div>
+                                                    <!-- Text Input (Full) -->
+                                                    <div class="form-group text-field span-full is-required">
+                                                        <label>Affiliate Link</label>
+                                                        <input type="text" id="gpp_button_aff_<?php echo $sports[$a]['id']?>" name="gpp_button_aff" value="" class="form-control"/>
+                                                    </div>
+                                                    <div class="form-group text-field span-full is-required">
+                                                        <label>False Affiliate Link</label>
+                                                        <input type="text" id="gpp_false_button_aff_<?php echo $sports[$a]['id']?>" name="gpp_false_button_aff_" value="" class="form-control"/>
+                                                    </div>
+
+                                                    <div class="form-group text-field span-full is-required">
+                                                        <h4>Points Section</h4>
+                                                        <label>Heading</label>
+                                                        <input type="text" id="gpd_points_head_<?php echo $sports[$a]['id']?>" name="gpd_points_head_" value="" class="form-control"/>
+                                                    </div>
+                                                    <!-- Text Input (Right) -->
+                                                    <div class="form-group text-field span-full is-required">
+                                                        <label>Point 1</label>
+                                                        <input type="text" id="gpd_points_pointOne_<?php echo $sports[$a]['id']?>" name="gpd_points_pointOne_" value="" class="form-control"/>
+                                                    </div>
+                                                    <!-- Text Input (Right) -->
+                                                    <div class="form-group text-field span-full is-required">
+                                                        <label>Point 2</label>
+                                                        <input type="text" id="gpd_points_pointTwo_<?php echo $sports[$a]['id']?>" name="gpd_points_pointTwo_" value="" class="form-control"/>
+                                                    </div>
+                                                    <!-- Text Input (Right) -->
+                                                    <div class="form-group text-field span-full is-required">
+                                                        <label>Point 3</label>
+                                                        <input type="text" id="gpd_points_pointTree_<?php echo $sports[$a]['id']?>" name="gpd_points_pointTree_" value="" class="form-control"/>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <!--------------- Game Page Details.  ---------------->
+                                            <h3 class="HS_Game"><i class="fa fa-plus">
+                                            </i> Game Page Details.  <small style="font-size: 11px">(<?php echo $sports[$a]['name']?>/Stream Providers/Edit Provider Game Page Detail )</small></h3>
+                                            <div class="gnr_Game hidden">
+                                                <div class="col-lg-12">
+                                                    <!-- Text Input (Left) -->
+                                                    <div class="form-group text-field span-full is-required">
+                                                        <label>Heading</label>
+                                                        <input type="text" id="gpd_head_<?php echo $sports[$a]['id']?>" name="gpd_head" value="" class="form-control"/>
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-6">
+                                                    <!-- Text Input (Right) -->
+                                                    <div class="form-group text-field span-full ">
+                                                        <h4>Note Section</h4>
+                                                        <label>Provider Note</label>
+                                                        <input type="text" id="gpd_icon_note_<?php echo $sports[$a]['id']?>" name="gpd_icon_note" value="" class="form-control"/>
+                                                    </div>
+                                                    <div class="form-group text-field span-full is-required">
+                                                        <h4>Buttons Section</h4>
+                                                        <label>Button Heading </label>
+                                                        <input type="text" id="gpd_button_head_<?php echo $sports[$a]['id']?>" name="gpd_button_head" value="" class="form-control"/>
+                                                    </div>
+                                                    <!-- Text Input (Full) -->
+                                                    <div class="form-group text-field span-full is-required">
+                                                        <label>Button Subheading</label>
+                                                        <input type="text" id="gpd_button_subhead_<?php echo $sports[$a]['id']?>" name="gpd_button_subhead" value="" class="form-control"/>
+                                                    </div>
+                                                    <!-- Text Input (Full) -->
+                                                    <div class="form-group text-field span-full is-required">
+                                                        <label>Affiliate Link</label>
+                                                        <input type="text" id="gpd_button_aff_<?php echo $sports[$a]['id']?>" name="gpd_button_aff" value="" class="form-control"/>
+                                                    </div>
+                                                    <div class="form-group text-field span-full is-required">
+                                                        <label>False Affiliate Link</label>
+                                                        <input type="text" id="gpd_false_button_aff_<?php echo $sports[$a]['id']?>" name="gpd_false_button_aff_" value="" class="form-control"/>
+                                                    </div>
+                                                    <!-- Text Input (Right) -->
+                                                    <div class="form-group text-field span-full is-required">
+                                                        <h4> Disclaimer</h4>
+                                                        <label>Content</label>
+                                                        <input type="text" id="gpd_button_disclaimer_<?php echo $sports[$a]['id']?>" name="gpd_button_disclaimer" value=""
+                                                               class="form-control"/>
+                                                    </div>
+
+                                                </div>
+                                                <div class="col-lg-6">
+
+                                                    <!-- Text Input (Right) -->
+                                                    <div class="form-group text-field span-full is-required">
+                                                        <h4>Icons Section</h4>
+                                                        <label>Icon 1 Heading</label>
+                                                        <input type="text" id="gpd_icon_H_one_<?php echo $sports[$a]['id']?>" name="gpd_icon_H_one" value="" class="form-control"/>
+                                                    </div>
+                                                    <!-- Text Input (Right) -->
+                                                    <div class="form-group text-field span-full is-required">
+                                                        <label>Icon 1 Subheading</label>
+                                                        <input type="text" id="gpd_icon_S_one_<?php echo $sports[$a]['id']?>" name="gpd_icon_S_one" value="" class="form-control"/>
+                                                    </div>
+                                                    <!-- Text Input (Right) -->
+                                                    <div class="form-group text-field span-full is-required">
+                                                        <label>Icon 2 Heading</label>
+                                                        <input type="text" id="gpd_icon_H_two_<?php echo $sports[$a]['id']?>" name="gpd_icon_H_two" value="" class="form-control"/>
+                                                    </div>
+                                                    <!-- Text Input (Right) -->
+                                                    <div class="form-group text-field span-full is-required">
+                                                        <label>Icon 2 Subheading</label>
+                                                        <input type="text" id="gpd_icon_S_two_<?php echo $sports[$a]['id']?>" name="gpd_icon_S_two" value="" class="form-control"/>
+                                                    </div>
+                                                    <!-- Text Input (Right) -->
+                                                    <div class="form-group text-field span-full is-required">
+                                                        <label>Icon 3 Heading</label>
+                                                        <input type="text" id="gpd_icon_H_three_<?php echo $sports[$a]['id']?>" name="gpd_icon_H_three" value="" class="form-control"/>
+                                                    </div>
+                                                    <!-- Text Input (Right) -->
+                                                    <div class="form-group text-field span-full is-required">
+                                                        <label>Icon 3 Subheading</label>
+                                                        <input type="text" id="gpd_icon_S_three_<?php echo $sports[$a]['id']?>" name="gpd_icon_S_three" value="" class="form-control"/>
+                                                    </div>
+
+                                                </div>
+                                            </div>
+
+                                            <!--------------- Sport Buttom ---------------->
+                                            <a class="btn btn-success" id="data_<?php echo $sports[$a]['id']?>">Save Data( <?php echo $sports[$a]['name']?> )</a>
+                                        </form>
+                                    </div>
+                                    <?php } ?>
+                                    <?php } ?>
+                                    <?php } ?>
+                                    <input type="text" id="stram_prov_id" name="" value="" class="hidden form-control"/>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        <!--Landing Page editor-->
+            <div class="control-popup modal fade" id="landingPageEdit_" static tabindex="-1" role="dialog">
+                <div class="modal-dialog modal-lg">
+                <div class="modal-content" style="padding-bottom: 20px">
+                    <div class="modal-header modal-header_info">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                        <h4 class="modal-title" id="land_id_name_str_stream">Landing Page editor</h4>
+                    </div>
+
+                    <div class="modal-body text-left" id="modal_body_land_stream">
+                        <div class="control-tabs content-tabs" data-control="tab">
+                            <ul id="land_stream" class="nav nav-tabs">
+
+                                <li class="active">
+                                    <a href="#home" id="MetaInformation" title="MetaInformation">
+                                        Meta Information
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="#profile" id="_MetaInformation" title="MetaInformation">
+                                        Promo Box
+                                    </a>
+                                </li>
+                                <?php for($a=0; $a< count($stream); $a++ ){ ?>
+                                            <?php if ($stream[$a]['active']== 1){ ?>
+                                            <li role="presentation">
+                                                <a href="#land_<?php echo $stream[$a]['id']?>" title="<?php echo $stream[$a]['id']?>"  aria-controls="profile" role="tab" data-toggle="tab">
+                                                    <?php echo $stream[$a]['name']?>
+                                                </a>
+                                            </li>
+                                    <?php } ?>
+                                <?php } ?>
+                            </ul>
+                            <div id="tabcontent" class="tab-content" style="padding: 10px; ">
+                                <div role="tabpanel" class="tab-pane active" id="home">
+                                    <div class="col-xs-12">
+
+                                        <!-- Checkbox -->
+                                        <div class="form-group checkbox-field span-left is-required">
+                                            <h3 class="text-left">Article</h3>
+                                            <label>Used Article</label>
+                                            <div class="checkbox custom-checkbox">
+                                                <input id="gnr_checkbox_use" name="gnr_checkbox_use" value="1" type="checkbox">
+                                                <label for="gnr_checkbox_use">Enable</label>
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group text-field span-full is-required hidden">
+                                            <label>id Article</label>
+                                            <input type="text" id="id_article" name="id_article" value="" class="form-control"/>
+                                        </div>
+
+                                        <div class="form-group text-field span-full is-required">
+                                            <h3 class="text-left">Meta Information</h3>
+                                            <label>Page Title</label>
+                                            <input type="text" id="pagtitle" name="pagtitle" value="" class="form-control"/>
+                                        </div>
+
+
+                                        <div class="form-group text-field span-full is-required">
+                                            <label>URL Token</label>
+                                            <input type="text" id="Token" name="Token" value=" " class="form-control"/>
+                                        </div>
+
+                                        <div class="form-group text-field span-full is-required">
+                                            <label>Meta Description</label>
+                                            <input type="text" id="Description" name="Description" value=" " class="form-control"/>
+                                        </div>
+
+                                        <div class="form-group text-field span-full is-required">
+                                            <label>Meta Keywords</label>
+                                            <input type="text" id="Keywords" name="Keywords" value=" " class="form-control"/>
+                                        </div>
+
+
+                                    </div>
+                                </div>
+                                <div role="tabpanel" class="tab-pane" id="profile">
+                                    <div class="col-xs-12">
+
+                                        <div class="form-group text-field span-full is-required">
+                                            <h3 class="text-left">Promo Box</h3>
+                                            <label>Heading</label>
+                                            <input type="text" id="Heading" name="Heading" value=" " class="form-control"/>
+                                        </div>
+                                        <div class="form-group text-field span-full is-required">
+                                            <label>Affiliate Link</label>
+                                            <input type="text" id="Affiliate" name="Affiliate" value=" " class="form-control"/>
+                                        </div>
+                                        <!-- Checkbox -->
+                                        <div class="form-group checkbox-field span-left is-required">
+                                            <label>Set link to entire promobox</label>
+                                            <div class="checkbox custom-checkbox">
+                                                <input id="gnr_checkbox" name="gnr_checkbox" value="1" type="checkbox">
+                                                <label for="gnr_checkbox">Enable</label>
+                                            </div>
+                                        </div>
+                                        <!-- Checkbox -->
+                                        <div class="form-group checkbox-field span-left is-required">
+                                            <label>Show 'sponsored' tag in promobox</label>
+                                            <div class="checkbox custom-checkbox">
+                                                <input id="Sponsoreret" name="gnr_checkbox" value="1" type="checkbox">
+                                                <label for="Sponsoreret">Enable</label>
+                                            </div>
+                                        </div>
+
+
+                                        <div class="form-group text-field span-full is-required">
+                                            <h3 class="text-left">Banner Section</h3>
+                                            <label>Heading 1</label>
+                                            <input type="text" id="Heading1" name="Heading1" value=" " class="form-control"/>
+                                        </div>
+                                        <div class="form-group text-field span-full is-required">
+                                            <label>Show Affiliate Link On TV</label>
+                                            <input type="text" id="OnTV" name="OnTV" value=" " class="form-control"/>
+                                        </div>
+
+
+                                    </div>
+                                </div>
+                                <?php for($a=0; $a< count($stream); $a++ ){ ?>
+                                    <?php if ($stream[$a]['active']== 1){ ?>
+                                        <div role="tabpanel" class="tab-pane" id="land_$stream[$a]['id_stream']">
+                                            <div class="col-xs-12">
+
+                                                <div class="form-group checkbox-field span-left is-required checkbox custom-checkbox">
+                                                    <h3>Stream Providers Section</h3>
+                                                        <input id="promobox_<?php echo $stream[$a]['id']?>" name="promobox_<?php echo $stream[$a]['id']?>" value="" type="checkbox">
+                                                        <label for="promobox_<?php echo $stream[$a]['id']?>">Show this provider in top promobox</label>
+                                                </div>
+                                                <div class="form-group checkbox-field span-left is-required checkbox custom-checkbox">
+                                                    <input id="Disclaimer_<?php echo $stream[$a]['id']?>" name="Disclaimer_<?php echo $stream[$a]['id']?>" value="" type="checkbox">
+                                                    <label for="Disclaimer_<?php echo $stream[$a]['id']?>">Disclaimer</label>
+                                                </div>
+                                                <div class="form-group checkbox-field span-left is-required checkbox custom-checkbox">
+                                                    <input id="Showsponsored_<?php echo $stream[$a]['id']?>" name="Showsponsored_<?php echo $stream[$a]['id']?>" value="" type="checkbox">
+                                                    <label for="Showsponsored_<?php echo $stream[$a]['id']?>">Show 'sponsored'</label>
+                                                </div>
+
+                                                <div class="form-group text-field span-full is-required  ">
+                                                    <label>Price</label>
+                                                    <input type="text" id="Price_<?php echo $stream[$a]['id']?>" name="Price_<?php echo $stream[$a]['id']?>" value=" " class="form-control"/>
+                                                </div>
+                                                <div class="form-group text-field span-full is-required  ">
+                                                    <label>Video Quality</label>
+                                                    <input type="text" id="Quality_<?php echo $stream[$a]['id']?>" name="Quality_<?php echo $stream[$a]['id']?>" value="  " class="form-control"/>
+                                                </div>
+                                                <div class="form-group text-field span-full is-required  ">
+                                                    <label>Rating</label>
+                                                    <input type="text" id="Rating_<?php echo $stream[$a]['id']?>" name="Rating_<?php echo $stream[$a]['id']?>" value=" " class="form-control"/>
+                                                </div>
+
+                                                <div class="form-group text-field span-full is-required hidden">
+                                                    <label>Heading</label>
+                                                    <input type="text" id="id_<?php echo $stream[$a]['id']?>" name="Stream_id_<?php echo $stream[$a]['id']?>" value="<?php echo $stream[$a]['id']?> " class="form-control"/>
+                                                </div>
+                                                <div class="form-group text-field span-full is-required">
+                                                    <label>Heading</label>
+                                                    <input type="text" id="Stream_Heading_<?php echo $stream[$a]['id']?>" name="Stream_Heading_<?php echo $stream[$a]['id']?>" value=" " class="form-control"/>
+                                                </div>
+                                                <div class="form-group text-field span-full is-required">
+                                                    <label>Aff. Link</label>
+                                                    <input type="text" id="Stream_Aff_<?php echo $stream[$a]['id']?>" name="Stream_Aff_<?php echo $stream[$a]['id']?>" value=" " class="form-control"/>
+                                                </div>
+                                                <div class="form-group text-field span-full is-required">
+                                                    <label>Content</label>
+                                                    <input type="text" id="Stream_Content_<?php echo $stream[$a]['id']?>" name="Stream_Content_<?php echo $stream[$a]['id']?>" value=" " class="form-control"/>
+                                                </div>
+                                                <div class="form-group text-field span-full is-required">
+                                                    <label>Sort Order</label>
+                                                    <input type="text" id="Stream_Sort_<?php echo $stream[$a]['id']?>" name="Stream_Sort_<?php echo $stream[$a]['id']?>" value=" " class="form-control"/>
+                                                </div>
+
+                                                <div class="form-group text-field span-full is-required">
+                                                    <h3>Icons Section</h3>
+                                                    <label>Icon 1</label>
+                                                    <input type="text" id="Stream_Icon1_<?php echo $stream[$a]['id']?>" name="Stream_Icon1_<?php echo $stream[$a]['id']?>" value="" class="form-control"/>
+                                                </div>
+                                                <div class="form-group text-field span-full is-required">
+                                                    <label>Icon 2</label>
+                                                    <input type="text" id="Stream_Icon2_<?php echo $stream[$a]['id']?>" name="Stream_Icon2_<?php echo $stream[$a]['id']?>" value=" " class="form-control"/>
+                                                </div>
+                                                <div class="form-group text-field span-full is-required">
+                                                    <label>Icon 3</label>
+                                                    <input type="text" id="Stream_Icon3_<?php echo $stream[$a]['id']?>" name="Stream_Icon3_<?php echo $stream[$a]['id']?>" value=" " class="form-control"/>
+                                                </div>
+
+                                                <div class="form-group text-field span-full is-required">
+                                                    <h3>Buttons Section</h3>
+                                                    <label>Phrase Text</label>
+                                                    <input type="text" id="Stream_Phrase_<?php echo $stream[$a]['id']?>" name="Stream_Phrase_<?php echo $stream[$a]['id']?>" value=" " class="form-control"/>
+                                                </div>
+                                                <div class="form-group text-field span-full is-required">
+                                                    <label>Button Text</label>
+                                                    <input type="text" id="Stream_ButtonText_<?php echo $stream[$a]['id']?>" name="Stream_ButtonText_<?php echo $stream[$a]['id']?>" value=" " class="form-control"/>
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                    <?php } ?>
+                                <?php } ?>
+                            </div>
+                        </div>
+                    </divsty>
+
+                    <div class="modal-footer">
+                        <div id="url_view" class="pull-left"></div>
+                        <div class="pull-right">
+                            <button type="button" class="btn btn-warning" data-dismiss="modal">Close</button>
+                            <button type="button" id="save_landing_Page" class="btn btn-primary">Save changes</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            </div>
+            </div>
+        <!--Restrictions Page editor-->
+        <div class="control-popup modal fade" id="restrictions" static tabindex="-1" role="dialog">
+            <div class="modal-dialog modal-xs">
+                <div class="modal-content" style="padding-bottom: 20px">
+
+                    <div class="modal-header modal-header_info">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                        <h4 class="modal-title" id="rest_str_stream">Landing Page editor</h4>
+                    </div>
+
+                    <div class="modal-body text-left" id="modal_body_rest_stream">
+                        <table class="table data" data-control="rowlink" id="str_pro">
+                            <thead>
+                            <tr class="th_list">
+                                <th class=""><span>Enable</span></th>
+                                <th class=""><span>Stream Providers</span></th>
+                            </tr>
+                            </thead>
+                            <tbody id="qtbody_list">
+
+                        </tbody>
+                        </table>
+
+
+                    </div>
+
+                    <div class="modal-footer">
+                            <div class="pull-right">
+                                <button type="button" class="btn btn-warning" data-dismiss="modal">Close</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!--Stream providers ConfProvider(Events)-->
+        <div class="control-popup modal fade" id="ConfProvider" static tabindex="-1" role="dialog">
+        <div class="modal-dialog modal-md">
+            <div class="modal-content" style="padding-bottom: 20px">
+
+                <div class="modal-header modal-header_info">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <h4 class="modal-title" id="conf_str_stream">Conf Stream Provider by Events</h4>
+                </div>
+
+                <div class="modal-body" id="ConfProvider_stream">
+
+                    <div class="control-list list-unresponsive">
+                        <table class="table data" data-control="rowlink">
+                            <thead>
+                            <tr>
+                                <th style="width:30% "><span style="color: black;">Active Promo Box</span></th>
+                                <th style="width:70% "><span style="color: black;">Published</span></th>
+
+
+                            </tr>
+                            </thead>
+                            <tbody id="ConfProvider_body">
+                                <?php for($a=0; $a< count($stream); $a++ ){ ?>
+                                <?php if ($stream[$a]['active']== 1){ ?>
+                                <tr>
+                                <td>
+                                    <div class="form-group checkbox-field span-left is-required">
+                                        <div class="checkbox custom-checkbox">
+                                            <input name="checkbox" value="1" type="checkbox" id="activepromo_<?php echo $stream[$a]['id']?>">
+                                            <label for="activepromo_<?php echo $stream[$a]['id']?>"></label>
+                                        </div>
+                                    </div>
+                                </td>
+                                    <td>
+                                        <div class="form-group checkbox-field span-left is-required">
+                                    <div class="checkbox custom-checkbox">
+                                        <input name="checkbox" value="1" type="checkbox" id="conf_<?php echo $stream[$a]['id']?>">
+                                        <label for="conf_<?php echo $stream[$a]['id']?>"><?php echo $stream[$a]['name']?></label>
+                                    </div>
+                                </div>
+                                    </td>
+
+                                </tr>
+                                <?php } ?>
+                                <?php } ?>
+                            </tbody>
+                        </table>
+                </div>
+
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <!--Loaders-->
+    <div class="control-popup modal fade" id="Loaders" static tabindex="-1" role="dialog">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content" style="background:transparent;">
+                <div class="modal-body text-center" >
+                    <img style="margin-top: 30%" src="/plugins/rebelpenguin/events/assets/imgs/ajax-loader.gif">
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+
+
+
+            <!-------------------------------------------------------Ventanas de eventos-------------------------------------------------!>
+               <!--Succes-->
+        <div class="control-popup modal fade" id="editsport" tabindex="-1" role="dialog">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header modal-header_succes">Edit Global Color</div>
+                <div class="modal-body" id="modal_editsport">
+                    <div  style="margin: 5px;padding: 10px;border: 1px solid #fff; color: #000">
+                        <form class="form-elements" role="form">
+                            <div class="form-group span-full">
+                                <label>Sport Name</label>
+                                <input type="text" name="" id="sport_name" disabled value="" class="form-control"/>
+                            </div>
+                            <div class="form-group span-full">
+                                <label>Main Color</label>
+                                <input type="text" name="" id="sport_color" value="" class="form-control"/>
+                            </div>
+                            <div class="form-group span-full hidden">
+                                <label>id</label>
+                                <input type="text" name="" value="" id="sport_id" class="hidden form-control"/>
+                            </div>
+                            <div class="btn btn-default" id="sport_save">Save</div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <?php endif ?>

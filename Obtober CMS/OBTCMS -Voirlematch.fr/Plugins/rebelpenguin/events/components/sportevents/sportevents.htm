@@ -1,0 +1,488 @@
+
+{% for conf in confs %}
+<style>
+.pagination>.active>a, .pagination>.active>a:focus, .pagination>.active>a:hover, .pagination>.active>span, .pagination>.active>span:focus, .pagination>.active>span:hover {
+    z-index: 2;
+    color: #fff;
+    cursor: default;
+    background-color: rgb(51, 183, 116);
+    border-color: #33B766;
+}
+.headblog{
+	background:#EEEEEE;
+	padding-top: 30px;
+	border:1px;
+	padding-bottom: 25px;
+	padding-left: 5px;
+	padding-right: 5px;
+	margin-bottom: 20px;
+	border-radius:2px;
+}
+.pagination>li>a, .pagination>li>span {
+    position: relative;
+    float: left;
+    padding: 6px 12px;
+    margin-left: -1px;
+    line-height: 1.42857143;
+    color: #2fc989;
+    text-decoration: none;
+    background-color: #fff;
+    border: 1px solid #ddd;
+}
+.pad_bo{
+	margin-bottom: 20px;
+}
+.padd_bott{padding-top:30px}
+.carousel-fade .carousel-inner .item {
+            -webkit-transition-property: opacity;
+            transition-property: opacity;
+        }
+.carousel-fade .carousel-inner .item,
+.carousel-fade .carousel-inner .active.left,
+.carousel-fade .carousel-inner .active.right {
+            opacity: 0;
+        }
+.carousel-fade .carousel-inner .active,
+.carousel-fade .carousel-inner .next.left,
+.carousel-fade .carousel-inner .prev.right {
+            opacity: 1;
+        }
+.carousel-fade .carousel-inner .next,
+.carousel-fade .carousel-inner .prev,
+.carousel-fade .carousel-inner .active.left,
+.carousel-fade .carousel-inner .active.right {
+            left: 0;
+            -webkit-transform: translate3d(0, 0, 0);
+            transform: translate3d(0, 0, 0);
+        }
+.carousel-fade .carousel-control {
+            z-index: 2;
+        }
+.mdcaptions{
+    margin-bottom: 10px
+}
+.vip .readmore-watchlive div.watchlive {
+    background: #{{conf.color}};
+}
+a{
+    color: #{{conf.color}};
+}
+
+</style>
+
+    {% if conf.Layout == 'New' %}
+        {% if conf.items > 0 %}
+        <section class="container padding-top">
+            <div class="heading-border">
+                <h3>{{ conf.head }}<span> {{ conf.SubHead }}</span></h3>
+            </div>
+            <div class="row" style="min-height: 15px">
+            {% for event in events %}
+                {% if  event.error != '1'%}
+                    {% if  event.vip_article == '1' %}
+                       <div id="panel_{{event.id}}" class="col-sm-12 col-md-4 col-lg-4 flexColumn color-sm vip">
+                                    <div class="row half-col-tablet-field" style="padding-top:30px;position:relative">
+                                        <div class="imgs">
+                                            <img class="field" src="/plugins/rebelpenguin/events/assets/imgs/ground-small.png" alt="soccer field" />
+                                            <img class="img_regular left" src="{{event.home_team_logo }}" >
+                                            <!---<div class="vs"><p>vs</p></div>--->
+                                            <img class="img_regular right" src="{{event.away_team_logo }}" >
+                                        </div>
+                                    </div>
+                                    <div class="panel panel-default half-col-tablet" style=";border-radius:0 0 3px 3px; margin-left: 5px">
+                                    <div class="plgpanel">
+                                        <div class="plgpanel_body">
+                                            <div class="row text-left" >
+                                                {%if event.artic_name == ''%}
+                                                <b class="mdcaptions"> {{event.home_team |md}} vs {{ event.away_team |md}} </b>
+                                                {% else %}
+                                                <b>{{ event.artic_name|md}} </b>
+                                                {% endif %}
+
+                                                <br>{{ event.date }} / {{ event.date_h }}<br>
+                                                {%if event.caption == ''%}
+                                                <b class="mdcaptions">
+                                                    {{event.home_team |md}} - {{ event.away_team |md}} se deroulera le {{ event.date }}
+                                                    a  {{ event.date_h }} - Reagradez ce match de la  {{ event.liga }} en cliquant ci-dessous.
+                                                </b>
+                                                {% else %}
+                                                {{event.caption |md}}
+                                                {% endif %}
+
+                                            </div>
+                                            <div class="readmore-watchlive">
+
+                                                {% if  event.article_body != ''%}
+                                                <div>
+                                                 <a href="{{conf.Link}}/:general" role="button">Lire Revue</a>
+                                                </div>
+                                                {% endif %}
+
+                                                <div class="watchlive pull-right">
+                                                    <a id="Online_{{event.id}}" href="/{{conf.sport}}/:{{event.url_free}}" role="button">
+                                                       Voir le match <i style="margin-left:5px;" class="fa fa-arrow-circle-o-right"></i>
+                                                    </a>
+                                                </div>
+                                           </div><!--readmore-watchlive-->
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                    {% else %}
+                       <div id="panel_{{event.id}}" class="col-sm-12 col-md-4 col-lg-4 flexColumn color-sm">
+                                    <div class="row half-col-tablet-field" style="padding-top:30px;position:relative">
+                                        <div class="imgs">
+
+                                            <img class="field" src="/plugins/rebelpenguin/events/assets/imgs/ground-small.png" alt="soccer field" />
+                                            <img class="img_regular left" src="{{event.home_team_logo }}" >
+
+                                            <!---<div class="vs"><p>vs</p></div>--->
+
+                                            <img class="img_regular right" src="{{event.away_team_logo }}" >
+
+                                        </div>
+                                    </div>
+                                    <div class="panel panel-default half-col-tablet" style="border-radius: 0 0 3px 3px; margin-left: 5px">
+                                        <div class="plgpanel">
+                                            <div class="plgpanel_body">
+                                                <div class="row text-left" >
+                                                    {%if event.artic_name == ''%}
+                                                    <b class="mdcaptions"> {{event.home_team |md}} vs {{ event.away_team |md}} </b>
+                                                    {% else %}
+                                                    <b>{{ event.artic_name|md}} </b>
+                                                    {% endif %}
+
+                                                    <br>{{ event.date }} / {{ event.date_h }}
+                                                    {%if event.caption == ''%}
+                                                    <b class="mdcaptions">
+                                                        {{event.home_team |md}} - {{ event.away_team |md}} se deroulera le {{ event.date }}
+                                                        a  {{ event.date_h }} - Reagradez ce match de la  {{ event.liga }} en cliquant ci-dessous.
+                                                    </b>
+                                                    {% else %}
+                                                    {{event.caption |md}}
+                                                    {% endif %}
+                                                </div>
+                                                <div class="readmore-watchlive">
+                                                    {% if  event.article_body != ''%}
+                                                    <div>
+                                                     <a href="{{conf.Link}}/:general" role="button">Lire Revue</a>
+                                                    </div>
+                                                    {% endif %}
+                                                    <div class="watchlive pull-right">
+                                                        <a id="Online_{{event.id}}" href="/{{conf.sport}}/:{{event.url_free}}" role="button">
+                                                           Voir le match <i style="margin-left:5px;" class="fa fa-arrow-circle-o-right"></i>
+                                                        </a>
+                                                    </div>
+                                               </div><!--readmore-watchlive-->
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                    {% endif %}
+                {% else %}
+                    <div class="alert alert-info"> This match no have information yet, be the first at writter </div>
+                {% endif %}
+          {% endfor %}
+        </div>
+        </section>
+        {% endif %}
+
+    {% endif %}
+
+    {% if conf.Layout == 'Blog' %}
+        <div class="heading-border">
+            <h3>{{ conf.head }}<span> {{ conf.SubHead }}</span></h3>
+            <div style="float: right">
+                <a href="#blogcarousel" role="button" data-slide="prev">
+                    <i class="fa fa-2x fa-chevron-circle-left"> </i>
+                </a>
+                <a href="#blogcarousel" role="button" data-slide="next">
+                    <i class="fa fa-2x fa-chevron-circle-right"> </i>
+                </a>
+            </div>
+        </div>
+        <div class="row clearfix ">
+            <div id="blogcarousel" class="carousel slide carousel-fade" data-ride="carousel">
+                 <div class="carousel-inner" role="listbox" style="color: red;">
+                {% for i in 0 .. conf.bloc%}
+                    {% if  i == 0 %}
+                        <div class="item active">
+                    {% else %}
+                            <div class="item">
+                    {% endif %}
+                         {% for event in events %}
+                            {% if  i == event.page %}
+                                    {% if  event.error != '1'%}
+                                        {% if  event.inicio == 'true' %}
+                                            <div class="col-lg-offset-1 col-lg-10 col-xs-12 headblog">
+                                              <div class="col-lg-4 col-md-offset-1 padd_bott">
+                                                  <div class="pad_bo imgs">
+                                                      <img class="field" src="/plugins/rebelpenguin/events/assets/imgs/ground-small.png" alt="soccer field" />
+                                                      <img class="img_regular left" src="{{event.home_team_logo }}" >
+                                                      <img class="img_regular right" src="{{event.away_team_logo }}" >
+                                                  </div>
+                                              </div>
+                                              <div class="col-lg-6">
+                                                <div class="text-left">
+                                                    <h4 class="mdheadstream"> {{ event.home_team |md}} - {{ event.away_team |md}}</h4>
+                                                    <p>{{event.date }}</p>
+                                                    {%if event.caption == ''%}
+                                                    <b class="mdcaptions">
+                                                        {{event.home_team |md}} - {{ event.away_team |md}} se deroulera le {{ event.date }}
+                                                        a  {{ event.date_h }} - Reagradez ce match de la  {{ event.liga }} en cliquant ci-dessous.
+                                                    </b>
+                                                    {% else %}
+                                                    {{event.caption |md}}
+                                                    {% endif %}
+                                                    <div class="watchlive">
+                                                        <a class="btn" style="background: #{{conf.color}};" id="Online_{{event.id}}" href="{{conf.Link}}/:general" role="button">
+                                                            Lire Revue<i style="margin-left:5px;" class="fa fa-arrow-circle-o-right"></i>
+                                                        </a>
+
+                                                        <a class="btn btn-default" id="Online_{{event.id}}" href="/{{conf.sport}}/:{{event.url_free}}" role="button">
+                                                            Voir le match <i style="margin-left:5px;" class="fa fa-arrow-circle-o-right"></i>
+                                                        </a>
+                                                    </div>
+
+                                                </div>
+                                            </div>
+                                            </div>
+                                        {% else %}
+                                            {% if  event.vip_article == '1' %}
+                                                <div id="panel_{{event.id}}" class="pad_bo col-sm-12 col-md-4 col-lg-4 flexColumn1 color-sm vip">
+                                                  <div class="row half-col-tablet-field" style="padding-top:30px;position:relative">
+                                                    <div class="imgs">
+                                                      <img class="field" src="/plugins/rebelpenguin/events/assets/imgs/ground-small.png" alt="soccer field" />
+                                                      <img class="img_regular left" src="{{event.home_team_logo }}" >
+                                                      <!---<div class="vs"><p>vs</p></div>--->
+                                                      <img class="img_regular right" src="{{event.away_team_logo }}" >
+                                                    </div>
+                                                  </div>
+                                                  <div class="panel panel-default half-col-tablet" style=";border-radius:0 0 3px 3px; margin-left: 5px">
+                                                    <div class="plgpanel">
+                                                      <div class="plgpanel_body">
+                                                          <div class="row text-left" >
+                                                              <b class="mdcaptions">{{ event.artic_name |md}}</b>
+                                                              <br> <br>d.{{ event.date }}&nbsp;/ {{ event.date_h }}<br>
+                                                              {%if event.caption == ''%}
+                                                              <b class="mdcaptions">
+                                                                  {{event.home_team |md}} - {{ event.away_team |md}} se deroulera le {{ event.date }}
+                                                                  a  {{ event.date_h }} - Reagradez ce match de la  {{ event.liga }} en cliquant ci-dessous.
+                                                              </b>
+                                                              {% else %}
+                                                              {{event.caption |md}}
+                                                              {% endif %}
+                                                          </div>
+                                                          <div class="readmore-watchlive">
+                                                              <div>
+                                                                  <a href="{{conf.Link}}/:general" role="button">Lire Revue</a>
+                                                              </div>
+
+                                                              <div class="watchlive">
+                                                                  <a id="Online_{{event.id}}" href="/{{conf.sport}}/:{{event.url_free}}" role="button">
+                                                                      Voir le match <i style="margin-left:5px;" class="fa fa-arrow-circle-o-right"></i>
+                                                                  </a>
+                                                              </div>
+                                                          </div><!--readmore-watchlive-->
+
+                                                      </div>
+                                                  </div>
+                                                  </div>
+                                                </div>
+                                            {% else %}
+                                                <div id="panel_{{event.id}}" class="pad_bo col-sm-12 col-md-4 col-lg-4 flexColumn1 color-sm">
+                                                  <div class="row half-col-tablet-field" style="padding-top:30px;position:relative">
+                                                  <div class="imgs">
+
+                                                      <img class="field" src="/plugins/rebelpenguin/events/assets/imgs/ground-small.png" alt="soccer field" />
+                                                      <img class="img_regular left" src="{{event.home_team_logo }}" >
+
+                                                      <!---<div class="vs"><p>vs</p></div>--->
+
+                                                      <img class="img_regular right" src="{{event.away_team_logo }}" >
+
+                                                  </div>
+                                                  </div>
+                                                  <div class="panel panel-default half-col-tablet" style="border-radius: 0 0 3px 3px; margin-left: 5px">
+                                                    <div class="plgpanel">
+                                                      <div class="plgpanel_body">
+                                                          <div class="row text-left" >
+                                                              <b class="mdcaptions">{{ event.artic_name |md}}</b>
+                                                              <br>d.{{ event.date }}&nbsp;;/ {{ event.date_h }}<br>
+                                                              {%if event.caption == ''%}
+                                                              <b class="mdcaptions">
+                                                                  {{event.home_team |md}} - {{ event.away_team |md}} se deroulera le {{ event.date }}
+                                                                  a  {{ event.date_h }} - Reagradez ce match de la  {{ event.liga }} en cliquant ci-dessous.
+                                                              </b>
+                                                              {% else %}
+                                                              {{event.caption |md}}
+                                                              {% endif %}
+                                                          </div>
+                                                          <div class="readmore-watchlive">
+                                                              <div>
+                                                                  <a href="{{conf.Link}}/:general" role="button">Lire Revue</a>
+                                                              </div>
+
+                                                              <div class="watchlive">
+                                                                  <a id="Online_{{event.id}}" href="/{{conf.sport}}/:{{event.url_free}}" role="button">
+                                                                      Voir le match <i style="margin-left:5px;" class="fa fa-arrow-circle-o-right"></i>
+                                                                  </a>
+                                                              </div>
+                                                          </div><!--readmore-watchlive-->
+
+                                                      </div>
+                                                  </div>
+                                                  </div>
+                                                </div>
+                                            {% endif %}
+                                        {% endif %}
+                                    {% else %}
+                                        <div class="alert alert-info"> This match no have information yet, be the first at writter </div>
+                                    {% endif %}
+                            {% endif %}
+                        {% endfor %}
+                    </div>
+                {% endfor %}
+            </div>
+          </div>
+        </div>
+        </div>
+    {% endif %}
+
+
+    {% if conf.Layout == 'Clasic' %}
+        {% if conf.items > 0 %}
+            <div class="heading-border">
+                <h3>{{ conf.head }}<span> {{ conf.SubHead }}</span></h3>
+            </div>
+            <div class="row">
+            {% for event in events %}
+                {% if  event.error != '1' %}
+                        {% if  event.vip_article == '1' %}
+                            <div id="panel_{{event.id}}" class="col-sm-12 col-md-6 col-lg-4 flexColumn ">
+                                               <span id="shearch_btn_{{event.id}}" type="link" class="btn btn-danger_ shearch_btn_ative">
+                                                 <b style="margin: 10px" class=" fa-3x">vs</b>
+                                                 </span>
+                            <div class="panel panel-default ">
+                                <div class="plgpanel">
+                                    <div class="plgpanel_head plgpanel_head_vip">
+                                        <span class="pull-left col-sm-5 text-left"><strong> {{conf.Layout}} {{ event.home_team}}</strong></span>
+                                        <span class="pull-right col-sm-offset-2 col-sm-5 text-right"><strong>{{event.away_team}}</strong></span>
+                                    </div>
+                                    <div class="plgpanel_body" style="background: rgba(253, 253, 255, 0.50);">
+                                        <div class="row">
+                                            <div class="imgs" style="margin-bottom: 25px">
+                                                <div class="col-xs-5">
+                                                    <img class="img_vip" src="{{event.home_team_logo }}" >
+                                                </div>
+                                                <div class="col-xs-2">
+
+                                                </div>
+                                                <div class="col-xs-5 ">
+                                                    <img class="img_vip" src="{{event.away_team_logo }}" >
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="ground-small"></div>
+                                            <p><b>{{ event.date }}</b></p>
+                                        </div>
+                                        <hr>
+                                        <div class="row text-left" style="margin:25px ">
+                                            <p><b>{{ event.artic_name }}</b></p>
+                                            <p><b>{{ event.date_h }}</b></p>
+                                            {%if event.caption == ''%}
+                                            <b class="mdcaptions">
+                                                {{event.home_team |md}} - {{ event.away_team |md}} se deroulera le {{ event.date }}
+                                                a  {{ event.date_h }} - Reagradez ce match de la  {{ event.liga }} en cliquant ci-dessous.
+                                            </b>
+                                            {% else %}
+                                            <p><b>{{event.caption |md}}</b></p>
+                                            {% endif %}
+                                        </div>
+                                        <a href="/{{conf.sport}}/:{{event.url_free}}">Læs hele artiklen her <i class="fa fa-angle-double-right "></i></a>
+                                        <hr>
+                                        <div class="row tv_guide">
+                                            <form class="">
+                                                <a class="btn_a btn btn-default btn-lg" id="TV_{{event.id}}" href="/{{conf.sport}}/:{{event.url_free}}" role="button">
+                                                    <i class="fa fa-desktop fa-1x"></i> Se TV-guide
+                                                </a>
+                                                <a class="animated infinite tada btn btn-danger_ btn-lg" id="Online_{{event.id}}" href="/{{conf.sport}}/:{{event.url_free}}" role="button">
+                                                    <i class="fa fa-chevron-circle-right "></i> Se TV-guide </a>
+                                            </form>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        {% else %}
+                            <div id="panel_{{event.id}}" class="col-sm-12 col-md-6 col-lg-4 flexColumn ">
+                                               <span id="shearch_btn_ {event.id}}" type="link" class="btn   shearch_btn_ative btn-success_">
+                                                 <b style="margin: 10px" class=" fa-3x">vs</b>
+                                                 </span>
+                            <div class="panel panel-default ">
+                                <div class="plgpanel">
+                                    <div class="plgpanel_head">
+                                        <span class="pull-left col-sm-5 text-left"><strong>{{ event.home_team  }}</strong></span>
+                                        <span class="pull-right col-sm-offset-2 col-sm-5 text-right"><strong>{{event.away_team}}</strong></span>
+                                    </div>
+                                    <div class="plgpanel_body" style="background: rgba(253, 253, 255, 0.50);">
+                                        <div class="row">
+                                            <div class="imgs" style="margin-bottom: 25px">
+                                                <div class="col-xs-5">
+                                                    <img class="img_regular" src="{{event.home_team_logo }}" >
+                                                </div>
+                                                <div class="col-xs-2"></div>
+                                                <div class="col-xs-5 ">
+                                                    <img class="img_regular" src="{{event.away_team_logo }}" >
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="ground-small"></div>
+                                            <p><b>{{ event.date }}</b></p>
+                                        </div>
+                                        <hr>
+                                        <div class="row text-left" style="margin:25px ">
+                                            <p><b>{{ event.artic_name }}</b></p>
+                                            <p><b>{{ event.date_h }}</b></p>
+                                            {%if event.caption == ''%}
+                                            <b class="mdcaptions">
+                                                {{event.home_team |md}} - {{ event.away_team |md}} se deroulera le {{ event.date }}
+                                                a  {{ event.date_h }} - Reagradez ce match de la  {{ event.liga }} en cliquant ci-dessous.
+                                            </b>
+                                            {% else %}
+                                            <p><b>{{event.caption |md}}</b></p>
+                                            {% endif %}
+                                        </div>
+                                        <a href="/{{conf.sport}}/:{{event.url_free}}">Læs hele artiklen her <i class="fa fa-angle-double-right "></i></a>
+                                        <hr>
+                                        <div class="row tv_guide">
+                                            <form class="">
+
+                                                <a class="btn_a btn btn-default btn-lg" id="TV_{{event.id}}" href="/{{conf.sport}}/:{{event.url_free}}" role="button">
+                                                    <i class="fa fa-desktop fa-1x"></i> Se TV-guide
+                                                </a>
+
+                                                <a class="btn btn-success_ btn-lg" id="Online_{{event.id}}" href="/{{conf.sport}}/:{{event.url_free}}" role="button">
+                                                    <i class="fa fa-chevron-circle-right "></i> Se TV-guide
+                                                </a>
+                                            </form>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        {% endif %}
+                {% else %}
+                    <div style="margin-bottom: 70px" class="alert alert-info"> This match no have information yet, be the first at writter </div>
+                {% endif %}
+            {% endfor %}
+        </div>
+        {% endif %}
+    {% endif %}
+{% endfor %}

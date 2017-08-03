@@ -1,0 +1,28 @@
+title = "TennisHome"
+url = "/Tennis"
+layout = "ly_Tennis/home"
+description = "sport"
+is_hidden = 0
+meta_title = "Regardez votre match de tennis içi | Voirlematch.fr"
+meta_description = "Vous cherchez à voir du tennis en streaming gratuitement et légalement? Trouvez tout les matchs de tennis disponibles en streaming sur Voirlematch.fr."
+
+[Rebelpenguin\Events\Components\Events Events]
+max = 0
+Layout = "IndexTables"
+Sport = "a0ddc52a-69fb-11e4-85c8-5254005a5aa0"
+Head = "Calendrier"
+SubHead = "– Matchs disponibles"
+
+[Rebelpenguin\Events\Components\GeneralStream GeneralStream]
+max = 10
+Layout = "TABLE"
+Sport = "a0ddc52a-69fb-11e4-85c8-5254005a5aa0"
+Head = "Choisissez votre site de streaming"
+Link = "/revue-streaming"
+==
+<section class="nontop container-fluid" style="background: #fff;">
+{% component 'Events' %}
+<section class="container">
+	{% component 'GeneralStream' %}
+</section>
+</section>

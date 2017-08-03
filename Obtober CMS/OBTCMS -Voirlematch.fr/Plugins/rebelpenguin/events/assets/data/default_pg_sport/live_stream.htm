@@ -1,0 +1,84 @@
+title = "fodbold_live_stream"
+url = "/fodbold/fodbold_live_stream/"
+layout = "ly_fodbold/selive"
+is_hidden = 0
+
+[StreamUdbyder]
+max = 10
+Layout = "TABLE"
+Sport = "a0c77e28-69fb-11e4-85c8-5254005a5aa0"
+==
+<?php
+use Rebelpenguin\Events\Classes\template;
+    function onStart()
+    {
+        $name = "Fodbold";
+        $id_fb = ['aa','id_march'];
+         
+        $stream_prov = template::sportlivestream($name,$id_fb);
+        $this['dataEvent'] = $stream_prov;
+       
+        $streams = template::landingpage_stream();
+        $this['streams'] = $streams;
+    }
+?>
+==
+
+
+    <div class="top-container container" style="background:rgba(0,0,0,0.7);">
+            <div class="row">
+                 <div class="col-sm-7 text-left">
+                    <h1 class="white"><span>Hvor kan jeg </span>live streame fodbold?</h1>
+                    <p class="white">Vi har samlet de bedste udbydere af live fodbold, som viser kampe fra de store internationale og europæiske ligaer, landskampe og meget mere...</p>
+                </div>
+                 <div class="col-sm-5 text-center ">
+                     <h4 class="white"><span>Udvalgte kampe</span><br/></h4>  
+                    <div id="carousel-example-generic" class="carousel slide" data-ride="carousel" >
+                        <div class="ground-small_general"></div>
+                        <div class="carousel-inner" role="listbox">
+                            {% for dataEvent in dataEvent %}
+                            {% if loop.index==1 %}
+                                <div class="item active" id="{{dataEvent.url_free }}">
+                                    <div class="col-xs-12" style="padding-top: 20px">
+                                       <div class="text-center text-event fontLivesHead" >{{ dataEvent.home_team }} vs {{ dataEvent.away_team }}</div>
+                                       <div class="text-center fontLivesFooter text-event "><b>D. {{dataEvent.date_D }}  Kl. {{dataEvent.date_H }}</b></div>
+                                    </div>
+
+                                    <div class="col-xs-offset-2 col-xs-3">
+                                        <img class="pull-right img_regular_fb" src="{{dataEvent.home_team_logo }}">
+                                    </div>
+
+                                    <div class="col-xs-offset-2 col-xs-3">
+                                        <img class=" pull-left img_regular_fb" src="{{dataEvent.away_team_logo }}">
+                                    </div>
+                                </div>
+                            {% else%}
+                                <div class="item" id="{{dataEvent.url_free }}">
+
+                                     <div class="col-xs-12" style="padding-top: 20px">
+                                        <div class="text-center text-event fontLivesHead" >{{ dataEvent.home_team }} vs {{ dataEvent.away_team }}</div>
+                                        <div class="text-center fontLivesFooter text-event"><b>D. {{dataEvent.date_D }}  Kl. {{dataEvent.date_H }}</b></div>
+                                    </div>
+
+                                    <div class="col-xs-offset-2 col-xs-3">
+                                        <img class=" pull-right img_regular_fb" src="{{dataEvent.home_team_logo }}">
+                                    </div>
+                                    <div class="col-xs-offset-2 col-xs-3 text-left">
+                                        <img class="pull-left img_regular_fb" src="{{dataEvent.away_team_logo }}">
+                                    </div>
+                                </div>
+                            {% endif %}
+                            {% endfor %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </header>
+</div><!--container_fluid-->
+
+
+<div class="container">
+  {% component 'StreamUdbyder' %}
+</div>

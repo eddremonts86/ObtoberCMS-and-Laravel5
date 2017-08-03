@@ -1,0 +1,20 @@
+description = "sport_menu"
+
+[viewBag]
+==
+<?php
+use Rebelpenguin\Events\Classes\template;
+    function onStart()
+    {
+      $sports = template::sport_name();
+      $this['sports'] = $sports;
+    }
+?>
+==
+<nav id="menu_id"role="navigation" class="nav nocollapse menu">
+    <ul class="nav nav-pills pull-right hidden-xs" role="menubar" style="color:#fff">
+        {% for sport in sports %}
+            <li id="id_{{sport.name}}" class="green"><a href="/{{sport.name}}"style="color:rgba(255,255,255,.4);">{{sport.realname}}</a></li>
+        {% endfor %}
+    </ul>
+</nav>

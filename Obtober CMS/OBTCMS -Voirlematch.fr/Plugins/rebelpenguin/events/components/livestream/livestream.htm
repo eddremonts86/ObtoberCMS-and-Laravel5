@@ -1,0 +1,156 @@
+<!----------------------------------Layaut para retornar "Table" --------------------------------->
+{% for conf in conf %}
+    <style>
+
+    </style>
+  {% if  conf.Layout == 'TABLE'%}
+      <div class="row" style="padding:0 10px">
+            <div class="bs-example bs-example-tabs" data-example-id="togglable-tabs">
+            <ul id="myTabs" class="nav nav-tabs float-nav" role="tablist">
+                {% for sport in sports %}
+                {% if loop.index == '1' %}
+                    <li style="width: 150px !important; ;background:#{{sport.color}}; border: 2px solid #{{sport.color}}" role="presentation" class="active">
+                    <a href="#{{sport.id_sport}}" id="home-tab" role="tab" data-toggle="tab" aria-controls="home" aria-expanded="true">
+                        <img alt="tennis-big" width="30px" height="30px" src="/storage/app/media/General/football-ball-big.png">
+                        {{sport.name}}</a>
+                </li>
+                {% else %}
+                    <li style="width: 150px !important;background:#{{sport.color}}; border: 2px solid #{{sport.color}}" role="presentation" class="">
+                    <a href="#{{sport.id_sport}}" role="tab" id="profile-tab" data-toggle="tab" aria-controls="profile" aria-expanded="false">
+                        <img alt="tennis-big" width="30px" height="30px" src="/storage/app/media/General/tennis-big.png">
+                        {{sport.name}}</a>
+                </li>
+                {% endif %}
+                {% endfor %}
+            </ul>
+            <div id="myTabContent" class="tab-content" style="margin-top:-10px;">
+                {% for sport in sports %}
+                    {% if loop.index == '1' %}
+                    <div role="tabpanel" class="tab-pane fade active in" id="{{sport.id_sport}}" aria-labelledby="home-tab">
+                        <div class="bs-example" data-example-id="bordered-table">
+                            <table class="table table-bordered table-hover" style="margin-top: 10px">
+                                <thead  style="font-size: 20px; background:#{{sport.color}}; color: #fff; border: 2px solid #{{sport.color}}">
+                                <tr >
+                                    <th style="border: 2px solid #{{sport.color}}" class="text-center">Horaire</th>
+                                    <th style="border: 2px solid #{{sport.color}}" class="text-center">Match</th>
+                                    <th style="border: 2px solid #{{sport.color}}" class="text-center hidden-xs hidden-sm">Ligues</th>
+                                    <th style="border: 2px solid #{{sport.color}}" class="text-center hidden-xs hidden-sm">Fournisseurs</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                {% for event in events %}
+                                {% if event.sport == sport.name%}
+                                <tr onclick="document.location = '/{{sport.name}}/:{{event.url_free}}';"  >
+                                    <td class="text-center">{{ event.date_hour}}</td>
+                                    <td class="text-left">{{ event.name}}</td>
+                                    <td class="text-left hidden-xs hidden-sm">{{ event.tournament}}</td>
+                                    <td class="text-center hidden-xs hidden-sm">
+                                        {% for stream in event.stream %}
+                                        {%if loop.index < 2%}
+
+                                                {%if stream.name == 'Bwin.dk'or stream.name == 'Bwin.de' or stream.name == 'Bwin.fr' or stream.name == 'Bwin.com'  %}
+                                                <img src="/storage/app/media/Stream Provider/stream_genera/General/{{stream.name}}.png" alt="{{ stream.name}}">
+
+                                                {% elseif stream.name == 'Betclic.fr'%}
+                                                <img src="/storage/app/media/Stream Provider/stream_genera/General/{{stream.name}}.png" alt="{{ stream.name}}">
+
+                                                {% elseif stream.name == 'Unibet' or stream.name == 'Unibet.dk' or stream.name == 'Unibet.de' or stream.name == 'Unibet.com' or stream.name == 'Unibet Mobile' or stream.name == 'Unibet.fr' %}
+                                                    <img src="/storage/app/media/Stream Provider/stream_genera/General/Unibet.png" alt="{{ stream.name}}">
+                                                 
+                                                {% else %}
+                                                  <img src="/storage/app/media/Stream Provider/stream_genera/General/Unibet.png" alt="{{stream.name}}">
+
+                                                {%endif%}
+                                            {%endif%}
+                                        {% endfor %}
+                                    </td>
+                                </tr>
+                                {%endif%}
+                                {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    {% else %}
+                    <div role="tabpanel" class="tab-pane fade in" id="{{sport.id_sport}}" aria-labelledby="home-tab">
+                        <div class="bs-example" data-example-id="bordered-table">
+                            <table class="table table-bordered table-hover" style="margin-top: 10px">
+                                <thead  style="font-size: 20px; background:#{{sport.color}}; color: #fff; border: 2px solid #{{sport.color}}">
+                                <tr >
+                                    <th style="border: 2px solid #{{sport.color}}" class="text-center">Horaire</th>
+                                    <th style="border: 2px solid #{{sport.color}}" class="text-center">Match</th>
+                                    <th style="border: 2px solid #{{sport.color}}" class="text-center hidden-xs hidden-sm">Ligues</th>
+                                    <th style="border: 2px solid #{{sport.color}}" class="text-center hidden-xs hidden-sm">Fournisseurs</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                {% for event in events %}
+                                {% if event.sport == sport.name%}
+                                <tr onclick="document.location = '/{{sport.name}}/:{{event.url_free}}';"  >
+                                    <td class="text-center">{{ event.date_hour}}</td>
+                                    <td class="text-left">{{ event.name}}</td>
+                                    <td class="text-left hidden-xs hidden-sm">{{ event.tournament}}</td>
+                                    <td class="text-center hidden-xs hidden-sm">
+                                        {% for stream in event.stream %}
+                                        {%if loop.index == 1%}
+                                        {%if stream.name == 'Bwin.dk'or stream.name == 'Bwin.de' or stream.name == 'Bwin.fr' or stream.name == 'Bwin.com'  %}
+                                        <img src="/storage/app/media/Stream Provider/stream_genera/General/Bwin.fr.png" alt="{{ stream.name}}">
+
+                                        {% elseif stream.name == 'Unibet' or stream.name == 'Unibet.dk' or stream.name == 'Unibet.de' or stream.name == 'Unibet.com'or stream.name == 'Unibet.fr' or stream.name == 'Unibet Mobile' %}
+                                        <img src="/storage/app/media/Stream Provider/stream_genera/General/Unibet.png" alt="{{ stream.name}}">
+
+                                        {% elseif stream.name == 'Viaplay.dk'or stream.name == 'Viaplay.fl' or stream.name == 'Viaplay.no' or stream.name == 'Viaplay.se'  %}
+                                        <img src="/storage/app/media/Stream Provider/stream_genera/General/Unibet.png" alt="{{ stream.name}}">
+                                        {% else %}
+                                        <img src="/storage/app/media/Stream Provider/stream_genera/General/Unibet.png" alt="bet365">
+                                        {%endif%}
+                                        {%endif%}
+                                        {% endfor %}
+                                    </td>
+                                </tr>
+                                {%endif%}
+                                {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    {% endif %}
+                {% endfor %}
+            </div>
+            </div>
+       </div>
+    {% endif %}
+    {% if  conf.Layout == 'NEW' %}
+        <div class="container-fluid" style="background: #fff; margin-bottom: 15px">
+            <div class="container" style="padding: 25px">
+            <div class="row">
+                {% for event in events %}
+                <div class="col-lg-offset-3 col-md-6" id="{{ event.id }}"
+                     style="margin-bottom: 15px;padding: 10px; border: 1px red solid">
+                    <div class="text-left col-xs-12" style="margin-bottom: 10px">
+                        <div class="active text-center" id="liga_{{ event.tournament_id }}">
+                            <img style="width:40px;height:30px" src="/sesport/plugins/rebelpinguin/Events/assets/imgs/flag/{{ event.country_alpha2}}.png"><br>
+                            &nbsp;&nbsp;{{ event.tournament }}<br>
+                        </div>
+                    </div>
+                    <div class="text-left col-xs-12">
+                        <div class="text-right col-xs-5">
+                            {{ event.home_team}}<br>
+                            <img class="text-right" style="width:70px;height:60px" src="{{ event.home_team_logo}} ">
+                        </div>
+                        <div class="text-center col-xs-2">&nbsp;&nbsp;<b class="text-center">vs</b>&nbsp;&nbsp; <br>
+                            {{event.date_hour}}
+                        </div>
+                        <div class="text-left col-xs-5">
+                            {{ event.away_team}}<br>
+                            <img class="text-left" style="width:70px;height:60px" src="{{ event.away_team_logo}}">
+
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+            </div>
+        </div>
+    {% endif %}
+{% endfor %}

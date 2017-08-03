@@ -1,0 +1,73 @@
+/*boostrat customize*/
+.btn{
+  border-radius:3px ;
+ -moz-border-radius:3px ;
+ -webkit-border-radius:3px ;
+ -o-radius:3px ;
+ margin: 10px 0;
+ font-size: 17px;
+letter-spacing: 0.5;
+font-weight: 200;
+margin-right: 10px;
+}
+
+.btn:last-child {margin-right: 0;}
+.btn-danger{
+    background: #b0120a ;
+    border: 1px solid #b0120a ;
+    box-shadow: 0 0 0.001px 5px rgba(188, 53, 49, 0.4);
+}
+
+.btn-success{
+    background: #6FC60A ;
+    border: 1px solid #6FC60A;
+    box-shadow: 0 0 0.001px 6px rgba(122, 170, 17, 0.4);
+
+}
+.btn-success:hover{
+    background: #6FC60A ;
+    border: 1px solid #6FC60A;
+    box-shadow: 0 0 0 10px rgba(153, 188, 59, 0.4);
+}
+
+
+.btn-primary{
+    background: #1997dd;
+    border: 1px solid #1997dd;
+    box-shadow: 0 0 0.001px 6px rgba(71, 172, 228, 0.4);
+}
+
+.btn-primary:hover{}
+
+.btn-default{
+    background: #FCFCFC;
+    border: 1px solid #FCFCFC;
+    
+}
+.btn-info{
+    background: #03A9F5 ;
+    border: 1px solid #03A9F5 ;
+    box-shadow: 0 0 0.001px 5px rgba(37, 166, 188, 0.4);
+}
+.btn-warning{
+    background:#FFA300;
+    border: 1px solid #FFA300;
+    box-shadow: 0 0 0.001px 6px rgba(255, 200, 102, 0.4);
+}
+
+.btn-warning:hover{
+    background:#FFA300;
+    border: 1px solid #FFA300;
+    box-shadow: 0 0 0 10px rgba(255, 163, 0, 0.4);
+}
+
+.btn_close{
+    box-shadow: 0 0 0.001px 5px rgba(188, 53, 49, 0);
+}
+
+
+.btn-success_ {
+    background: #2fc989!important;
+    border: 1px solid #2fc989;
+    color:#fff
+}

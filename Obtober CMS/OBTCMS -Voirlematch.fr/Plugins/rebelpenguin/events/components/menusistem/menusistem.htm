@@ -1,0 +1,24 @@
+{% for conf in conf %}
+    {% if  conf.Layout == 'MENUTOP' %}
+        <span>
+            {% for sport in sports %}
+              <a class="btn btn-lg" style="background:#{{sport.color}};" href="{{sport.name}}">
+                {{sport.realname}} <i class="fa fa-chevron-circle-right"></i>
+              </a>
+            {% endfor %}
+        </span>
+
+    {% else %}
+
+        <div class="col-sm-12">
+            {% for sport in sports %}
+            <a style="float:right" href="{{sport.name}}">
+                <button type="button" class="btn  btn-lg xs_" style="background:#{{sport.color}};color:#fff;margin-left:5px;border-radius:0">
+                    Gå til {{sport.realname}}<i style="margin-left:5px;" class="fa fa-arrow-circle-o-right"></i>
+                </button>
+            </a>
+            {% endfor %}
+        </div>
+
+    {% endif %}
+{% endfor %}

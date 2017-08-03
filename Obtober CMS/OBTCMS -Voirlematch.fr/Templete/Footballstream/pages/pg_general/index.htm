@@ -1,0 +1,55 @@
+title = "Index"
+url = "/"
+layout = "ly_home"
+description = "index"
+is_hidden = 0
+meta_title = "Trouvez votre match en streaming içi | Voirlematch.fr"
+meta_description = "Sur Voirlematch.fr vous pouvez facilement accéder à une multitude de fonctions qui vous facilite la tâche de trouver un site de streaming pour un match sportif de votre choix."
+
+[FrontPagePartners]
+Name = "Nos Partenaires"
+Link = "/revue-streaming"
+
+[MenuSistemToo]
+Layout = "TOPMENU"
+==
+<div class=" container-fluid vores">
+    {% component 'FrontPagePartners' %}
+</div>
+<section class="container padding-top-front">
+    <div class="row">
+        <div class="col-xs-12">
+            <div class="heading-border special">
+                <h2>Voici les services proposés par <span>Voirlematch.fr</span></h2>
+                <p>Accédez à pleins d'articles, aux derniers résultats, guides de streaming et beaucoup plus encore! <br>Choissisez le sport que vous désirez regarder en direct ou bien accédez directement à la platforme de streaming ci-dessous.</p>
+            </div>
+        </div>
+    </div>
+</section>
+<section class="container">
+    <div class="row">
+        <div class="col-xs-12 text-left">
+            <div class="live"><i class="fa fa-play-circle fa-10x"></i></div>
+            <h3>Streaming en direct</h3>
+            <p>
+                Footballstream.fr vous permet de visionner légalement une multitude de sports en streaming.
+                Accédez aux match des ligues françaises et internationales et ne ratez plus jamais votre match préférré.<br>
+                <a href="live-stream">Cliquez içi pour voir les matchs disponibles </a>
+            </p>
+           
+        </div>
+        <div class="col-xs-12 text-left"><hr></div>
+        <!-- <div class="col-xs-12 text-left">
+            <div class="tvguide"><i class="fa fa-television fa-8x"></i></div>
+            <h3>TV-guide</h3>
+            <p>
+                Hvem er det lige, der møder hvem i weekenden, og hvor kan jeg se det? Det er slut med at bruge
+                hjerneceller på at tænke over det, for med vores store oversigt kan du altid finde din
+                yndlingskamp og din favorit sportsgren med <a href="general_tv_guide">ét klik her</a>.
+            </p>
+        </div>
+        <div class="col-xs-12 text-left"><hr></div> -->
+        {% component 'MenuSistemToo' %}
+        
+    </div>
+</section>

@@ -1,0 +1,69 @@
+{% for conf in conf %}
+    {% if  conf.Layout == 'TABLE' %}
+        <div  class="container-fluid" style="background:#FFFFFF">
+        <div class="container" style="margin-bottom: 15px;padding: 25px">
+            <div class="row">
+                <div class="bs-example bs-example-tabs table_live" data-example-id="togglable-tabs">
+                    <ul id="myTabs" class="nav nav-tabs" role="tablist">
+                        {% for sport in sports %}
+                        {% if loop.index == '1' %}
+                        <li role="presentation" class="active">
+                            <a href="#{{sport.id}}" id="home-tab" role="tab" data-toggle="tab" aria-controls="home"
+                               aria-expanded="true">
+                                <img alt="tennis-big" width="30px" height="30px"
+                                     src="http://images.sesport.dk/sesport.dk-ver5/football-ball-big.png">
+                                {{sport.name}}</a>
+                        </li>
+                        {% else %}
+                        <li role="presentation" class="">
+                            <a href="#{{sport.id}}" role="tab" id="profile-tab" data-toggle="tab" aria-controls="profile"
+                               aria-expanded="false">
+                                <img alt="tennis-big" width="30px" height="30px"
+                                     src="http://images.sesport.dk/sesport.dk-ver5/tennis-big.png">
+                                {{sport.name}}</a>
+                        </li>
+                        {% endif %}
+                        {% endfor %}
+                    </ul>
+
+                    <div id="myTabContent" class="tab-content">
+                        {% for sport in sports %}
+                        {% if loop.index == '1' %}
+                        <div role="tabpanel" class="tab-pane fade active in" id="{{sport.id}}" aria-labelledby="home-tab">
+
+                            <div class="bs-example" data-example-id="bordered-table">
+                                <table class="table table-bordered table-hover" style="margin-top: 10px">
+                                    <thead  style="font-size: 20px; background: forestgreen; color: #fff;">
+                                    <tr >
+                                        <th class="text-center">Tid</th>
+                                        <th class="text-center">Kamp</th>
+                                        <th class="text-center">Liga</th>
+                                        <th class="text-center">Kanal</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody style="background:#e7eeee">
+                                    {% for event in events %}
+
+                                    <tr onclick="document.location = '/sesport/live_Stream_March/:{{event.url_free}}/:{{event.id}}';"  >
+                                        <td class="text-center">{{ event.date_hour}}</td>
+                                        <td class="text-left">{{ event.name}}</td>
+                                        <td class="text-left">{{ event.tournament}}</td>
+                                        <td class="text-center">{{ event.away_team}}</td>
+                                    </tr>
+                                    {% endfor %}
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                        {% else %}
+                        <div role="tabpanel" class="tab-pane fade in" id="{{sport.id}}" aria-labelledby="home-tab">
+                        </div>
+                        {% endif %}
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% endif %}
+{% endfor %}

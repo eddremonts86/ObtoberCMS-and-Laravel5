@@ -1,0 +1,396 @@
+<!----------------------------------- Buscador del plugin --------------------------------->
+{% for conf in conf %}
+{% if conf.Search == 1 %}
+<div id="buscador" class="fadeIn animated">
+    <div class="row animated bounce">
+        <button id="shearch_btn" type="button" class="btn btn btn-success  shearch_btn_ative">
+            <i style="margin: 15px" class="fa fa-search fa-3x"></i>
+        </button>
+        <div id="form_">
+            <form class=" col-sm-offset-4 col-sm-4 box_sh"
+                  data-request="{{ __SELF__ }}::onAddItem_Fodbold"
+                  data-request-update="'{{ __SELF__ }}::list': '#result'"
+                  data-request-success="$('#input-item').val('')">
+                <div class="input-group">
+                    <input type="text" id="input-item" class="form-control" value="" name="newItem"
+                           placeholder="View events">
+               <span class="input-group-btn"><button type="submit" class="btn btn btn-success">
+                   <i style="padding: 3px 3px 3px 4px;margin-left: 17px" class="fa fa-search"></i>
+               </button>
+               </span>
+                </div>
+                <div class="input-group select">
+                    <select class="form-control" value="" name="country" id="country">
+                        <option>country</option>
+                        <option>country1</option>
+                        <option>country2</option>
+                        <option>country3</option>
+                        <option>country4</option>
+                    </select>
+               <span class="input-group-btn"><button type="submit" class="btn btn btn-success">
+                   <i style="padding: 3px;margin-left: 0px" class="fa fa-search fa-1x"></i>
+               </button></span>
+                </div>
+                <div class="input-group select">
+                    <select class="form-control" value="" name="stream" id="stream">
+                        <option>stream</option>
+                        <option>stream1</option>
+                        <option>stream2</option>
+                        <option>stream3</option>
+                        <option>stream4</option>
+                    </select>
+               <span class="input-group-btn"><button type="submit" class="btn btn btn-success">
+                   <i style="padding: 3px;margin-left: 0px" class="fa fa-search"></i>
+               </button></span>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+{% endif %}
+{% endfor %}
+
+<!----------------------------------Layaut para retornar "BOX" --------------------------------->
+{% for conf in conf %}
+{% if  conf.Layout == 'Box' %}
+<div class="col-sm-12"><h1 class="  text-left"><span>{{ conf.head }}</span> {{ conf.SubHead }}</h1><br></div>
+{% for event in events %}
+{% if event.start_row == 1 %}
+    <div class="row fadeIn animated">
+    {% endif %}
+    {% if event.Error == 0 %}
+
+    <div id="panel_{{event.id}}" class="col-sm-12 col-md-6 col-lg-4 flexColumn top_G ">
+        <div class="panel panel-default">
+            <div class="plgpanel">
+                <div class="plgpanel_head text-center">
+                    <p><b class="white">{{ event.name }}</b></p>
+                </div>
+                <div class="plgpanel_body">
+                    <div class="row">
+                        <div class="imgs " style="margin-bottom: 25px">
+                            <div class="col-xs-5 text-left">
+                                <img style="float: left; margin-left: 25px" width="70px" height=70px"
+                                     alt="{{ event.away_team }}" src="{{ event.away_team_logo}} ">
+                            </div>
+                            <div class="col-xs-5 text-rigth">
+                                <img style="float: right" class="img-circle" width="70px" height=70px"
+                                     alt="{{event.home_team}}" src="{{ event.home_team_logo}} ">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="ground-small"></div>
+                        <p><b>{{ event.date_day }}</b></p>
+                    </div>
+                    <hr>
+                    <div class="row tv_guide">
+                        <form class="">
+                             <span>
+                                                <a class="btn_a btn btn-default" id="TV_{{event.id}}"
+                                                   href="/{{event.Sport}}/:{{event.url_free}}"
+                                                   role="button">
+                                                    <i class="fa fa-desktop fa-1x"></i> Se TV-guide {{conf.Layout}}
+                                                </a></span>
+                             <span>
+                                                <a class="btn btn-success" id="Online_{{event.id}}"
+                                                   href="/{{event.Sport}}/:{{event.url_free}}"
+                                                   role="button">
+                                                    <i class="fa fa-chevron-circle-right "></i> Se TV-guide
+                                                </a>
+                                                </span>
+                        </form>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+    {% else %}
+    <div class="alert alert-success alert-dismissible" role="alert">
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span
+                aria-hidden="true">&times;</span>
+        </button>
+        <strong>Info!</strong>
+        <p><strong>No data for that event or sport. We are sorry.</strong></p>
+    </div>
+    {% endif %}
+    {% if event.end_row == 1 %}
+</div>
+{% endif %}
+{% endfor %}
+{% endif %}
+{% endfor %}
+
+<!----------------------------------Layaut para retornar "Table" --------------------------------->
+{% for conf in conf %}
+{% if  conf.Layout == 'TableNew' %}
+<div class="row">
+<div class="col-sm-12">
+<h1 class=" text-left">
+    <span>{{ conf.head }}</span> {{ conf.SubHead }}</h1><br>
+</div>
+</div>
+<!--class="fadeIn animated"-->
+    <div>
+         <div class="row event fadeIn animated">
+            <div class="col-md-5 col-sm-5 col-lg-5 event-menu">
+                <ul class="nav nav-tabs text-left">
+                    {% for end in ends %}
+                    {% if loop.index == 1 %}
+                    <li class="active">
+                        <a href="#{{end.tournament_id}}_{{loop.index}}" data-toggle="tab">
+                            <img style="width:25px;height:25px;" class="img-circle  " alt="{{ end.country_alpha2}}"
+                                 src="/plugins/rebelpenguin/events/assets/imgs/flag/{{ end.country_alpha2}}.png">&nbsp;&nbsp;{{
+                            end.tournament }}
+                        </a>
+                    </li>
+                    {% else %}
+                    <li>
+                        <a href="#{{ end.tournament_id}}_{{loop.index}}" data-toggle="tab">
+                            <img style="width:25px;height:25px;" class="img-circle  " alt="{{ end.country_alpha2}}"
+                                 src="/plugins/rebelpenguin/events/assets/imgs/flag/{{ end.country_alpha2}}.png">
+                            &nbsp;&nbsp;{{ end.tournament }}
+                        </a>
+                    </li>
+                    {%endif%}
+                    {% endfor %}
+                </ul>
+            </div>
+            <div class="col-md-7 col-sm-7 col-lg-7 no-padding">
+                <div class="event-heading">
+                    {% for end in ends %}
+                    {% if loop.index == 1 %}
+                    <h3 class="white text-left">{{ end.date_acc }}</h3>
+                    <br>
+                    {%endif%}
+                    {% endfor %}
+                </div>
+                <div class="tab-content text-left">
+                    {% for end in ends %}
+                    {% if loop.index == 1 %}
+
+                    <div class="tab-pane active fadeInLeft animated" id="{{end.tournament_id}}_{{loop.index}}">
+                        {% for events in events %}
+                        {% if end.tournament_id == events.tournament_id %}
+                        <div class="list">
+                            <a href="/{{events.Sport}}/:{{events.url_free}} "><p><i class="fa fa-clock-o"></i>&nbsp;&nbsp;<b>{{events.date_hour}}</b>
+                                &nbsp;&nbsp; {{events.name}}</p></a>
+                        </div>
+                        {%endif%}
+                        {% endfor %}
+                    </div>
+                    {% else %}
+                    <div class="tab-pane fadeInLeft animated" id="{{end.tournament_id}}_{{loop.index}}">
+                        {% for events in events %}
+                        {% if end.tournament_id == events.tournament_id %}
+                        <div class="list">
+                            <a href="/{{events.Sport}}/:{{events.url_free}} "><p><i class="fa fa-clock-o"></i>&nbsp;&nbsp;<b>{{events.date_hour}}</b>
+                                &nbsp;&nbsp; {{events.name}}</p></a>
+                        </div>
+                        {%endif%}
+                        {% endfor %}
+                    </div>
+
+                    {%endif%}
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+{% endif %}
+{% endfor %}
+
+<!----------------------------------Layaut para retornar "Table de cronogramas semanal " --------------------------------->
+{% for conf in conf %}
+{% if  conf.Layout == 'Table' %}
+
+    <div class="row  fadeIn animated">
+        <div class="col-sm-12"><h1 class="  text-left"><span>{{ conf.head }}</span> {{ conf.SubHead }}</h1><br></div>
+        <!-- Ligas -->
+        {% for date_eventsend in date_eventsend %}
+        <div class="panel-group col-sm-12" id="accordion_{{date_eventsend.date}}" role="tablist" aria-multiselectable="true" style="padding:0;">
+            <div style="margin-bottom:10px;" class="mypanel_head active" role="tab" data-toggle="collapse" data-parent="#accordion_" href="#collapseOne_{{loop.index}}" id="headingOne_{{date_eventsend.date}}">
+                <h4 class="panel-title">{{date_eventsend.date_acc}}</h4>
+                <i role="button" class="fa fa-plus fa-2x pull-right hidden" style="margin-top: -25px"></i>
+            </div>
+            <div id="collapseOne_{{loop.index}}" class="panel-collapse collapse" role="tabpanel"
+                 aria-labelledby="headingOne">
+                <div class="mypanel_body" style="padding: 5px;">
+                   <!-- Ligas  -->
+                    {% for ends in ends %}
+                    {% if date_eventsend.date_acc == ends.date_acc %}
+                    <div class="panel-group" id="sub_accordion_" role="tablist" aria-multiselectable="true">
+                        <div class="panel panel-default">
+                            <div class="mypanel_head active" role="tab" data-toggle="collapse" data-parent="#sub_accordion_"
+                                 href="#subcollapseOne1_{{loop.index}}" aria-expanded="false"
+                                 aria-controls="collapseOne1_" id="SubheadingOne_{{loop.index}}">
+                                <h4 class="panel-title">
+                                    <a role="button" >
+                                        <img style="width:35px;height:35px;margin-right:10px;" class="img-circle"
+                                             alt="{{ends.country_alpha2}}"
+                                             src="/plugins/rebelpenguin/events/assets/imgs/flag/{{ends.country_alpha2}}.png">
+                                        {{ end.tournament }}
+                                        <b style="margin-top: 15px">{{ends.tournament}}</b>
+
+                                    </a>
+                                </h4>
+                                <a role="button" data-toggle="collapse" data-parent="#sub_accordion_"
+                                   href="#subcollapseOne1_{{loop.index}}" aria-expanded="false"
+                                   aria-controls="collapseOne1_" class="fa fa-plus fa-2x pull-right hidden"
+                                   style="margin-top: -25px"></a>
+                            </div>
+                            <div id="subcollapseOne1_{{loop.index}}" class="panel-collapse collapse" role="tabpanel"
+                                 aria-labelledby="headingOne1_">
+                                <div class="mypanel_body" style="margin: -5px 0;">
+
+                                   <!-- Eventos -->
+                                    {% for events in events %}
+                                    {% if ends.tournament_id == events.tournament_id and events.date_acc == date_eventsend.date_acc %}
+                                    <div style="cursor: hand" class="inter" onclick="document.location = '/{{events.Sport}}/:{{events.url_free}}';">
+                                        <div><p><i class="fa fa-clock-o"></i>&nbsp;&nbsp;{{events.date_acc}} &nbsp;&nbsp;{{events.date_hour}}&nbsp;&nbsp;
+                                            {{events.name}}</p></div>
+                                        <div class="float-right">
+                                            <a href="/{{events.Sport}}/:{{events.url_free}}"
+                                               class="float-right btn btn-success_ btn-xs " style="height: 35px;font-size: 14px;padding: 5px 8px;">Voir le match <i
+                                                    class="fa fa-chevron-circle-right"></i></a>
+                                        </div>
+                                    </div>
+                                    {% endif %}
+                                    {% endfor %}
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    {% endif %}
+                    {% endfor %}
+
+                </div>
+            </div>
+
+        </div>
+        {% endfor %}
+    </div>
+
+{% endif %}
+{% endfor %}
+
+<!----------------------------------Layaut para retornar "Table con dia y stream" --------------------------------->
+{% for conf in conf %}
+{% if  conf.Layout == 'TableProgram' %}
+    <div class="container">
+        <div class="row fadeIn animated">
+        <div class="col-sm-12"><h1 class="text-left white"><span>{{ conf.head }}</span> {{ conf.SubHead }}</h1><br></div>
+        <!---Ligas-->
+        <table class="program table table-hover" style="color: #fff;">
+            <thead style="font-size: 20px; color: #212121; background:#E5E6E6">
+            <tr>
+                <th class="text-center" >Horaire</th>
+                <th class="text-center" >Match</th>
+                <th class="text-center" >Ligues</th>
+                <th class="text-center hidden-xs hidden-sm" >Fournisseurs</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for date_eventsend in date_eventsend %}
+            <tr>
+                <th class="hidden-xs hidden-sm"scope="row" colspan="4" style="font-size: 17px; background:#2fc989">{{date_eventsend.date_acc}}</th>
+                <th class="visible-xs-* visible-sm-*  hidden-md hidden-lg "scope="row" colspan="3" style="font-size: 17px; background:#2fc989">{{date_eventsend.date_acc}}</th>
+            </tr>
+            {% for events in events %}
+            {% if events.date_acc == date_eventsend.date_acc %}
+            <tr onclick="document.location = '#allbody';" >
+                <td class="text-center">{{events.date_hour}}</td>
+                <th scope="row">{{events.name}}</th>
+                <td>{{events.tournament}}</td>
+                <td class="text-center hidden-xs hidden-sm">
+                    {% for stream in events.stream %}
+                    {%if loop.index < 2%}
+
+                    {%if stream.name == 'Bwin.dk'or stream.name == 'Bwin.de' or stream.name == 'Bwin.fr' or stream.name == 'Bwin.com'  %}
+                    <img src="/storage/app/media/Stream Provider/stream_genera/General/{{stream.name}}.png" alt="{{ stream.name}}">
+
+                    {% elseif stream.name == 'Betclic.fr'%}
+                    <img src="/storage/app/media/Stream Provider/stream_genera/General/{{stream.name}}.png" alt="{{ stream.name}}">
+
+                    {% elseif stream.name == 'Unibet' or stream.name == 'Unibet.dk' or stream.name == 'Unibet.de' or stream.name == 'Unibet.com' or stream.name == 'Unibet Mobile' or stream.name == 'Unibet.fr' %}
+                    <img src="/storage/app/media/Stream Provider/stream_genera/General/Unibet.png" alt="{{ stream.name}}">
+
+                    {% else %}
+                    <img src="/storage/app/media/Stream Provider/stream_genera/General/Unibet.png" alt="{{stream.name}}">
+
+                    {%endif%}
+                    {%endif%}
+                    {% endfor %}
+
+
+
+                </td>
+            </tr>
+            {% endif %}
+            {% endfor %}
+            {% endfor %}
+            </tbody>
+        </table>
+
+    </div>
+</div>
+{% endif %}
+{% endfor %}
+
+<!----------------------------------Layaut para retornar "Los partidpos en forma de tabla" --------------------------------->
+{% for conf in conf %}
+    {% if  conf.Layout == 'IndexTables' %}
+       {% if conf.items > 0 %}
+            <section class="container">
+                <div class="row fadeIn animated">
+                    {% for date_eventsend in date_eventsend %}
+                    <div class="col-sm-12"><h1 class="  text-left"><span>{{ conf.head }}</span> {{ conf.SubHead }}</h1><br></div>
+                        <!---Ligas-->
+                        <table class="program table " style="color: #212121;border-bottom:3px solid #212121";>
+                            <thead style="font-size: 20px; color: #212121; background:#F6F6F7">
+                            <tr>
+                            <th scope="row" colspan="4" style="font-size: 17px; background:#252627; color: white">{{date_eventsend.date_acc}}</th>
+                    {% endfor %}
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {% for ligas in ends %}
+                            <tr>
+                                <th scope="row" colspan="4" style="font-size: 17px; background:#e8e8e8;">
+                                    <img style="width:20px;height:20px;margin-right:10px;" class="img-circle" alt="{{ligas.country_alpha2}}" src="/plugins/rebelpenguin/events/assets/imgs/flag/{{ligas.country_alpha2}}.png">
+                                    {{ligas.tournament}}
+                                </th>
+                            </tr>
+                            {% for events in events %}
+                            {% if ligas.tournament_id == events.tournament_id and ligas.country_alpha2 == events.country_alpha2%}
+                                <tr class="active" onclick="document.location = '/{{events.Sport}}/:{{events.url_free}}';" >
+                                <td class="text-center">
+                                    {{events.date_hour}}
+                                    <p class="hidden-md hidden-lg"> {{events.away_team}} vs {{events.home_team}} </p>
+                                </td>
+                                <td scope="row" class="text-right">
+                                    <span class="hidden-xs hidden-sm">{{events.home_team}}</span>
+                                    <img  class="hidden-xs hidden-sm" style="float: none" class="img-circle" width="25px" height=25px" alt="{{ events.away_team }}" src="{{ events.home_team_logo}}">
+                                    <img  class="hidden-md hidden-lg" style="float: none" class="img-circle" width="42px" height=42px" alt="{{ events.away_team }}" src="{{ events.home_team_logo}}">
+                                    <span class="hidden-xs hidden-sm"style="margin-left: 15px">&nbsp;-&nbsp;</span>
+                                </td>
+                                <td scope="row" class="text-left">
+                                    <img class="hidden-xs hidden-sm" style="float: none" class="img-circle" width="25px" height="25px" alt="{{ events.home_team_logo }}" src="{{ events.away_team_logo}} ">
+                                    <img class="hidden-md hidden-lg" style="float: none" class="img-circle" width="42px" height="42px" alt="{{ events.home_team_logo }}" src="{{ events.away_team_logo}} ">
+                                    <span class="hidden-xs hidden-sm">{{events.away_team}}</span>
+                                </td>
+                                <td></td>
+                            </tr>
+                            {% endif %}
+                        {% endfor %}
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+       {% endif %}
+    {% endif %}
+{% endfor %}
+

@@ -1,0 +1,61 @@
+description = "Other Page Layaut"
+==
+<?php
+use Rebelpenguin\Events\Classes\template;
+    function onStart()
+    {
+         $sports = template::sport_name();
+         $this['sports'] = $sports;
+
+    }
+?>
+==
+<html lang="en">
+{% partial "tpl_system/head" %}
+
+ 
+
+<body  id="allbody" data-spy="scroll" data-target=".navbar-custom" >
+{% partial "tpl_system/Gtm_script" %}
+    
+<div class="container_fluid">
+    <header class="header main-page">
+        <section class="top trans-black">
+            <div class="container">
+                <div class="row">
+                    <div class="col-sm-12 col-xs-12">
+                        <div class="logo">
+                            <a href="/"><img src="/themes/Footballstream/assets/images/home/voirlematchlogos/voirlematch-logo-orange.png" alt="Sesport logo" /></a>
+                        </div>
+                        {% partial "tpl_system/sport_menu" %}
+
+                        <div class="navbar-header">
+                            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-8" aria-expanded="false">
+                                <span class="sr-only">Toggle navigation</span>
+                                <span class="fa fa-bars white"></span>
+                            </button>
+                        </div>
+                        <!-- Collect the nav links, forms, and other content for toggling -->
+                        <nav class="collapse navbar-collapse navbar-custom" id="bs-example-navbar-collapse-8">
+                            <ul class="nav navbar-nav  pull-left text-left">
+                                <li id="Tennis_" role="presentation" class="top_sport_link"><a href="/Tennis">Page d'Accueil</a></li>
+                                <li id="Live" role="presentation" class="top_sport_link"><a href="/Tennis/Tennis_live_stream/">Sites de Streaming</a></li>
+                                <li id="guide" role="presentation" class="top_sport_link"><a href="/Tennis/calendrier">Calendrier</a></li>
+                                <li id="Blog" role="presentation" class="top_sport_link"><a href="/Tennis/blog">Actualitées</a></li>
+                            </ul>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </section>
+    
+{% page %}
+{% partial "tpl_system/footer" %}
+{% partial "tpl_system/SystemPopUp" %}
+<!-- Scripts -->
+{% partial "tpl_system/scrit" %}
+{% framework extras %}
+{% scripts %}
+ 
+
+</body></html>

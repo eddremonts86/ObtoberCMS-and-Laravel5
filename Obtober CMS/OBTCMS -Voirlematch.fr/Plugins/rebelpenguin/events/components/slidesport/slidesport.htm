@@ -1,0 +1,154 @@
+<!--
+
+<div class="welcome ">
+    <div class="welcome-inner">
+        {% for heads in header %}
+            {% if heads.count != 0%}
+                <span class="promo">
+                        {% for arts in art %}
+                            {% if loop.index == 1 %}
+                         <h1 class="white">Streaming de<span><m style="color:#{{arts.color}}"> {{arts.sport}}</m> online</span></h1>
+                         <div class="test">
+                               <div class="test-inner text-left">
+                                   <div class="test-col hide-tablet">
+                                       <a style="color: #ffffff; animation: none;opacity: 1" href="{{arts.Url}}"><h3> {{heads.Head0}} {{arts.StreamName}}</h3></a>
+                                   </div>
+                                   <div class="test-col">
+                                       <div class="white-col"><a style="color: #ffffff; animation: none;opacity: 1" href="{{arts.Url}}"><i class="fa fa-user-plus"></i><h3>{{heads.Head1}}</h3></a></div>
+                                       <div class="white-col"><a style="color: #ffffff; animation: none;opacity: 1" href="{{arts.Url}}"><i class="fa fa-play-circle"></i><h3>{{heads.Head2}}</h3></a></div>
+                                   </div>
+                                   <div class="test-col center">
+                                       <a class="btn round-cta"style="background:#{{arts.color}} " href="{{arts.Url}}"><div><span>{{heads.Head3}}</span>{{arts.StreamName}}</div></a>
+
+                                   </div>
+                                   <div class="test-col center last">
+                                       <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
+                                           <div class="carousel-inner" role="listbox">
+                                               <div class="item active">
+                                                   <p>Prochains Matchs - {{arts.date}}  Kl. {{arts.hora}}<br/>
+                                                       <a style="color:#{{arts.color}}" href="{{arts.sport}}/:{{arts.url_free}}">{{arts.artic_name}}</a><br>
+                                                       {% if arts.rest != '' %}
+                                                            <b style="font-size: 10px;opacity:.5;">
+                                                                <i style="color:#F8595F"class="icon-info fa fa-info-circle">&nbsp;&nbsp;</i>{{arts.rest}}</b></p>
+                                                       {%endif%}
+                                               </div>
+                             {% else %}
+                                               <div class="item">
+                                                   <p>Prochains Matchs - {{arts.date}}  Kl. {{arts.hora}}<br/>
+                                                       <a style="color:#{{arts.color}}" href="{{arts.sport}}/:{{arts.url_free}}">{{arts.artic_name}}</a><br>
+                                                       {% if arts.rest != '' %}
+                                                            <b style="font-size: 10px;opacity:.5;"><i style="color:#F8595F"class="icon-info fa fa-info-circle">&nbsp;&nbsp;</i>{{arts.rest}}</b></p>
+                                                        {%endif%}
+                                                   <br>
+                                               </div>
+                             {%endif%}
+                         {% endfor %}
+                                           </div>
+                                           {% if heads.Stream == '8ceb67ee-9bd7-11e4-92ee-5254005a5aa0' %}
+                                                <div class="onerow"><div onclick="$('#terms_winows').modal('show')" class="terms"></div></div>
+                                           {%endif%}
+                                       </div>
+                                   </div>
+                               </div>
+                           </div>
+                </span>
+            {% else %}
+                    <span class="promo" style="top: 150;">
+                         <h1 class="white">Streaming de<span><m style="color:#{{heads.color}}"> {{heads.sport}}</m> online</span></h1>
+                    </span>
+            {%endif%}
+        {% endfor %}
+    </div>
+</div>
+
+-->
+<style>
+    .clas{
+        color: #ffffff !important;
+        font-size: 16px;
+        animation: none;
+        opacity: 1;
+        padding-top: 15px;
+    }
+    .clas_important{
+        color: #ffffff !important;
+        opacity: 1
+    }
+    .nonepadd_tre{padding-top: 35px!important;}
+    .nonepadd{padding: 0!important;}
+    .welcome-inner > span .test {
+        background: #252627;
+        padding: 10px;
+        border-radius: 3px;
+        height: 120px;
+        margin: 60px 0 0 0;
+    }
+
+    @media screen and (max-width: 1200px){
+        .nonepadd_tre{padding-top: 0px!important;}
+        .clas_important{color: #212121 !important;opacity: 1}
+        .welcome{margin-bottom: 50px}
+    }
+
+
+
+</style>
+
+<div class="welcome ">
+    <div class="welcome-inner">
+        {% for heads in header %}
+        {% if heads.count != 0%}
+                <span class="promo">
+                        {% for arts in art %}
+                            {% if loop.index == 1 %}
+                         <h1 class="white">Streaming de<span><m style="color:#{{arts.color}}"> {{arts.sport}}</m> online</span></h1>
+                         <div class="test">
+                             <div class="row">
+                                 <div class="col-lg-8 nonepadd">
+                                     <div class="col-lg-3 nonepadd_tre"> <a  class="clas" href="{{arts.Url}}">  {{heads.Head0}} {{arts.StreamName}} </a></div>
+                                     <div class="col-lg-5 nonepadd_tre"><a class="clas" href="{{arts.Url}}"><i class="fa fa-user-plus"></i> {{heads.Head1}} </a></div>
+                                     <div class="col-lg-4 nonepadd_tre"><a class="clas" href="{{arts.Url}}"><i class="fa fa-play-circle"></i> {{heads.Head2}} </a></div>
+                                 </div>
+                                 <div class="col-lg-2 nonepadd center">
+                                     <a class="btn round-cta"style="background:#{{arts.color}} " href="{{arts.Url}}"><div><span>{{heads.Head3}}</span>{{arts.StreamName}}</div></a>
+                                 </div>
+                                 <div class="col-lg-2 nonepadd center last">
+                                     <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
+                                         <div class="carousel-inner " role="listbox">
+                                             <div class="item active ">
+                                                 <p class="clas_important">Prochains Matchs - {{arts.date}}  Kl. {{arts.hora}}<br/>
+                                                     <a style="color:#{{arts.color}}" href="{{arts.sport}}/:{{arts.url_free}}">{{arts.artic_name}}</a><br>
+                                                     {% if arts.rest != '' %}
+                                                     <b class="clas_important" style="font-size: 10px;opacity:.5;">
+                                                         <i  style="color:#F8595F"class=" icon-info fa fa-info-circle">&nbsp;&nbsp;</i>{{arts.rest}}</b></p>
+                                                 {%endif%}
+                                             </div>
+                                             {% else %}
+                                             <div class="item">
+                                                 <p class="clas_important">Prochains Matchs - {{arts.date}}  Kl. {{arts.hora}}<br/>
+                                                     <a style="color:#{{arts.color}}" href="{{arts.sport}}/:{{arts.url_free}}">{{arts.artic_name}}</a><br>
+                                                     {% if arts.rest != '' %}
+                                                     <b class="clas_important" style="font-size: 10px;opacity:.5;"><i style="color:#F8595F"class="icon-info fa fa-info-circle">&nbsp;&nbsp;</i>{{arts.rest}}</b></ >
+                                                 {%endif%}
+                                                 <br>
+                                             </div>
+                                             {%endif%}
+                                             {% endfor %}
+                                         </div>
+                                         {% if heads.Stream == '8ceb67ee-9bd7-11e4-92ee-5254005a5aa0' %}
+                                         <div class="onerow"><div onclick="$('#terms_winows').modal('show')" class="terms"></div></div>
+                                         {%endif%}
+                                     </div>
+                                 </div>
+                             </div>
+                         </div>
+                </span>
+        {% else %}
+                    <span class="promo" style="top: 150;">
+                         <h1 class="white">Streaming de<span><m style="color:#{{heads.color}}"> {{heads.sport}}</m> online</span></h1>
+                    </span>
+        {%endif%}
+        {% endfor %}
+    </div>
+</div>
+

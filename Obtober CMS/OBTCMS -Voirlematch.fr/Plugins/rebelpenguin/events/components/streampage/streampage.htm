@@ -1,0 +1,65 @@
+
+{% for heads in header %}
+    {%if loop.index==1%}
+         <div class="top-container container">
+            <div class="row">
+                <div class="col-sm-7 text-left">
+                    <h1 class="white"><span>{{ heads.Head0}} </span>{{ heads.Head1}}</h1>
+                    <p class="white">{{ heads.Head2}}</p>
+                </div>
+                <div class="col-sm-5 text-center ">
+                    <h4 class="white"><span>{{ heads.Head3}}</span><br/></h4>
+                    <div id="carousel-example-generic" class="carousel slide" data-ride="carousel" >
+                        <div class="ground-small_general ground-small_general_{{heads.sport}} "></div>
+                        <div class="carousel-inner minus-top" role="listbox">
+
+                            {% for dataEvent in dataEvent %}
+                                {% if dataEvent.count!=0 %}
+                                    {% if loop.index==1 %}
+                                    <div class="item active" id="{{dataEvent.url_free }}">
+                                        <div class="col-xs-12" style="padding-top: 20px">
+                                            <div class="text-center fontLivesHead" style="color:#{{heads.sport_color}}">{{ dataEvent.home_team }} vs {{ dataEvent.away_team }}</div>
+                                            <div class="text-center fontLivesFooter"  style="color:#{{heads.sport_color}}"><b>D. {{dataEvent.date_d }}  Kl. {{dataEvent.date_h }}</b></div>
+                                        </div>
+
+                                        <div class="col-xs-offset-2 col-xs-3">
+                                            <img class="pull-right img_regular_fb" style="border: 1px solid #{{heads.sport_color}}"src="{{dataEvent.home_team_logo }}">
+                                        </div>
+
+                                        <div class="col-xs-offset-2 col-xs-3">
+                                            <img class=" pull-left img_regular_fb" style="border: 1px solid #{{heads.sport_color}}"src="{{dataEvent.away_team_logo }}">
+                                        </div>
+                                    </div>
+                                    {% else%}
+                                    <div class="item" id="{{dataEvent.url_free }}">
+
+                                        <div class="col-xs-12" style="padding-top: 20px">
+                                            <div class="text-center fontLivesHead" style="color:#{{heads.sport_color}}">{{ dataEvent.home_team }} vs {{ dataEvent.away_team }}</div>
+                                            <div class="text-center fontLivesFooter"  style="color:#{{heads.sport_color}}"><b>D. {{dataEvent.date_d }}  Kl. {{dataEvent.date_h }}</b></div>
+                                        </div>
+
+                                        <div class="col-xs-offset-2 col-xs-3">
+                                            <img class=" pull-right img_regular_fb" style="border: 1px solid #{{heads.sport_color}}" src="{{dataEvent.home_team_logo }}">
+                                        </div>
+                                        <div class="col-xs-offset-2 col-xs-3 text-left">
+                                            <img class="pull-left img_regular_fb" style="border: 1px solid #{{heads.sport_color}}" src="{{dataEvent.away_team_logo }}">
+                                        </div>
+                                    </div>
+                                    {% endif %}
+                                {% else%}
+                                    <div><br><br>Aucun match disponible<br>
+                                        <i class="fa fa-chevron-circle-down fa-3x"></i>
+                                    </div>
+                            {% endif %}
+                            {% endfor %}
+
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        </div>
+    {%endif%}
+{% endfor %}
+<!--container_fluid-->
