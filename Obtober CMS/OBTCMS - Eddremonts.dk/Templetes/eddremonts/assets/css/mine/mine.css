@@ -246,7 +246,7 @@ p {
 }
 
 .dobleF_exp {
-    background-color: rgba(0, 0, 0, 0.75);
+    background-color: rgba(0, 0, 0, 0.5);
     font-size: 16px;
     margin-top: -10px;
     margin-bottom: -10px;
@@ -338,7 +338,7 @@ header .header-content .header-content-inner p {
     -moz-background-size: cover;
     -o-background-size: cover;
     background-size: cover;
-    opacity: 0.45;
+    opacity: 0.65;
     filter: blur(1px);
 }
 
