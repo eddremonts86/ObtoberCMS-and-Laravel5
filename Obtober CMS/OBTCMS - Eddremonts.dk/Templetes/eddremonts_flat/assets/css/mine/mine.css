@@ -27,7 +27,7 @@ h4, h5, h6, .h4, .h5, .h6, small {
 }
 
 .text-muted {
-    display: none !important;
+    display: block !important;
 }
 
 .class_small_head {
@@ -43,7 +43,7 @@ h4, h5, h6, .h4, .h5, .h6, small {
 .timeline .timeline-heading .profile h4 {
     color: #212121 !important;
     font-weight: bold;
-    padding-top: 70px;
+    padding-top: 0px;
     padding-left: 25px
 }
 
@@ -229,8 +229,12 @@ p {
 
 .body {
     /* background-image: url("../../images/index/eddy.jpg");
-    background-image: url("../../images/index/index_edd.jpeg");*/
+    background-image: url("../../images/index/index_edd.jpeg");
     background-image: url("../../images/index/index.jpeg");
+    
+    background-image: url("../../images/flat_imgs/header_flatfile_cms.jpg");*/
+    background-image: url("../../images/flat_imgs/web-development.jpg");
+    
     background-position: center center;
     background-repeat: no-repeat;
     background-attachment: fixed;
@@ -238,12 +242,51 @@ p {
     background-color: #464646;
 }
 
-.body_home {
-    background-color: rgba(0, 0, 0, 0.9);
+
+.skill_list{
+    background-image: url("../../images/flat_imgs/web-development-skills.jpg");
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: cover;
+    background-color: #464646;
+}
+
+.all_shadow{
+    font-weight: 900;
+    text-shadow: rgb(39, 45, 45) 5px 2px 2px
+}
+
+
+
+
+.body_home, .body_skills, .home_profile {
+    background-color: #212121;
     font-size: 16px;
     margin-top: -10px;
     margin-bottom: -10px;
 }
+.body_skills{
+    background-color: #30ADC1
+}
+
+.home_profile {
+     background-color: #33B7C2;
+    }
+
+
+
+  h1.white > small{
+    font-size: 100%;
+    font-weight: 900;
+    color: white;
+ 
+ }
+
+
+
+
+
 
 .dobleF_exp {
     background-color: rgba(0, 0, 0, 0.5);
@@ -326,7 +369,7 @@ header .header-content .header-content-inner p {
 }
 
 .firts {
-    background-image: url("../../images/general/fondo.png");
+    background-image: url("../../images/general/fondo_Fotor.png");
     margin-top: -5px;
     text-align: left;
     display: table;
@@ -342,13 +385,14 @@ header .header-content .header-content-inner p {
     filter: blur(1px);
 }
 
+
 .fondo_info {
     background: #212121;
     margin-top: 102px;
 }
 
 .datos_proy_info {
-    background-image: url("../../images/general/header_info.jpeg");
+    background-image: url("../../images/flat_imgs/header_flatfile_cms.jpg");
     *margin-top: -100px;
     text-align: left;
     *display: table;
@@ -359,9 +403,7 @@ header .header-content .header-content-inner p {
     -webkit-background-size: cover;
     -moz-background-size: cover;
     -o-background-size: cover;
-    background-size: cover;
-    *opacity: 0.45;
-     filter: blur(3px);
+    background-size: cover;    
 }
 
 .btn-primary {
@@ -540,7 +582,7 @@ footer {
 .experience_bg {
     margin-left: -15px;
     margin-right: -15px;
-    background-image: url("../../images/portafolio/entradas/RebelPenguin.jpg");
+    background-image: url("../../images/portafolio/entradas/RebelPenguin2.JPG");
     position: relative;
     -webkit-background-size: cover;
     -moz-background-size: cover;
@@ -568,6 +610,7 @@ footer {
     -webkit-box-shadow: 1px 1px 13px 0px rgba(50, 50, 50, 1);
     -moz-box-shadow: 1px 1px 13px 0px rgba(50, 50, 50, 1);
     box-shadow: 1px 1px 13px 0px rgba(50, 50, 50, 1);
+    border-radius: 15px;
 }
 
 .carrera p {
@@ -1199,6 +1242,14 @@ figcaption {
     margin-top: -41px;
 }
 
+
+.fast_class{
+    background: #33B7C2;
+    padding: 60px 0;    
+}
+
+
+
 .img_head {
     width: 200px !important;
     height: 200px !important;
@@ -1206,6 +1257,12 @@ figcaption {
 
 /*---------------------------------------------------------Responsible---------------------------------------------*/
 @media (max-width: 1025px) {
+    .fast_class{
+    background: #33B7C2;
+    padding: 15px 0;    
+}
+
+    
     .text-muted {
         display: block !important;
     }
@@ -1227,7 +1284,8 @@ figcaption {
 
     .minimo {
         background: #1F2024;
-        margin-top: 20px !important;
+        margin-top: 20px;
+        margin-bottom: 20px;
     }
 
     .presentation {
@@ -1255,7 +1313,8 @@ figcaption {
     }
 
     .navbar-default .navbar-header .navbar-brand {
-        color: rgba(0, 0, 0.78);
+        #color: rgba(0, 0, 0.78);
+        color: rgba(255, 255, 255,1);
     }
 
     .navbar-default .navbar-header .navbar-brand:hover, .navbar-default .navbar-header .navbar-brand:focus {
@@ -1347,6 +1406,19 @@ figcaption {
     filter: blur(3px);
 }
 
+._datos_skills {   
+    background-image: url(../../images/flat_imgs/aprenentatge-mon-digital.jpg);
+    text-align: left;
+    width: auto;
+    min-height: 750px;
+    position: relative;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+     
+}
+
 .fondo_d {
     background: transparent url("../../images/general/header-transparent.png") no-repeat left top;
     display: table;
@@ -1402,6 +1474,7 @@ figcaption {
         padding-left: 0px;
         padding-right: 0px;
     }
+    
 }
 
 /*------------------------------------------------------------------------------------------------------------------*/
@@ -1482,7 +1555,7 @@ figcaption {
 }
 
 .skill_promo{
-    margin-top: 70px;
+    margin-top: 0px;
     margin-bottom: 70px;
 }
 /**
@@ -1525,8 +1598,8 @@ figcaption {
         margin-bottom: 15px;
     }
     .skill_promo{
-        margin-top: 25px;
-        margin-bottom: 25px;
+        margin-top: -40px;
+        margin-bottom: 50px;
     }
 }
 
@@ -1540,10 +1613,12 @@ figcaption {
     -o-box-shadow: inset 0px 0px 50px 0px #ABABAB,5px 5px 5px 1px #242424;
 }
 .wico {
-font-size: 95px !important;
-color: white;
-background: rgba(0, 0, 0, 0.68);
-border: 0px solid rgba(255, 255, 255, 0.59);
+    font-size: 95px;
+    color: white;
+    background: rgba(0, 0, 0, 0.25);
+    border: 6px solid rgba(247, 247, 247, 0.18);
+    font-weight: 900;
+    border-radius: 10px;
 }
 .white{
     color: #ffffff;
@@ -1557,8 +1632,31 @@ border: 0px solid rgba(255, 255, 255, 0.59);
 
 }
 .skiller{
-    background: #212121;
+    background: #0E2F40;
 }
+
+
+#page-top > section > section.row.skiller > div > div > div > h1 > small{
+        font-size: 80px;
+    font-weight: 800;
+    color: white;
+}
+
+.container_skill_list{
+    background: #ffffffab;
+    border-radius: 15px;
+    margin: 0px 15px;
+    padding: 50px 0px;
+    }
+
+@media (max-width: 768px) {
+    .wico {font-size: 65px;}
+    .moveToCenter{
+            text-align: center;
+        }
+}
+
+
 /*-------------------------------------------------*/
 .box h3{
     text-align:center;
@@ -1737,3 +1835,37 @@ border: 0px solid rgba(255, 255, 255, 0.59);
     box-shadow: 0 2.5em 0 0 #FFF;
   }
 }
+
+
+/*--------Only flat theme------------*/
+
+
+.dobleF_exp {
+    background-color: rgba(0, 0, 0, 0.7);
+}
+
+.dobleF {    
+    background-image: url(../../images/flat_imgs/wordpress-theme-development.png);     
+}
+
+
+
+@media only screen and (max-width: 768px) {
+.firts{
+    background-image: url("../../images/general/fondo_Fotor_mobil.png"); 
+    
+    }    
+    
+.dobleF {
+    background-image: url(../../images/flat_imgs/wordpress-theme-development_mobile.png);
+}
+
+.skill_list {
+    background-image: url(../../images/flat_imgs/web-development-skills-mobil.jpg);
+    }
+
+
+    
+}
+
+
